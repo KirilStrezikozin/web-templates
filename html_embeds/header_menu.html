@@ -1,0 +1,327 @@
+<html>
+    <head> 
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Jura" />
+        <link rel="stylesheet" type="text/css" href='https://fonts.googleapis.com/css?family=Barlow' />
+
+        <style>
+            /* 
+                black is used for local preview,
+                change to none on export.
+            */
+            :root {
+                --bg-native: black;
+                --primary-color: #FAFAFA;
+                --secondary-color: #FAFAFA;
+
+                --border-color: rgba(250, 250, 250, 0.1);
+                --border-color-hover: rgba(250, 250, 250, 0.25);
+            }
+
+
+            body {
+                margin: 0px;
+                display: flex;
+                justify-content: center;
+                overflow: hidden;
+                background-color: var(--bg-native);
+            }
+
+            .hidden { visibility: hidden; }
+            .collapsed { width: 0px; height: 0px; }
+
+            .scrollable { overflow: auto; }
+            .scrollable.unvisible {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .scrollable.unvisible::-webkit-scrollbar { display: none; }
+
+            .l {
+                --hover-at: 26px;
+                color: var(--primary-color);
+                transition: color 0.25s ease-out;
+
+                display: inline-block;
+                position: relative;
+            }
+
+            .l.jura { font-family: Jura; }
+            .l.barlow { font-family: Barlow; }
+
+            .l.bolder { font-weight: bolder; }
+
+            .l.hover { cursor: pointer; }
+            .l.hover:hover { color: var(--secondary-color); }
+            .l.hover:hover::after { transform: scaleX(1); transform-origin: bottom left; }
+            .l.hover::after {
+                content: '';
+                position: absolute;
+                width: var(--hover-width, 100%);
+                height: 1px;
+                top: var(--hover-at); /* (--label-hover-line-position);*/
+                bottom: 0px;
+                left: calc(var(--hover-width, 0px) / 2);
+                transform: scaleX(0);
+                transform-origin: bottom right;
+                transition: transform 0.15s ease-out;
+                background-color: var(--secondary-color);
+            }
+
+            .l.h2 { font-size: 28px; }
+            .l.h3 { font-size: 22px; }
+            .l.h6 { font-size: 18px; }
+            .l.h8 { font-size: 14px; }
+
+            .menuBg {
+                width: 75%;
+                position: absolute;
+
+                display: flex;
+                justify-content: center;
+                overflow: hidden;
+
+                border-radius: 0px 0px 5px 5px;
+                border: 1px solid var(--border-color);
+                border-top: 0px;
+                transition: border 0.25s ease-out;
+
+                backdrop-filter: blur(15px);
+            }
+
+            .menuBg:hover { border: 1px solid var(--border-color-hover); border-top: 0px; }
+
+            .menuBg_spotlight {
+                --size: 160px;
+
+                z-index: 0;
+                position: absolute;
+                overflow: hidden;
+                inset: 0;
+
+                opacity: 0;
+                transition: opacity 2s ease-out;
+                background: radial-gradient(
+                    var(--size) circle at var(--x) var(--y),
+                    rgba(43, 76, 46, 0.40) 0%,
+                    transparent 100%
+                );
+            }
+
+            .menuBg_spotlight:hover { opacity: 1; }
+
+            #menuLogo {
+                z-index: 1;
+                margin: 8px;
+                margin-left: 24px;
+                cursor: pointer;
+                padding: 8px;
+
+                display: block;
+
+                border-radius: 5px;
+                border: 1px solid transparent;
+
+                transform: scale(1, 1);
+                transition: 0.15s ease-out;
+            }
+
+            #menuLogo path { fill: var(--secondary-color); }
+
+            #menuLogo:hover {
+                border: 1px solid var(--border-color-hover);
+                transform: scale(0.99, 0.99);
+            }
+            
+            #menuButton {
+                display: inline-flex;
+                width: 38px;
+                height: 38px;
+                position: relative;
+                top: -2px;
+                margin-left: 48px;
+                margin-right: 24px;
+                cursor: pointer;
+                transform: scale(1, 1);
+                transition: transform 0.15s ease-out;
+            }
+
+            #menuButton::selection { background-color: transparent; }
+
+            #menuButton:hover { transform: scale(0.95, 0.95); }
+
+            #menuButton svg path, #menuButton svg rect { fill: var(--primary-color); }
+
+        </style>
+    </head>
+    <body>
+        <div id="menu" class="menuBg" style="height: 70px; transition: 1s cubic-bezier(0.16, 1, 0.3, 1); background-color: rgba(250, 250, 250, 0.20);">
+            <div class="menuBg_spotlight"></div>
+            <div style="width: 90%; display: flex; flex-direction: column;">
+                <div id="menuContent_collapsed" style="display: flex; justify-content: space-between; align-items: center;">
+                    <svg id="menuLogo" xmlns="http://www.w3.org/2000/svg" width="164" height="39" viewBox="0 0 164 39" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M20.2831 0.0746751C20.338 0.0265298 20.4083 0 20.4812 0H36.3692C36.4449 0 36.5178 0.0286392 36.5734 0.0802179L77.4604 37.9887C77.5516 38.0732 77.5819 38.2052 77.5367 38.3213C77.4916 38.4374 77.3802 38.5138 77.2562 38.5138H61.5188C61.4432 38.5138 61.3704 38.4852 61.3148 38.4338L28.307 7.89748L16.538 18.2363C16.4831 18.2845 16.4127 18.3111 16.3398 18.3111H0.301208C0.175669 18.3111 0.0632963 18.2328 0.0192033 18.1147C-0.0248897 17.9966 0.00854542 17.8634 0.10311 17.7804L20.2831 0.0746751ZM20.5942 0.605325L1.10411 17.7057H16.2267L28.114 7.26303C28.2297 7.16135 28.4031 7.16359 28.5162 7.26823L61.6364 37.9085H76.4856L36.2514 0.605325H20.5942ZM0.0190913 20.475C0.0631005 20.3568 0.175552 20.2784 0.301208 20.2784H16.3398C16.4125 20.2784 16.4828 20.3048 16.5376 20.3528L26.392 28.9799H44.4261C44.5026 28.9799 44.5762 29.0092 44.632 29.0617L54.1196 37.9902C54.2098 38.0751 54.2392 38.2068 54.1938 38.3224C54.1484 38.4379 54.0373 38.5138 53.9137 38.5138H20.4812C20.4086 38.5138 20.3384 38.4874 20.2836 38.4395L0.103592 20.8095C0.00876398 20.7266 -0.024918 20.5933 0.0190913 20.475ZM1.10671 20.8837L20.5938 37.9085H53.1514L44.3071 29.5853H26.2792C26.2064 29.5853 26.1362 29.5588 26.0813 29.5108L16.227 20.8837H1.10671Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M71.0817 2.1943C71.0817 1.48389 71.6548 0.907987 72.3618 0.907987H82.6777C83.3847 0.907987 83.9578 1.48389 83.9578 2.1943V6.50724C83.9578 6.84921 83.8223 7.1771 83.5812 7.41846C83.3401 7.65983 83.0133 7.7948 82.673 7.79355L73.6419 7.76043V9.4582H83.9578V12.0308H72.3618C71.6548 12.0308 71.0817 11.4549 71.0817 10.7445V2.1943ZM73.6419 5.18778L81.3976 5.21622V3.48062H73.6419V5.18778ZM66.4885 3.48062H57.8292V0.907988H67.7686C68.4756 0.907988 69.0487 1.48389 69.0487 2.1943V10.7445C69.0487 11.4549 68.4756 12.0308 67.7686 12.0308H57.4527C56.7457 12.0308 56.1726 11.4549 56.1726 10.7445V6.43158C56.1726 6.08961 56.3081 5.76172 56.5492 5.52036C56.7903 5.27899 57.1171 5.14402 57.4574 5.14527L66.4885 5.17839V3.48062ZM66.4885 7.75104L58.7328 7.7226V9.4582H66.4885V7.75104ZM86.7438 2.1943C86.7438 1.48389 87.3169 0.907988 88.0239 0.907988H96.0055V3.48062H89.304V12.0308H86.7438V2.1943ZM97.888 2.1943C97.888 1.48389 98.4611 0.907989 99.1681 0.907989H109.409C110.116 0.907989 110.689 1.48389 110.689 2.1943V10.8202C110.689 11.5306 110.116 12.1065 109.409 12.1065H99.1681C98.4611 12.1065 97.888 11.5306 97.888 10.8202V2.1943ZM100.448 3.48062V9.53387H108.129V3.48062H100.448ZM122.736 26.256V12.0308H125.297V24.9696H133.805V19.2947H127.179V16.7221H135.085C135.792 16.7221 136.365 17.298 136.365 18.0084V26.256C136.365 26.9664 135.792 27.5423 135.085 27.5423H124.017C123.31 27.5423 122.736 26.9664 122.736 26.256ZM155.717 16.6464V13.2415H158.277V16.6464H164V19.2191H158.277V24.9696H164V27.5423H156.997C156.29 27.5423 155.717 26.9664 155.717 26.256V19.2191H152.705V16.6464H155.717ZM72.7383 17.6301C72.7383 16.9197 73.3114 16.3438 74.0184 16.3438H85.6143V18.9164H75.2984V24.894H85.6143V27.4666H74.0184C73.3114 27.4666 72.7383 26.8907 72.7383 26.1803V17.6301ZM87.6474 17.6301C87.6474 16.9197 88.2205 16.3438 88.9275 16.3438H99.1681C99.875 16.3438 100.448 16.9197 100.448 17.6301V26.256C100.448 26.9664 99.875 27.5423 99.1681 27.5423H88.9275C88.2205 27.5423 87.6474 26.9664 87.6474 26.256V17.6301ZM90.2075 18.9164V24.9696H97.888V18.9164H90.2075ZM102.707 17.6301C102.707 16.9197 103.28 16.3438 103.987 16.3438H118.896C119.603 16.3438 120.176 16.9197 120.176 17.6301V27.5423H117.616V18.9164H112.722V27.5423H110.162V18.9164H105.267V27.5423H102.707V17.6301ZM148.865 19.0677H140.206V16.4951H150.145C150.852 16.4951 151.425 17.071 151.425 17.7814V26.3316C151.425 27.042 150.852 27.6179 150.145 27.6179H139.829C139.122 27.6179 138.549 27.042 138.549 26.3316V22.0187C138.549 21.6767 138.685 21.3488 138.926 21.1075C139.167 20.8661 139.494 20.7311 139.834 20.7324L148.865 20.7655V19.0677ZM148.865 23.3382L141.109 23.3097V25.0453H148.865V23.3382Z" fill="white"/><path d="M1.10411 17.7057L20.5942 0.605325H36.2514L76.4856 37.9085H61.6364L28.5162 7.26823C28.4031 7.16359 28.2297 7.16135 28.114 7.26303L16.2267 17.7057H1.10411Z" fill="white"/><path d="M20.5938 37.9085L1.10671 20.8837H16.227L26.0813 29.5108C26.1362 29.5588 26.2064 29.5853 26.2792 29.5853H44.3071L53.1514 37.9085H20.5938Z" fill="white"/></svg>
+
+                    <div style="display: flex; align-items: center;">
+                        <span id="aboutLabel" class="l hover jura h6" style="margin-left: 48px; margin-right: 48px;">Про нас</span>
+                        <span id="coursesLabel" class="l hover jura h6" style="margin-left: 48px; margin-right: 48px;">Курси</span>
+
+                        <div id="menuButton">
+                            <svg id="menuButton_idle" xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 -1.5 17 7" fill="none"><rect width="17" height="1" rx="0.5" fill="black"/><rect y="3" width="17" height="1" rx="0.5" fill="black"/><rect y="6" width="17" height="1" rx="0.5" fill="black"/></svg>
+                            <svg id="menuButton_alter" class="collapsed" xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 -1.5 19 16" fill="none"><rect width="6.03317" height="0.995134" rx="0.497567" transform="matrix(-0.666816 0.745222 -0.666816 -0.745222 18.145 0.741577)" fill="black"/><rect width="4.82018" height="0.995134" rx="0.497567" transform="matrix(-0.666816 -0.745222 0.666816 -0.745222 16.6726 15.354)" fill="black"/><rect width="6.06959" height="1.00114" rx="0.500571" transform="matrix(0.671781 0.74075 0.671781 -0.74075 0.791748 0.741577)" fill="black"/><rect width="4.77064" height="1.00114" rx="0.500571" transform="matrix(0.671781 -0.74075 -0.671781 -0.74075 2.33691 15.2957)" fill="black"/><path fill-rule="evenodd" clip-rule="evenodd" d="M16 5.82697H3C1.89543 5.82697 1 6.7224 1 7.82697V8.90499C1 10.0096 1.89543 10.905 3 10.905H16C17.1046 10.905 18 10.0096 18 8.90499V7.82697C18 6.7224 17.1046 5.82697 16 5.82697ZM3 4.82697C1.34315 4.82697 0 6.17011 0 7.82697V8.90499C0 10.5618 1.34315 11.905 3 11.905H16C17.6569 11.905 19 10.5618 19 8.90499V7.82697C19 6.17011 17.6569 4.82697 16 4.82697H3Z" fill="black"/><rect x="1.58325" y="3.94226" width="15.8333" height="1.76951" rx="0.884753" fill="black"/></svg>
+                            <svg id="menuButton_close" class="collapsed" xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 -3 24 24" fill="none"><rect class="menuButton_inner" x="6.20605" y="5.46875" width="16.3871" height="1.04256" rx="0.521279" transform="rotate(45 6.20605 5.46875)" fill="black"/><rect class="menuButton_inner" x="17.7935" y="6.20593" width="16.3871" height="1.04256" rx="0.521279" transform="rotate(135 17.7935 6.20593)" fill="black"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div id="menuContent_expanded" class="scrollable unvisible" style="height: 100%; display: flex; flex-direction: column; align-items: flex-end; margin-top: 28px; margin-right: 24px; margin-bottom: 36px;">
+                    <span id="introHeadLabel" class="l barlow h3 bolder" style="margin-bottom: 35px;">DRONE ACADEMY</span>
+                    <span id="introLabel" class="l jura h3" style="text-align: end; margin-bottom: 48px;">
+                        Професійна академія<br>
+                        операторів FPV квадракоптера
+                    </span>
+                    <span id="aboutLabel1" class="l hover jura h2" style="--hover-at: 36px; margin-bottom: 16px;">Про нас</span>
+                    <span id="coursesLabel1" class="l hover jura h2" style="--hover-at: 36px; margin-bottom: 16px;">Курси</span>
+                    <span id="contactsLabel" class="l hover jura h2" style="--hover-at: 36px; margin-bottom: 16px;">Контакти</span>
+                    <span id="copyrightLabel" class="l hover jura h8" style="--hover-at: 18px; opacity: 0.75; margin-top: 32px;">
+                        ​© 2023 &nbsp| &nbspПолітика конфіденційності &nbsp| &nbspУсі права захищені
+                    </span>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            let isMenuExpanded = false;
+            let oldPrimaryColor = "";
+            let oldSecondaryColor = "";
+
+            const menuBg = document.querySelector("#menu");
+            const menuBg_spotlight = document.querySelector(".menuBg_spotlight");
+
+            const menuButton = document.querySelector("#menuButton")
+            const menuButton_idle = document.querySelector("#menuButton_idle");
+            const menuButton_alter = document.querySelector("#menuButton_alter");
+            const menuButton_close = document.querySelector("#menuButton_close");
+
+            const menuLogo = document.querySelector("#menuLogo");
+
+            const aboutLabel = document.querySelector("#aboutLabel");
+            const coursesLabel = document.querySelector("#coursesLabel");
+
+            function postElementClickMessage(element, useLog=false) {
+                const messageData = { "id": element.id, "messageType": "event", "eventType": "click" };
+                window.parent.postMessage(messageData, "https://kirilstrezikozin.wixsite.com/aero-combat-dev");
+                if (useLog) console.log(messageData);
+            }
+
+            function toggleMenu(state) {
+                const style = getComputedStyle(document.documentElement);
+
+                if (state === "expand") {
+                    menuButton_idle.classList.add("collapsed");
+                    menuButton_alter.classList.add("collapsed");
+                    menuButton_close.classList.remove("collapsed");
+
+                    aboutLabel.classList.add("hidden");
+                    coursesLabel.classList.add("hidden");
+
+                    oldPrimaryColor = style.getPropertyValue('--primary-color');
+                    oldSecondaryColor = style.getPropertyValue('--secondary-color');
+                    document.documentElement.style.setProperty('--primary-color', "black");
+                    document.documentElement.style.setProperty('--secondary-color', "#2B4C2E");
+
+                    menuBg.style.height = "500px";
+                    menuBg.style.backgroundColor = "rgba(250, 250, 250, 0.8)";
+                    menuBg_spotlight.style.setProperty('--size', "560px");
+
+                    isMenuExpanded = true;
+
+                } else if (state === "collapse") {
+                    menuButton_idle.classList.remove("collapsed");
+                    menuButton_alter.classList.add("collapsed");
+                    menuButton_close.classList.add("collapsed");
+
+                    aboutLabel.classList.remove("hidden");
+                    coursesLabel.classList.remove("hidden");
+
+                    document.documentElement.style.setProperty('--primary-color', oldPrimaryColor);
+                    document.documentElement.style.setProperty('--secondary-color', oldSecondaryColor);
+
+                    menuBg.style.height = "70px";
+                    menuBg.style.backgroundColor = "rgba(250, 250, 250, 0.2)";
+                    menuBg_spotlight.style.setProperty('--size', "160px");
+
+                    isMenuExpanded = false;
+                }
+            }
+
+            menuBg.onmousemove = (event) => {
+                let { clientX, clientY, currentTarget } = event;
+                let { left, top } = currentTarget.getBoundingClientRect();
+                menuBg_spotlight.style.setProperty('--x',  `${clientX - left}px`)
+                menuBg_spotlight.style.setProperty('--y',  `${clientY - top}px`)
+            };
+
+            menuButton.onmouseenter = (event) => {
+                if (isMenuExpanded) {
+                    menuButton_alter.classList.add("collapsed");
+                    menuButton_close.classList.remove("collapsed");
+                } else {
+                    menuButton_idle.classList.add("collapsed");
+                    menuButton_alter.classList.remove("collapsed");
+                }
+            };
+
+            menuButton.onmouseleave = (event) => {
+                if (isMenuExpanded) {
+                    menuButton_alter.classList.remove("collapsed");
+                    menuButton_close.classList.add("collapsed");
+                } else {
+                    menuButton_idle.classList.remove("collapsed");
+                    menuButton_alter.classList.add("collapsed");
+                }
+            };
+
+            menuButton.onclick = (event) => {
+                if (isMenuExpanded) toggleMenu("collapse")
+                else toggleMenu("expand");
+            };
+
+            document.querySelectorAll(".l.hover").forEach(element => {
+                element.onclick = (event) => {
+                    toggleMenu("collapse");
+                    postElementClickMessage(element);
+                };
+            });
+
+            menuLogo.onclick = (event) => {
+                toggleMenu("collapse");
+                postElementClickMessage(menuLogo);
+            };
+
+            window.onmessage = ({ data }) => {
+                if (!data) return;
+                const messageData = data;
+
+                if (messageData.messageType === "setState" && messageData.stateId === "colors") {
+                    const { stateValue } = messageData;
+
+                    if (stateValue === "whiteText") {
+                        oldPrimaryColor = "#FAFAFA";
+                        oldSecondaryColor = "#FAFAFA";
+                        document.documentElement.style.setProperty('--primary-color', oldPrimaryColor);
+                        document.documentElement.style.setProperty('--secondary-color', oldSecondaryColor);
+                        document.documentElement.style.setProperty('--border-color', "rgba(250, 250, 250, 0.1)");
+                        document.documentElement.style.setProperty('--border-color-hover', "rgba(250, 250, 250, 0.25)");
+
+                    } else if (stateValue === "blackText") {
+                        oldPrimaryColor = "black";
+                        oldSecondaryColor = "#2B4C2E";
+                        document.documentElement.style.setProperty('--primary-color', oldPrimaryColor);
+                        document.documentElement.style.setProperty('--secondary-color', oldSecondaryColor);
+                        document.documentElement.style.setProperty('--border-color', "rgba(0, 0, 0, 0.1)");
+                        document.documentElement.style.setProperty('--border-color-hover', "rgba(0, 0, 0, 0.12)");
+
+                    }
+
+                } else console.log("HTML Component Warning: unknown data as messageData received: ", messageData);
+            };
+        </script>
+    </body>
+</html>
