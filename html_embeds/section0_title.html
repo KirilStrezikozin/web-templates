@@ -199,9 +199,6 @@
                         <path d="M1 7L31 6.99998M31 6.99998L22 13.0622M31 6.99998L22 0.937805" stroke="black" stroke-width="2" stroke-linecap="round" />
                     </svg>
                     <span id="scrollButton_label" class="l jura" style="--sx: 1.0; --sy: 1.0; transform: scale(var(--sx), var(--sy)); transition: all 0.35s ease-out;">Навчитись</span>
-<<<<<<< HEAD
-                    <div class="hover-bg" style="transition: background 1s cubic-bezier(0.16, 1, 0.3, 1);"></div>
-=======
                     <div class="hover-bg" style="
                         transition: background 1s cubic-bezier(0.16, 1, 0.3, 1);
                         -o-transition: background 1s cubic-bezier(0.16, 1, 0.3, 1);
@@ -209,8 +206,6 @@
                         -ms-transition: background 1s cubic-bezier(0.16, 1, 0.3, 1);
                         -webkit-transition: background 1s cubic-bezier(0.16, 1, 0.3, 1);
                     "></div>
->>>>>>> 01659b5 ((no task-id section0Title) add: -prefixed- css props for older browsers)
-
                     <svg id="scrollButton_cursor" class="hidden" style="
                         pointer-events: none;
                         transition-delay: 0s;
@@ -234,9 +229,6 @@
                         <path d="M31.25 25.5L50 25.5" stroke="#FAFAFA" />
                         <path d="M0 25.5L18.75 25.5" stroke="#FAFAFA" />
                         <path id="scrollButton_cursor_scope"
-<<<<<<< HEAD
-                            style="position: relative; transform: translate(var(--x1), var(--y1)); transition: transform 0.1s ease-out; pointer-events: none;"
-=======
                             style="
                                 position: relative;
                                 pointer-events: none;
@@ -251,7 +243,6 @@
                                 -ms-transition: transform 0.1s ease-out;
                                 -webkit-transition: transform 0.1s ease-out;
                             "
->>>>>>> 01659b5 ((no task-id section0Title) add: -prefixed- css props for older browsers)
                             fill-rule="evenodd" clip-rule="evenodd"
                             d="M25.5 28.5C27.1569 28.5 28.5 27.1569 28.5 25.5C28.5 23.8431 27.1569 22.5 25.5 22.5C23.8431 22.5 22.5 23.8431 22.5 25.5C22.5 27.1569 23.8431 28.5 25.5 28.5Z"
                             fill="#FAFAFA" />
@@ -430,7 +421,7 @@
                     scrollButton_label.style.setProperty('--sy',  `1.0`)
                 }
 
-                setTimeout(() => scrollButton_updateTranslate = true, 120);
+                setTimeout(() => scrollButton_updateTranslate = true, 100);
             }, true);
 
             function postElementClickMessage(element, useLog=false) {
