@@ -2,14 +2,12 @@
     <head> 
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Jura" />
         <link rel="stylesheet" type="text/css" href='https://fonts.googleapis.com/css?family=Barlow' />
-
         <style>
             /* 
-                black is used for local preview,
-                change to none on export.
+                --bg-native: use black for local preview.
             */
             :root {
-                --bg-native: black;
+                --bg-native: none;
                 --primary-color: #FAFAFA;
                 --secondary-color: #FAFAFA;
 
@@ -30,10 +28,7 @@
             .collapsed { width: 0px; height: 0px; }
 
             .scrollable { overflow: auto; }
-            .scrollable.unvisible {
-                -ms-overflow-style: none;
-                scrollbar-width: none;
-            }
+            .scrollable.unvisible { -ms-overflow-style: none; scrollbar-width: none; }
             .scrollable.unvisible::-webkit-scrollbar { display: none; }
 
             .l {
@@ -226,7 +221,7 @@
                     document.documentElement.style.setProperty('--primary-color', "black");
                     document.documentElement.style.setProperty('--secondary-color', "#2B4C2E");
 
-                    menuBg.style.height = "500px";
+                    menuBg.style.height = "495px";
                     menuBg.style.backgroundColor = "rgba(250, 250, 250, 0.8)";
                     menuBg_spotlight.style.setProperty('--size', "560px");
 
@@ -299,7 +294,11 @@
                 if (!data) return;
                 const messageData = data;
 
-                if (messageData.messageType === "setState" && messageData.stateId === "colors") {
+                if (messageData.messageType === "setState" && messageData.stateId === "menu") {
+                    toggleMenu(messageData.stateValue);
+                }
+
+                else if (messageData.messageType === "setState" && messageData.stateId === "colors") {
                     const { stateValue } = messageData;
 
                     if (stateValue === "whiteText") {
