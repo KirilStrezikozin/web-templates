@@ -168,7 +168,7 @@
                         <path d="M1 7L31 6.99998M31 6.99998L22 13.0622M31 6.99998L22 0.937805" stroke="black" stroke-width="2" stroke-linecap="round" />
                     </svg>
                     <span id="scrollButton_label" class="l jura" style="--sx: 1.0; --sy: 1.0; transform: scale(var(--sx), var(--sy)); transition: all 0.35s ease-out;">Навчитись</span>
-                    <div class="hover-bg" style="transition: 1s cubic-bezier(0.16, 1, 0.3, 1);"></div>
+                    <div class="hover-bg" style="transition: background 1s cubic-bezier(0.16, 1, 0.3, 1);"></div>
 
                     <svg id="scrollButton_cursor" class="hidden" style="transform: translate(var(--x), var(--y)); transition: all 0.35s ease-out; pointer-events: none;" width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M25.5 31.25L25.5 50" stroke="#FAFAFA" />
@@ -176,7 +176,7 @@
                         <path d="M31.25 25.5L50 25.5" stroke="#FAFAFA" />
                         <path d="M0 25.5L18.75 25.5" stroke="#FAFAFA" />
                         <path id="scrollButton_cursor_scope"
-                            style="transform: translate(var(--x1), var(--y1)); transition: all 0.1s ease-out; pointer-events: none;"
+                            style="position: relative; transform: translate(var(--x1), var(--y1)); transition: transform 0.1s ease-out; pointer-events: none;"
                             fill-rule="evenodd" clip-rule="evenodd"
                             d="M25.5 28.5C27.1569 28.5 28.5 27.1569 28.5 25.5C28.5 23.8431 27.1569 22.5 25.5 22.5C23.8431 22.5 22.5 23.8431 22.5 25.5C22.5 27.1569 23.8431 28.5 25.5 28.5Z"
                             fill="#FAFAFA" />
@@ -317,7 +317,8 @@
                 scrollButton_label.style.setProperty('--sy',  `1.0`)
             };
 
-            scrollButton.onmousemove = (event) => {
+            let scrollButton_updateTranslate = true;
+            scrollButton.addEventListener('mousemove', (event) => {
                 let { clientX, clientY, currentTarget } = event;
                 let { width, height, left, top } = currentTarget.getBoundingClientRect();
 
@@ -327,11 +328,22 @@
                 scrollButton_hoverBg.style.setProperty('--x',  `${x}px`)
                 scrollButton_hoverBg.style.setProperty('--y',  `${y}px`)
 
-                scrollButton_cursor.style.setProperty('--x',  `${clientX - width/2 - left}px`)
-                scrollButton_cursor.style.setProperty('--y',  `${clientY - height/2 - top}px`)
+                // use throttling for scrollButton_cursor transform update.
+                // otherwise, transition stalls in Edge browser. 
+                // or remove transition props from these elements' styles.
+                if (!scrollButton_updateTranslate) return;
+                scrollButton_updateTranslate = false;
+
+                const cursorX = clientX - width/2 - left;
+                const cursorY = clientY - height/2 - top;
+
+                console.log(cursorX, cursorY);
+
+                scrollButton_cursor.style.setProperty('--x',  `${cursorX}px`)
+                scrollButton_cursor.style.setProperty('--y',  `${cursorY}px`)
                 
-                const scopeX = (clientX - width/2 - left)/-10;
-                const scopeY = (clientY - height/2 - top)/-10;
+                const scopeX = cursorX/-10;
+                const scopeY = cursorY/-10;
                 scrollButton_cursor_scope.style.setProperty('--x1',  `${scopeX}px`)
                 scrollButton_cursor_scope.style.setProperty('--y1',  `${scopeY}px`)
 
@@ -342,7 +354,9 @@
                     scrollButton_label.style.setProperty('--sx',  `1.0`)
                     scrollButton_label.style.setProperty('--sy',  `1.0`)
                 }
-            };
+
+                setTimeout(() => scrollButton_updateTranslate = true, 120);
+            }, true);
 
             function postElementClickMessage(element, useLog=false) {
                 const messageData = { "id": element.id, "messageType": "event", "eventType": "click" };
@@ -357,4 +371,3 @@
         </script>
     </body>
 </html>
-
