@@ -545,7 +545,8 @@
 
             #section2 div:not(.btn) > svg:not(.hour-label, .hour-label-under, .drone-icon) path { fill: var(--secondary-color); }
             #section2 div:not(.btn) > svg.hour-label path { fill: var(--primary-color); }
-            #section2 div:not(.btn) > svg.hour-label {  height: 3.4vmax; }
+            #section2 div:not(.btn) > svg.hour-label,
+            #section2 div:not(.btn) > svg.drone-icon {  height: 3.4vmax; }
             #section2 span { color: var(--primary-color); }
             #section2 span.hour-label-under {
                 font-size: 1vw;
@@ -585,9 +586,9 @@
 
             #section2 .grid > div {
                 width: 18vw;
-                height: 42vh;
-                min-width: 200px;
-                min-height: 300px;
+                height: 40vh;
+                /* min-width: 200px; */
+                /* min-height: 300px; */
                 border-radius: 5px;
                 border: 1px solid var(--header-border-color);
                 backdrop-filter: blur(15px);
