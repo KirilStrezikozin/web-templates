@@ -35,6 +35,21 @@
                 100% { fill: var(--anim-fill-flow-clr1); }
             }
 
+            @keyframes hover-flow {
+                0% {
+                    transform: scaleX(0);
+                    transform-origin: left;
+                } 49% {
+                    transform-origin: left;
+                } 50% {
+                    transform: scaleX(1);
+                    transform-origin: right;
+                } 100% {
+                    transform: scaleX(0);
+                    transform-origin: right;
+                }
+            }
+
             html, body {
                 width: 100%;
                 height: auto !important;
@@ -410,6 +425,34 @@
                 margin-bottom: 1.5rem;
             }
 
+            .flashcard {
+                width: 18vw;
+                height: 40vh;
+                border-radius: 5px;
+                border: 1px solid var(--header-border-color);
+                backdrop-filter: blur(15px);
+                transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+                -webkit-transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            .flashcard:hover { border: 1px solid rgba(0, 0, 0, 0.02); }
+
+            .flashcard > .bg-spotlight { --size: 300px; }
+            .flashcard > .bg-spotlight:hover { opacity: 0.4; }
+            .flashcard > .flex {
+                transform: translate(calc(var(--spotlight-x) / -50), calc(var(--spotlight-y) / -50));
+                transition: transform 0.5s ease-out;
+            }
+
+            .link-icon {
+                opacity: 0;
+                position: relative;
+                transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+                -webkit-transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+                transition-delay: 0.2s;
+                -webkit-transition-delay: 0.2s;
+            }
+
             #header_menuLogo {
                 z-index: calc(var(--header-z-index) + 2);
                 margin: 8px;
@@ -540,7 +583,7 @@
                 z-index: 3;
                 position: relative;
                 background: #FAFAFA;
-                height: 200vh;
+                height: 100vh;
             }
 
             #section2 div:not(.btn) > svg:not(.hour-label, .hour-label-under, .drone-icon) path { fill: var(--secondary-color); }
@@ -548,17 +591,12 @@
             #section2 div:not(.btn) > svg.hour-label,
             #section2 div:not(.btn) > svg.drone-icon {  height: 3.4vmax; }
             #section2 span { color: var(--primary-color); }
-            #section2 span.hour-label-under {
-                font-size: 1vw;
-                transform: rotate(90deg);
-            }
+            #section2 span.hour-label-under { font-size: 1vw; transform: rotate(90deg); }
 
             #section2 .btn-wrapper { height: 100%; }
             #section2 .btn { border: 1px solid rgba(0, 0, 0, .1); }
             #section2 .btn:hover { border: none; }
             #section2 .btn:hover span { font-weight: normal; color: #FAFAFA; }
-
-            /* #section2 .drone-icon { margin-right: -10%; } */
 
             #section2 > div:first-child {
                 margin-top: 100vh;
@@ -569,26 +607,59 @@
             }
 
             #section2 > div:first-child > div:first-child > div:not(.btn-wrapper) > svg { width: 28vw; }
-
-            #section2 > div:first-child > div:first-child > div:nth-child(2) > svg {
-                margin-top: 16vh;
-            }
+            #section2 > div:first-child > div:first-child > div:nth-child(2) > svg { margin-top: 16vh; }
 
             #section2 .grid {
                 gap: 1.75vw;
                 width: 35vw;
                 margin-right: 1.6rem;
-                /* height: 86vh; */
                 height: auto;
-                /* min-height: fit-content; */
                 margin-top: -12vh;
             }
 
-            #section2 .grid > div {
-                width: 18vw;
-                height: 40vh;
-                /* min-width: 200px; */
-                /* min-height: 300px; */
+            #section2 .flashcard > .flex > span:last-child {
+                margin-top: 1.5em;
+                margin-bottom: 1.5em;
+                font-size: 0.88vw;
+            }
+
+            #section2 .flashcard > .flex > span { margin-right: 1.5rem; }
+            #section2 .flashcard .h1-5 { font-size: 2.8vw; }
+
+            #section3 {
+                position: relative;
+                height: 100vh;
+                z-index: 3;
+            }
+
+            #section3 > div:first-child > div:first-child svg path { fill: var(--secondary-color); }
+            #section3 > div:first-child > div:first-child { margin-left: 25vw; }
+
+            #section3_closestDate {
+                position: relative;
+                top: -0.1em;
+                margin-left: 0.8em;
+                padding-left: 0.5em;
+                padding-right: 0.5em;
+            }
+
+            #section3_closestDate::after {
+                content: '';
+                position: relative;
+                display: block;
+                top: 0.1em;
+                width: 100%;
+                height: 1px;
+                background: var(--header-border-color-hover);
+                animation: hover-flow 2.5s infinite linear running;
+            }
+
+            #section3 > div:first-child > div.rel-position { pointer-events: none; top: -40vh; }
+
+            #section3_flashcards .flashcard {
+                width: 360px;
+                height: auto;
+                min-height: 20vh;
                 border-radius: 5px;
                 border: 1px solid var(--header-border-color);
                 backdrop-filter: blur(15px);
@@ -596,31 +667,40 @@
                 -webkit-transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
             }
 
-            /* #section2 .grid > div:hover { border: 1px solid rgba(0, 0, 0, 0.02); } */
-            #section2 .grid > div:hover { border: 1px solid rgba(0, 0, 0, 0.02); }
-            #section2 .grid > div:hover { border: 1px solid rgba(0, 0, 0, 0.02); }
+            #section3 > div:first-child > div:first-child > div.flex.row > span:hover { cursor: pointer; }
 
-            #section2 .grid > div > .bg-spotlight { --size: 300px; }
-            #section2 .grid > div > .bg-spotlight:hover { opacity: 0.4; }
-            #section2 .grid > div > .flex {
-                transform: translate(calc(var(--spotlight-x) / -50), calc(var(--spotlight-y) / -50));
-                transition: transform 0.5s ease-out;
+            #section3_flashcards .flashcard:hover { border: 1px solid rgba(29, 51, 31, 0.02); }
+            #section3_flashcards .flashcard:hover { cursor: pointer; }
+            #section3_flashcards .flashcard .link-icon {
+                top: -2.5em;
+                right: 2em;
+                margin-bottom: -31px;
             }
 
-            #section2 .grid > div > .flex > span:last-child {
-                margin-top: 1.5em;
-                margin-bottom: 1.5em;
-                font-size: 0.88vw;
-                /* a bit wrong since the font will look tiny on small screens,
-                although it's the easiest way to adapt each label to fit container
-                and occupy the same number of lines */
+            #section3_flashcards .flashcard:hover .link-icon {
+                opacity: 1.0;
+                right: 1em;
+                transition-delay: 0s;
+                -webkit-transition-delay: 0s;
             }
 
-            #section2 .grid > div > .flex > span { margin-right: 1.5rem; }
-
-            #section2 .grid > div .h1-5 {
-                font-size: 2.8vw;
+            #section3 > div:first-child > div.flex.flex-wrap {
+                position: relative;
+                width: 70vw;
+                top: -60vh;
+                margin-left: 25vw;
+                gap: 1.75vw;
             }
+
+            #section3 > div:first-child > .btn {
+                position: relative;
+                top: -60vh;
+                margin-left: 25vw;
+            }
+
+            #section3 .btn { border: 1px solid rgba(0, 0, 0, .1); }
+            #section3 .btn:hover { border: none; }
+            #section3 .btn:hover span { font-weight: normal; color: #FAFAFA; }
 
             .hidden { visibility: hidden; }
             .collapsed { width: 0px; height: 0px; display: none; }
@@ -742,6 +822,12 @@
                         <svg width="650" height="100%" viewBox="0 0 2235 390" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1518.4 143C1514.51 143 1512.57 141.057 1512.57 137.17V7.03999C1512.57 3.15333 1514.51 1.21 1518.4 1.21H1597.71C1599.54 1.21 1600.94 1.72333 1601.89 2.74999C1602.92 3.70332 1603.43 5.13332 1603.43 7.03999C1603.43 10.8533 1601.52 12.76 1597.71 12.76H1524.12V65.45H1574.28C1578.17 65.45 1580.11 67.3567 1580.11 71.17C1580.11 75.0567 1578.17 77 1574.28 77H1524.12V137.17C1524.12 141.057 1522.21 143 1518.4 143ZM1640.9 143C1637.02 143 1635.07 141.057 1635.07 137.17V7.03999C1635.07 3.15333 1637.02 1.21 1640.9 1.21H1692.38C1704.92 1.21 1714.38 4.43666 1720.76 10.89C1727.22 17.3433 1730.44 26.84 1730.44 39.38V45.98C1730.44 58.4467 1727.22 67.9067 1720.76 74.36C1714.38 80.8133 1704.92 84.04 1692.38 84.04H1646.62V137.17C1646.62 141.057 1644.72 143 1640.9 143ZM1646.62 72.49H1692.38C1701.62 72.49 1708.33 70.4 1712.51 66.22C1716.77 61.9667 1718.89 55.22 1718.89 45.98V39.38C1718.89 30.0667 1716.77 23.32 1712.51 19.14C1708.33 14.8867 1701.62 12.76 1692.38 12.76H1646.62V72.49ZM1814.93 143C1812.44 143 1810.64 141.68 1809.54 139.04L1752.45 9.45999C1751.5 7.33333 1751.5 5.57333 1752.45 4.17999C1753.48 2.78666 1754.87 1.90666 1756.63 1.54C1759.64 0.806666 1761.73 1.90666 1762.9 4.84L1817.9 129.58H1813.83L1868.5 4.84C1869.68 1.90666 1871.8 0.806666 1874.88 1.54C1876.79 1.90666 1878.18 2.78666 1879.06 4.17999C1879.94 5.57333 1879.94 7.33333 1879.06 9.45999L1821.75 139.04C1820.65 141.68 1818.78 143 1816.14 143H1814.93Z" fill="white"/><path d="M110 114.5V32H27.5V114.5H110ZM27.5 142C19.7656 142 13.2487 139.35 7.94922 134.051C2.64974 128.751 0 122.234 0 114.5V32C0 24.4089 2.64974 17.9635 7.94922 12.6641C13.2487 7.22135 19.7656 4.5 27.5 4.5H110C117.591 4.5 124.036 7.22135 129.336 12.6641C134.779 17.9635 137.5 24.4089 137.5 32V114.5C137.5 122.234 134.779 128.751 129.336 134.051C124.036 139.35 117.591 142 110 142H27.5ZM174.711 142V4.5H312.211V142H284.711V32H202.211V142H174.711ZM459.422 59.5V32H376.922V59.5H459.422ZM376.922 142C369.188 142 362.671 139.35 357.371 134.051C352.072 128.751 349.422 122.234 349.422 114.5V32C349.422 24.4089 352.072 17.9635 357.371 12.6641C362.671 7.22135 369.188 4.5 376.922 4.5H459.422C467.013 4.5 473.458 7.22135 478.758 12.6641C484.201 17.9635 486.922 24.4089 486.922 32V59.5C486.922 67.2344 484.201 73.7513 478.758 79.0508C473.458 84.3503 467.013 87 459.422 87H376.922V114.5H486.922V142H376.922ZM634.133 59.5V32H551.633V59.5H634.133ZM524.133 142V4.5H634.133C641.724 4.5 648.169 7.22135 653.469 12.6641C658.911 17.9635 661.633 24.4089 661.633 32V59.5C661.633 67.2344 658.911 73.7513 653.469 79.0508C648.169 84.3503 641.724 87 634.133 87H551.633V142H524.133ZM808.844 114.5V87H726.344V114.5H808.844ZM726.344 142C718.609 142 712.092 139.35 706.793 134.051C701.493 128.751 698.844 122.234 698.844 114.5V87C698.844 79.4089 701.493 72.9635 706.793 67.6641C712.092 62.2214 718.609 59.5 726.344 59.5H808.844V32H726.344V4.5H808.844C816.435 4.5 822.88 7.22135 828.18 12.6641C833.622 17.9635 836.344 24.4089 836.344 32V114.5C836.344 122.234 833.622 128.751 828.18 134.051C822.88 139.35 816.435 142 808.844 142H726.344ZM928.555 142V32H873.555V4.5H1011.05V32H956.055V142H928.555ZM1158.27 114.5V32H1075.77V114.5H1158.27ZM1075.77 142C1068.03 142 1061.51 139.35 1056.21 134.051C1050.92 128.751 1048.27 122.234 1048.27 114.5V32C1048.27 24.4089 1050.92 17.9635 1056.21 12.6641C1061.51 7.22135 1068.03 4.5 1075.77 4.5H1158.27C1165.86 4.5 1172.3 7.22135 1177.6 12.6641C1183.04 17.9635 1185.77 24.4089 1185.77 32V114.5C1185.77 122.234 1183.04 128.751 1177.6 134.051C1172.3 139.35 1165.86 142 1158.27 142H1075.77ZM1332.98 59.5V32H1250.48V59.5H1332.98ZM1222.98 142V4.5H1332.98C1340.57 4.5 1347.01 7.22135 1352.31 12.6641C1357.76 17.9635 1360.48 24.4089 1360.48 32V59.5C1360.48 67.2344 1357.76 73.7513 1352.31 79.0508C1347.01 84.3503 1340.57 87 1332.98 87H1250.48V142H1222.98Z" fill="white"/><path d="M0 362V224.5H27.5V279.5H55L110 224.5H137.5L82.5 279.5H110C117.591 279.5 124.036 282.221 129.336 287.664C134.779 292.964 137.5 299.409 137.5 307V362H110V307H27.5V362H0ZM284.711 334.5V307H202.211V334.5H284.711ZM284.711 279.5V252H202.211V279.5H284.711ZM174.711 362V224.5H284.711C292.302 224.5 298.747 227.221 304.047 232.664C309.49 237.964 312.211 244.409 312.211 252V279.5C312.211 283.367 310.85 286.661 308.129 289.383C305.408 291.961 302.185 293.25 298.461 293.25C302.185 293.25 305.408 294.611 308.129 297.332C310.85 300.053 312.211 303.276 312.211 307V334.5C312.211 342.234 309.49 348.751 304.047 354.051C298.747 359.35 292.302 362 284.711 362H174.711ZM459.422 334.5V307H376.922V334.5H459.422ZM376.922 362C369.188 362 362.671 359.35 357.371 354.051C352.072 348.751 349.422 342.234 349.422 334.5V307C349.422 299.409 352.072 292.964 357.371 287.664C362.671 282.221 369.188 279.5 376.922 279.5H459.422V252H376.922V224.5H459.422C467.013 224.5 473.458 227.221 478.758 232.664C484.201 237.964 486.922 244.409 486.922 252V334.5C486.922 342.234 484.201 348.751 478.758 354.051C473.458 359.35 467.013 362 459.422 362H376.922ZM524.133 389.5V334.5H606.633V252H579.133V307C579.133 314.734 576.411 321.251 570.969 326.551C565.669 331.85 559.224 334.5 551.633 334.5V224.5H634.133V334.5H661.633V389.5H634.133V362H551.633V389.5H524.133ZM808.844 279.5V252H726.344V279.5H808.844ZM698.844 362V224.5H808.844C816.435 224.5 822.88 227.221 828.18 232.664C833.622 237.964 836.344 244.409 836.344 252V279.5C836.344 287.234 833.622 293.751 828.18 299.051C822.88 304.35 816.435 307 808.844 307H726.344V362H698.844ZM983.555 334.5V307H901.055V334.5H983.555ZM901.055 362C893.32 362 886.803 359.35 881.504 354.051C876.204 348.751 873.555 342.234 873.555 334.5V307C873.555 299.409 876.204 292.964 881.504 287.664C886.803 282.221 893.32 279.5 901.055 279.5H983.555V252H901.055V224.5H983.555C991.146 224.5 997.591 227.221 1002.89 232.664C1008.33 237.964 1011.05 244.409 1011.05 252V334.5C1011.05 342.234 1008.33 348.751 1002.89 354.051C997.591 359.35 991.146 362 983.555 362H901.055ZM1048.27 362V224.5H1075.77V279.5H1103.27L1158.27 224.5H1185.77L1130.77 279.5H1158.27C1165.86 279.5 1172.3 282.221 1177.6 287.664C1183.04 292.964 1185.77 299.409 1185.77 307V362H1158.27V307H1075.77V362H1048.27ZM1332.98 334.5V252H1250.48V334.5H1332.98ZM1250.48 362C1242.74 362 1236.23 359.35 1230.93 354.051C1225.63 348.751 1222.98 342.234 1222.98 334.5V252C1222.98 244.409 1225.63 237.964 1230.93 232.664C1236.23 227.221 1242.74 224.5 1250.48 224.5H1332.98C1340.57 224.5 1347.01 227.221 1352.31 232.664C1357.76 237.964 1360.48 244.409 1360.48 252V334.5C1360.48 342.234 1357.76 348.751 1352.31 354.051C1347.01 359.35 1340.57 362 1332.98 362H1250.48ZM1397.69 362V224.5H1535.19V362H1507.69V252H1425.19V362H1397.69ZM1627.4 362V252H1572.4V224.5H1709.9V252H1654.9V362H1627.4ZM1857.11 279.5V252H1774.61V279.5H1857.11ZM1774.61 362C1766.88 362 1760.36 359.35 1755.06 354.051C1749.76 348.751 1747.11 342.234 1747.11 334.5V252C1747.11 244.409 1749.76 237.964 1755.06 232.664C1760.36 227.221 1766.88 224.5 1774.61 224.5H1857.11C1864.7 224.5 1871.15 227.221 1876.45 232.664C1881.89 237.964 1884.61 244.409 1884.61 252V279.5C1884.61 287.234 1881.89 293.751 1876.45 299.051C1871.15 304.35 1864.7 307 1857.11 307H1774.61V334.5H1884.61V362H1774.61ZM2031.82 279.5V252H1949.32V279.5H2031.82ZM1921.82 362V224.5H2031.82C2039.41 224.5 2045.86 227.221 2051.16 232.664C2056.6 237.964 2059.32 244.409 2059.32 252V279.5C2059.32 287.234 2056.6 293.751 2051.16 299.051C2045.86 304.35 2039.41 307 2031.82 307H1949.32V362H1921.82ZM2206.53 334.5V307H2124.03V334.5H2206.53ZM2124.03 362C2116.3 362 2109.78 359.35 2104.48 354.051C2099.18 348.751 2096.53 342.234 2096.53 334.5V307C2096.53 299.409 2099.18 292.964 2104.48 287.664C2109.78 282.221 2116.3 279.5 2124.03 279.5H2206.53V252H2124.03V224.5H2206.53C2214.12 224.5 2220.57 227.221 2225.87 232.664C2231.31 237.964 2234.03 244.409 2234.03 252V334.5C2234.03 342.234 2231.31 348.751 2225.87 354.051C2220.57 359.35 2214.12 362 2206.53 362H2124.03Z" fill="white"/></svg>
                     </div>
                     <div class="flex column align-center btn-wrapper">
+                        <div class="btn btn-primary btn-color-secondary flex align-center" data-target="contacts" data-msg="true">
+                            <svg class="btn-pointer" width="32" height="14" viewBox="0 0 32 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7L31 6.99998M31 6.99998L22 13.0622M31 6.99998L22 0.937805" stroke="black" stroke-width="2" stroke-linecap="round" /></svg>
+                            <span class="btn-l l jura">Дізнатися більше</span>
+                            <div class="btn-hover-bg"></div>
+                            <svg class="cursor" width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25.5 31.25L25.5 50" stroke="#FAFAFA" /><path d="M25.5 0L25.5 18.75" stroke="#FAFAFA" /><path d="M31.25 25.5L50 25.5" stroke="#FAFAFA" /><path d="M0 25.5L18.75 25.5" stroke="#FAFAFA" /><path class="cursor-scope" fill-rule="evenodd" clip-rule="evenodd" d="M25.5 28.5C27.1569 28.5 28.5 27.1569 28.5 25.5C28.5 23.8431 27.1569 22.5 25.5 22.5C23.8431 22.5 22.5 23.8431 22.5 25.5C22.5 27.1569 23.8431 28.5 25.5 28.5Z" fill="#FAFAFA" /></svg>
+                        </div>
                         <div class="btn btn-primary btn-color-secondary flex align-center" data-target="course-date" data-msg="true">
                             <svg class="btn-pointer" width="32" height="14" viewBox="0 0 32 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7L31 6.99998M31 6.99998L22 13.0622M31 6.99998L22 0.937805" stroke="black" stroke-width="2" stroke-linecap="round" /></svg>
                             <span class="btn-l l jura">Обрати дату</span>
@@ -751,7 +837,7 @@
                     </div>
                 </div>
                 <div class="grid square-grid">
-                    <div>
+                    <div class="flashcard">
                         <div class="bg-spotlight"></div>
                         <div class="flex column end-end full-width full-height">
                             <div class="flex row align-center">
@@ -762,7 +848,7 @@
                             <span class="l jura p0 l-end">Лекції, інструктаж, ознайомлення<br>з технічними аспектами пілотування.</span>
                         </div>
                     </div>
-                    <div>
+                    <div class="flashcard">
                         <div class="bg-spotlight"></div>
                         <div class="flex column end-end full-width full-height">
                             <div class="flex row align-center">
@@ -773,7 +859,7 @@
                             <span class="l jura p0 l-end">Відчуйте принцип керування.<br>Готуйтесь до справжніх польотів.</span>
                         </div>
                     </div>
-                    <div>
+                    <div class="flashcard">
                         <div class="bg-spotlight"></div>
                         <div class="flex column end-end full-width full-height">
                             <div class="flex row align-center">
@@ -784,7 +870,7 @@
                             <span class="l jura p0 l-end">Опануйте FPV на індивідуальних практичних заняттях.</span>
                         </div>
                     </div>
-                    <div>
+                    <div class="flashcard">
                         <div class="bg-spotlight"></div>
                         <div class="flex column end-end full-width full-height">
                             <div class="flex row align-center">
@@ -797,8 +883,32 @@
                 </div>
             </div>
         </section>
+        <section id="section3" class="full-width">
+            <div class="flex column">
+                <div class="flex column">
+                    <svg width="650" height="319" viewBox="0 0 1634 319" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M103.5 52.375V26.5H25.875V52.375H103.5ZM0 130V0.625H103.5C110.643 0.625 116.707 3.18555 121.693 8.30664C126.814 13.293 129.375 19.3574 129.375 26.5V52.375C129.375 59.6523 126.814 65.7842 121.693 70.7705C116.707 75.7568 110.643 78.25 103.5 78.25H25.875V130H0ZM267.887 104.125V26.5H190.262V104.125H267.887ZM190.262 130C182.985 130 176.853 127.507 171.867 122.521C166.88 117.534 164.387 111.402 164.387 104.125V26.5C164.387 19.3574 166.88 13.293 171.867 8.30664C176.853 3.18555 182.985 0.625 190.262 0.625H267.887C275.03 0.625 281.094 3.18555 286.08 8.30664C291.202 13.293 293.762 19.3574 293.762 26.5V104.125C293.762 111.402 291.202 117.534 286.08 122.521C281.094 127.507 275.03 130 267.887 130H190.262ZM328.774 130V104.125H432.274V78.25H354.649V52.375H432.274V26.5H328.774V0.625H432.274C439.417 0.625 445.481 3.18555 450.468 8.30664C455.589 13.293 458.149 19.3574 458.149 26.5V52.375C458.149 56.0137 456.869 59.1133 454.308 61.6738C451.748 64.0996 448.716 65.3125 445.212 65.3125C448.716 65.3125 451.748 66.5928 454.308 69.1533C456.869 71.7139 458.149 74.7461 458.149 78.25V104.125C458.149 111.402 455.589 117.534 450.468 122.521C445.481 127.507 439.417 130 432.274 130H328.774ZM493.161 130V0.625H622.536V130H596.661V26.5H519.036V130H493.161ZM761.048 104.125V26.5H683.423V104.125H761.048ZM683.423 130C676.146 130 670.014 127.507 665.028 122.521C660.042 117.534 657.548 111.402 657.548 104.125V26.5C657.548 19.3574 660.042 13.293 665.028 8.30664C670.014 3.18555 676.146 0.625 683.423 0.625H761.048C768.191 0.625 774.255 3.18555 779.242 8.30664C784.363 13.293 786.923 19.3574 786.923 26.5V104.125C786.923 111.402 784.363 117.534 779.242 122.521C774.255 127.507 768.191 130 761.048 130H683.423ZM925.436 130V78.25H847.811C840.533 78.25 834.401 75.7568 829.415 70.7705C824.429 65.7842 821.936 59.6523 821.936 52.375V0.625H847.811V52.375H925.436V0.625H951.311V130H925.436ZM986.323 130V0.625H1012.2V52.375H1089.82V0.625H1115.7V130H1089.82V78.25H1012.2V130H986.323ZM1150.71 130V104.125H1202.46V26.5H1150.71V0.625H1280.08V26.5H1228.33V104.125H1280.08V130H1150.71ZM1366.85 130V26.5H1315.1V0.625H1444.47V26.5H1392.72V130H1366.85ZM1582.98 104.125V78.25H1505.36V104.125H1582.98ZM1479.48 130V0.625H1505.36V52.375H1582.98C1590.13 52.375 1596.19 54.9355 1601.18 60.0566C1606.3 65.043 1608.86 71.1074 1608.86 78.25V104.125C1608.86 111.402 1606.3 117.534 1601.18 122.521C1596.19 127.507 1590.13 130 1582.98 130H1479.48Z" fill="white"/><path d="M0 319V189.625H25.875V241.375H103.5V189.625H129.375V319H103.5V267.25H25.875V319H0ZM267.887 241.375V215.5H190.262V241.375H267.887ZM164.387 319V215.5C164.387 208.357 166.88 202.293 171.867 197.307C176.853 192.186 182.985 189.625 190.262 189.625H267.887C275.03 189.625 281.094 192.186 286.08 197.307C291.202 202.293 293.762 208.357 293.762 215.5V319H267.887V267.25H190.262V319H164.387ZM432.274 293.125V267.25H354.649V293.125H432.274ZM432.274 241.375V215.5H354.649V241.375H432.274ZM328.774 319V189.625H432.274C439.417 189.625 445.481 192.186 450.468 197.307C455.589 202.293 458.149 208.357 458.149 215.5V241.375C458.149 245.014 456.869 248.113 454.308 250.674C451.748 253.1 448.716 254.312 445.212 254.312C448.716 254.312 451.748 255.593 454.308 258.153C456.869 260.714 458.149 263.746 458.149 267.25V293.125C458.149 300.402 455.589 306.534 450.468 311.521C445.481 316.507 439.417 319 432.274 319H328.774ZM596.661 319V267.25H519.036C511.759 267.25 505.627 264.757 500.641 259.771C495.654 254.784 493.161 248.652 493.161 241.375V189.625H519.036V241.375H596.661V189.625H622.536V319H596.661ZM761.048 241.375V215.5H683.423V241.375H761.048ZM657.548 319V215.5C657.548 208.357 660.042 202.293 665.028 197.307C670.014 192.186 676.146 189.625 683.423 189.625H761.048C768.191 189.625 774.255 192.186 779.242 197.307C784.363 202.293 786.923 208.357 786.923 215.5V319H761.048V267.25H683.423V319H657.548ZM821.936 319V189.625H847.811V241.375H925.436V189.625H951.311V319H925.436V267.25H847.811V319H821.936ZM986.323 319V189.625H1012.2V241.375H1089.82V189.625H1115.7V319H1089.82V267.25H1012.2V319H986.323ZM1254.21 241.375V215.5H1176.58V241.375H1254.21ZM1150.71 319L1202.46 267.25H1176.58C1169.31 267.25 1163.18 264.757 1158.19 259.771C1153.2 254.784 1150.71 248.652 1150.71 241.375V215.5C1150.71 208.357 1153.2 202.293 1158.19 197.307C1163.18 192.186 1169.31 189.625 1176.58 189.625H1280.08V319H1254.21V267.25H1228.33L1176.58 319H1150.71Z" fill="white"/></svg>
+                    <div class="flex row center-start">
+                        <svg width="120" height="50" viewBox="0 0 355 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M80 80V60H20V80H80ZM80 40V20H20V40H80ZM0 100V0H80C85.5208 0 90.2083 1.97917 94.0625 5.9375C98.0208 9.79167 100 14.4792 100 20V40C100 42.8125 99.0104 45.2083 97.0312 47.1875C95.0521 49.0625 92.7083 50 90 50C92.7083 50 95.0521 50.9896 97.0312 52.9688C99.0104 54.9479 100 57.2917 100 60V80C100 85.625 98.0208 90.3646 94.0625 94.2188C90.2083 98.0729 85.5208 100 80 100H0ZM127.062 100L152.062 50L127.062 0H147.062L167.062 40V0H187.062V40L207.062 0H227.062L202.062 50L227.062 100H207.062L187.062 60V100H167.062V60L147.062 100H127.062ZM254.125 100V0H354.125V20H274.125V40H334.125V60H274.125V80H354.125V100H254.125Z" fill="white"/></svg>
+                        <span id="section3_closestDate" class="l jura h1-5">цього місяця</span>
+                    </div>
+                    <span class="l jura h4 space-bigger">Обирайте найзручніший день початку курсу та переходьте за посиланням для реєстрації.</span>
+                </div>
+                <div class="rel-position">
+                    <svg width="138" height="635" viewBox="0 0 138 635" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M104.79 104.601L9.10052e-07 -2.51774e-05L-2.13149e-05 254.224L40.839 294.989L48.2765 272.847L104.79 104.601Z" fill="#2B4C2E" fill-opacity="0.5"/><path d="M108.38 362.409L40.839 294.989L-2.13149e-05 254.224L-2.65272e-05 635L54.3379 498.333L108.38 362.409Z" fill="#333132"/><path d="M40.839 294.989L108.38 362.409L54.3379 498.333L138 414.822L138 362.409L48.2765 272.847L40.839 294.989Z" fill="#E6E7E9"/></svg>
+                </div>
+                <div id="section3_flashcards" class="flex row flex-wrap"></div>
+                <div class="btn btn-primary btn-color-secondary flex align-center" data-target="contacts" data-msg="true">
+                    <svg class="btn-pointer" width="32" height="14" viewBox="0 0 32 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7L31 6.99998M31 6.99998L22 13.0622M31 6.99998L22 0.937805" stroke="black" stroke-width="2" stroke-linecap="round" /></svg>
+                    <span class="btn-l l jura">Дізнатися більше</span>
+                    <div class="btn-hover-bg"></div>
+                    <svg class="cursor" width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25.5 31.25L25.5 50" stroke="#FAFAFA" /><path d="M25.5 0L25.5 18.75" stroke="#FAFAFA" /><path d="M31.25 25.5L50 25.5" stroke="#FAFAFA" /><path d="M0 25.5L18.75 25.5" stroke="#FAFAFA" /><path class="cursor-scope" fill-rule="evenodd" clip-rule="evenodd" d="M25.5 28.5C27.1569 28.5 28.5 27.1569 28.5 25.5C28.5 23.8431 27.1569 22.5 25.5 22.5C23.8431 22.5 22.5 23.8431 22.5 25.5C22.5 27.1569 23.8431 28.5 25.5 28.5Z" fill="#FAFAFA" /></svg>
+                </div>
+            </div>
+        </section>
         <script type="text/javascript">
             const URL = "https://kirilstrezikozin.wixsite.com/aero-combat-dev";
+            const sheetId = "1WfDCqFzQOfIwz5Sc-IdSfAFJym86ib0dOf9OVRxwiCI";
+            const sheetApiKey= "AIzaSyApDaq3alpY2-QAdo58VarQHppZVzzuWAY";
 
             let isMenuExpanded = false;
             let oldHeaderPrimaryColor = "#FAFAFA";
@@ -806,6 +916,7 @@
             let headerBgOpacity = 0.2;
 
             const buttons = document.querySelectorAll(".btn");
+            const flashcards =  document.querySelectorAll(".flashcard");
 
             const header = document.querySelector("header");
             const header_bg = document.querySelector("header .header-bg");
@@ -834,7 +945,69 @@
             const section1_content1_sticky = document.querySelector("#section1_content1 .sticky-bg-stick");
 
             const section2 = document.querySelector("#section2");
-            const section2_gridItems = document.querySelectorAll("#section2 .grid > div");
+
+            const section3_closestDate = document.querySelector("#section3_closestDate");
+            const section3_flashcards =  document.querySelector("#section3_flashcards");
+
+            async function callsheetsapi(sheetId, apiKey, sheetName, cellRange) {
+                const requestUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}!${cellRange}?key=${apiKey}`;
+                const request = new Request(requestUrl);
+                const response = await fetch(request);
+                const data = await response.json();
+                return data.values;
+            }
+
+            async function fetchDates() {
+                const cellRange = "A2:E";
+                const dates = await callsheetsapi(sheetId, sheetApiKey, "1", "A2:F");
+                return dates;
+            }
+
+            function populateDates() {
+                fetchDates().then((dates) => {
+                    if (dates.length) {
+                        const currentDate = new Date();
+                        let month = currentDate.getMonth() + 1, day = currentDate.getDate(), year = currentDate.getFullYear();
+
+                        let closestDate = `${dates[0][0]} ${dates[0][1]}`;
+                        if (dates[0][2] == month && dates[0][3] == year) {
+                            if (dates[0][0] === day) closestDate = "сьогодні";
+                            else if (dates[0][0] - 1 === day) closestDate = "завтра";
+                            else if (dates[0][0] - 2 === day) closestDate = "післязавтра";
+                        }
+
+                        section3_closestDate.innerHTML = closestDate;
+                        section3_closestDate.onclick = (event) => window.open(dates[0][5], "_blank");
+                    }
+                    
+                    dates.forEach((date) => {
+                        const dateFlashcard = document.createElement("div");
+                        dateFlashcard.className = "flashcard flex column align-center";
+                        dateFlashcard.innerHTML = `
+                            <div class="bg-spotlight"></div>
+                            <div class="flex column align-center full-width space-bigger">
+                                <div class="link-icon flex row align-end full-width">
+                                    <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.12515 0H29.0002C30.1047 0 31.0002 0.89543 31.0002 2V23.875H27.0002V6.82843L2.91436 30.9142L0.0859375 28.0858L24.1717 4H7.12515V0Z" fill="black"/></svg>
+                                </div>
+                                <span class="l jura h3 bold">${date[1]}</span>
+                                <span class="l jura h1 bold">${date[0]}</span>
+                                <span class="l jura h3">${date[3]}</span>
+                                <span class="l jura h4 bold p-space-top">${date[4]}</span>
+                            </div>
+                        `;
+
+                        dateFlashcard.onclick = (event) => window.open(date[5], "_blank");
+                        dateFlashcard.onmousemove = (event) => {
+                            let { clientX, clientY, currentTarget } = event;
+                            let { left, top } = currentTarget.getBoundingClientRect();
+                            dateFlashcard.style.setProperty('--spotlight-x',  `${clientX - left}px`)
+                            dateFlashcard.style.setProperty('--spotlight-y',  `${clientY - top}px`)
+                        };
+
+                        section3_flashcards.appendChild(dateFlashcard);
+                    })
+                });
+            }
 
             function switchSource(event) {
                 section0_bg_video_src.src = video1_url;
@@ -1154,17 +1327,32 @@
                         (isIntersecting) => section1_bg_sticky_changeSrc(isIntersecting, 2)
                     ],
                     [
+                        section1,
+                        function (isIntersecting) {
+                            if (isIntersecting) {
+                                document.documentElement.style.setProperty('--header-z-index', 2);
+                                section1_content1_sticky.style.opacity = 1.0;
+                            }
+                        }
+                    ],
+                    [
                         section2,
                         function (isIntersecting) {
                             if (isIntersecting) {
                                 document.documentElement.style.setProperty('--header-z-index', 4);
                                 section1_content1_sticky.style.opacity = 0;
-                            } else {
-                                document.documentElement.style.setProperty('--header-z-index', 2);
-                                section1_content1_sticky.style.opacity = 1.0;
                             }
                         }
-                    ]
+                    ],
+                    [
+                        section3,
+                        function (isIntersecting) {
+                            if (isIntersecting) {
+                                document.documentElement.style.setProperty('--header-z-index', 4);
+                                section1_content1_sticky.style.opacity = 0;
+                            }
+                        }
+                    ],
                 ]));
 
                 section1_bg_sticky_TransitionHandler(scrollYListener, section1_bg_sticky_getParams(scrollYListener));
@@ -1191,6 +1379,8 @@
                         }
                     }
                 });
+
+                populateDates();
             }
 
             document.addEventListener("DOMContentLoaded", onDOMLoad);
@@ -1240,6 +1430,7 @@
 
                     if (button.getAttribute("data-target") === "course") button_l.innerHTML = "Курс";
                     else if (button.getAttribute("data-target") === "course-date") button_l.innerHTML = "Розпочніть навчання!";
+                    else if (button.getAttribute("data-target") === "contacts") button_l.innerHTML = "Контакти";
                 };
 
                 button.onmouseleave = (event) => {
@@ -1273,12 +1464,12 @@
                 header_bgSpotlight.style.setProperty('--spotlight-y',  `${clientY - top - window.pageYOffset}px`)
             };
 
-            section2_gridItems.forEach((element) => {
-                element.onmousemove = (event) => {
+            flashcards.forEach((flashcard) => {
+                flashcard.onmousemove = (event) => {
                     let { clientX, clientY, currentTarget } = event;
                     let { left, top } = currentTarget.getBoundingClientRect();
-                    element.style.setProperty('--spotlight-x',  `${clientX - left}px`)
-                    element.style.setProperty('--spotlight-y',  `${clientY - top}px`)
+                    flashcard.style.setProperty('--spotlight-x',  `${clientX - left}px`)
+                    flashcard.style.setProperty('--spotlight-y',  `${clientY - top}px`)
                 };
             });
 
