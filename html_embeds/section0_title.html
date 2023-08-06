@@ -540,8 +540,6 @@
             #section1_aboutHeading svg path { fill: var(--secondary-color); }
 
             #section1_cursor {
-                --cursor-x: 34rem;
-                --cursor-y: 60rem;
                 --animation-duration: 5s;
                 transition: tranform 5s ease-out;
                 -webkit-transition: transform 5s ease-out;
@@ -841,7 +839,7 @@
                         <span class="l jura h3">Професійна академія<br>операторів FPV квадракоптера</span>
                         <span data-target="about" class="l hover jura h2">Про нас</span>
                         <span data-target="course" class="l hover jura h2">Курси</span>
-                        <span data-target="contact" class="l hover jura h2">Контакти</span>
+                        <span data-target="contacts" class="l hover jura h2">Контакти</span>
                         <span data-target="copyright" class="l hover jura h7">​© 2023 &nbsp| &nbspПолітика конфіденційності &nbsp| &nbspУсі права захищені</span>
                     </div>
                 </div>
@@ -1090,7 +1088,7 @@
         </section>
         <section id="section5" class="full-width">
             <div class="flex column align-center">
-                <span class="l hover jura h6 p-space-top">Політика конфіденційності</span>
+                <span data-target="copyright" class="l hover jura h6 p-space-top">Політика конфіденційності</span>
                 <span class="l jura h6 p-space-bottom">Усі права захищені</span>
             </div>
         </section>
@@ -1144,11 +1142,29 @@
             const section4_embossedLs = document.querySelectorAll("#section4 .l.l-emboss-wrapper");
             const section4_socials = document.querySelectorAll("#section4 .socials-content > div");
 
+            const scrollBtns = document.querySelectorAll("*[data-target]");
+            const scrollActions = new Map([
+                ["about", () => scrollToElement(section1)],
+                ["course", () => scrollToElement(section2)],
+                ["course-date", () => scrollToElement(section3, 0)],
+                ["contacts", () => scrollToElement(section4)],
+                ["copyright", () => openCopyright()],
+            ]);
+
             const socials_links = new Map([
                 ["socials-instagram", "https://www.instagram.com/aero_combat_drone_academy/"],
                 ["socials-facebook", "https://www.facebook.com/AerocombatEurope/"],
                 ["socials-telegram", "https://t.me/+WYqOXEO3o4Q4Y2Yy"],
             ]);
+
+            function scrollToElement(element, offset=-200) {
+                console.log(element.getBoundingClientRect().top + window.pageYOffset);
+                scrollTo(0, element.getBoundingClientRect().top + offset + window.pageYOffset);
+            }
+
+            function openCopyright() {
+                openLink("https://www.aero-combat.com/");
+            }
 
             function postMessage(message, useLog=false) {
                 window.parent.postMessage(message, URL);
@@ -1622,7 +1638,7 @@
                 let section1_aboutHeading_rect = section1_aboutHeading.getBoundingClientRect();
                 let section1_cursor_x = section1_aboutHeading_rect.x + section1_aboutHeading_rect.width - section1_cursor.clientWidth / 2;
                 let section1_cursor_y = section1_aboutHeading_rect.top - section1_cursor.clientHeight / 2;
-                section1_cursor.style.setProperty('--cursor-x',  `${section1_cursor_x}px`)
+                section1_cursor.style.setProperty('--cursor-x',  `${section1_cursor_x / 8}px`)
                 section1_cursor.style.setProperty('--cursor-y',  `${section1_cursor_y}px`)
 
                 const switchHeaderMenuThemeAtY = 
@@ -1635,6 +1651,7 @@
                 });
 
                 populateDates();
+                scrollTo({ left: 0 });
             }
 
             document.addEventListener("DOMContentLoaded", onDOMLoad);
@@ -1707,7 +1724,10 @@
             });
 
             mouseCursorListener(section1, function(clientX, clientY, targetRect, _element) {
-                section1_cursor.style.setProperty('--cursor-x',  `${clientX - section1_cursor.clientWidth / 2}px`);
+                let cursorX = clientX - section1_cursor.clientWidth / 2;
+                if (cursorX < section1.clientWidth / 3) {
+                    section1_cursor.style.setProperty('--cursor-x',  `${cursorX}px`);
+                }
                 section1_cursor.style.setProperty('--cursor-y',  `${clientY + section1_cursor.clientHeight / 2}px`);
             });
 
@@ -1780,12 +1800,31 @@
                 }
             };
 
-            header_labels.forEach(label => label.onclick = (event) => toggleHeaderMenu("collapsed"));
-            header_menuLogo.onclick = (event) => toggleHeaderMenu("collapsed");
+            // header_labels.forEach(label => label.onclick = (event) => {
+            //     toggleHeaderMenu("collapsed");
+            // });
+
+            header_menuLogo.onclick = (event) => {
+                toggleHeaderMenu("collapsed");
+                postMessage({ "messageType": "reloadPage" });
+            };
+
             header_menuButton.onclick = (event) => {
                 if (isMenuExpanded) toggleHeaderMenu("collapsed")
                 else toggleHeaderMenu("expanded");
             };
+
+            scrollBtns.forEach((element) => {
+                element.onclick = (event) => {
+                    toggleHeaderMenu("collapsed");
+                    console.log(element.getAttribute("data-target"));
+                    let action = scrollActions.get(element.getAttribute("data-target"));
+                    console.log(action);
+                    action();
+                };
+            });
+
+            scrollTo({ left: 0 });
         </script>
     </body>
 </html>
