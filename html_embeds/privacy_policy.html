@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aero Combat | Політика конфіденційності</title>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Jura" />
+    <link rel="stylesheet" type="text/css" href='https://fonts.googleapis.com/css?family=Barlow' />
+    <style>
+        :root {
+            --bg-native: #FAFAFA;
+            --primary-color: black;
+            --secondary-color: #2B4C2E;
+            /* --accent-color: #6709b4; */
+            --accent-color: #9847DA;
+
+            --header-z-index: 4;
+            --header-border-color: rgba(0, 0, 0, 0.1);
+            --header-border-color-hover: rgba(0, 0, 0, 0.12);
+            --header-primary-color: black;
+            --header-secondary-color: #2B4C2E;
+
+            --section-content-height: 650vh;
+        }
+
+        ::-webkit-scrollbar { width: 0px; display: none !important; }
+
+        html, body {
+            width: 100%;
+            height: auto !important;
+            min-height: 100%;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0px;
+            background: var(--bg-native);
+            /* overflow: hidden; */
+        }
+
+        section { height: auto; }
+
+        .l {
+            display: inline-block;
+            position: relative;
+            color: var(--primary-color);
+            transition: color 0.1s ease-out;
+            -webkit-transition: color 0.1s ease-out;
+        }
+
+        .l.jura { font-family: Jura; }
+        .l.barlow { font-family: Barlow; }
+        .l.hover { cursor: pointer; }
+        .l.hover:hover { color: var(--secondary-color); }
+
+        .l.hover:hover::after {
+            transform: scaleX(1);
+            -webkit-transform: scaleX(1);
+            transform-origin: bottom left;
+            -webkit-transform-origin: bottom left;
+        }
+
+        .l.hover::after {
+            content: '';
+            width: 100%;
+            height: 1px;
+            top: 1.3em;
+            bottom: 0px;
+            left: 0px;
+            position: absolute;
+            background: var(--secondary-color);
+            transform: scaleX(0);
+            -webkit-transform: scaleX(0);
+            transform-origin: bottom right;
+            -webkit-transform-origin: bottom right;
+            transition: transform 0.1s ease-out;
+            -webkit-transition: -webkit-transform 0.1s ease-out;
+        }
+
+        .l.h1 { font-size: 5em; }
+        .l.h1-5 { font-size: 3.3em; }
+        .l.h2 { font-size: 2em; }
+        .l.h3 { font-size: 1.5em; }
+        .l.h4 { font-size: 1.2em; }
+        .l.h6 { font-size: 1em; }
+        .l.h7 { font-size: 0.8em; }
+        .l.h8 { font-size: 0.5em; }
+        .l.p1 { font-size: 1.35em; }
+        .l.p2 { font-size: 1.2em; }
+
+        .l.bold { font-weight: 700; }
+        .l.no-wrap { white-space: pre; }
+        .l.l-center { text-align: center; }
+        .l.l-end { text-align: end; }
+
+        .p-space-top { margin-top: 1.2em; }
+        .p-space-top-smaller { margin-top: 0.5em; }
+        .p-space-bottom { margin-bottom: 1.2em; }
+        .p-space-both { margin-top: 1.2em; margin-bottom: 1.2em; }
+
+        .flex { display: flex; }
+        .flex.column { flex-direction: column; }
+        .flex.row { flex-direction: row; }
+        .flex.align-center { justify-content: center; align-items: center; }
+        .flex.row.start-center { justify-content: center; align-items: start; }
+        .flex.column.start-center { justify-content: start; align-items: center; }
+        .flex.row.center-start { justify-content: start; align-items: center; }
+        .flex.column.center-start { justify-content: center; align-items: start; }
+        .flex.row.end-center { justify-content: center; align-items: end; }
+        .flex.column.end-center { justify-content: end; align-items: center; }
+        .flex.row.align-end { justify-content: end; }
+        .flex.column.align-end { align-items: end; }
+        .flex.row.align-start { justify-content: start; }
+        .flex.column.align-start { align-items: start; }
+        .flex.stretch { justify-items: stretch; }
+        .flex.flex-wrap { flex-wrap: wrap; }
+        .flex.end-end { justify-content: end; align-items: end; }
+
+        .grid { display: grid; }
+        .grid.square-grid { grid-template-areas: "a a"; }
+
+        .rel-position { position: relative; }
+        .abs-position-auto { position: absolute; }
+        .abs-position { position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px; }
+
+        .cursor {
+            --cursor-x: 0px;
+            --cursor-y: 0px;
+            position: absolute;
+            width: fit-content;
+            height: fit-content;
+            overflow: hidden;
+            pointer-events: none;
+            transform: translate(var(--cursor-x), var(--cursor-y)) translateZ(0);
+            -webkit-transform: translate(var(--cursor-x), var(--cursor-y)) translateZ(0);
+            transition: transform 0.35s ease-out;
+            -webkit-transition: transform 0.35s ease-out;
+        }
+
+        .cursor-scope {
+            --scope-x: 0px;
+            --scope-y: 0px;
+            position: relative;
+            pointer-events: none;
+            transform: translate(var(--scope-x), var(--scope-y));
+            -webkit-transform: translate(var(--scope-x), var(--scope-y));
+            transition: transform 0.1s ease-out;
+            -webkit-transition: transform 0.1s ease-out;
+        }
+
+        .rotate-infinite {
+            animation: rotate-neg360deg calc(var(--animation-duration, 5s)) linear 0s infinite running;
+            transition: animation 0.5s ease-out;
+        }
+
+        .btn-primary, .l-focus {
+            width: 15vw;
+            min-width: fit-content;
+            max-width: inherit;
+            height: auto;
+            z-index: 5;
+
+            margin-top: 4%;
+            padding: 6px;
+
+            border-radius: 5px;
+            background: #FAFAFA;
+        }
+
+        .btn-primary {
+            text-align: center;
+            cursor: pointer;
+            transform: none;
+            -webkit-transform: none;
+            transition: transform 0.5s ease-out;
+            -webkit-transition: transform 0.5s ease-out;
+        }
+
+        .btn-primary .btn-hover-bg {
+            --size: 120px;
+
+            z-index: 6;
+            position: absolute;
+            overflow: hidden;
+            inset: 0;
+            pointer-events: none;
+
+            opacity: 0;
+            transition: opacity 2s ease-out;
+            -webkit-transition: opacity 2s ease-out;
+
+            background: radial-gradient(
+                var(--size) circle at var(--bg-x) var(--bg-y),
+                /* rgba(250, 250, 250, 0.2) 0%, */
+                rgba(0, 0, 0, 0.3) 0%,
+                transparent 100%
+            );
+            transition: background 1s cubic-bezier(0.16, 1, 0.3, 1);
+            -webkit-transition: background 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-primary .btn-l, .l-focus {
+            z-index: 7;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .btn-primary .btn-l {
+            --label-sx: 1.0;
+            --label-sy: 1.0;
+            transform: scale(var(--label-sx), var(--label-sy));
+            -webkit-transform: scale(var(--label-sx), var(--label-sy));
+            transition: transform 0.5s ease-out;
+            -webkit-transition: -webkit-transform 0.5s ease-out;
+        }
+
+        .btn-primary .btn-pointer { margin-right: 12px; margin-top: 3px; }
+        .btn-primary .cursor { z-index: 2; opacity: 0.9; }
+        .btn-primary .cursor path { fill: none; stroke: none; }
+        
+        .btn-primary:hover .btn-hover-bg { opacity: 1; }
+        .btn-primary:hover svg path { stroke: #FAFAFA; fill: #FAFAFA; }
+        .btn-primary.btn-color-secondary:hover { background: var(--secondary-color); }
+        .btn-primary.btn-color-accent:hover { background: var(--accent-color); }
+
+        .btn-primary:hover {
+            border: 1px solid rgba(250, 250, 250, 0.25);
+            transform: scale(1.2, 1.3);
+            -webkit-transform: scale(1.2, 1.3);
+        }
+
+        .btn-primary:hover .btn-l {
+            color: #FAFAFA;
+            --label-sx: 0.9;
+            --label-sy: 0.9;
+            transform: scale(var(--label-sx), var(--label-sy));
+            -webkit-transform: scale(var(--label-sx), var(--label-sy));
+        }
+
+        .space-bigger { margin-top: 4em; margin-bottom: 4em; }
+        .full-width { width: 100%; }
+        .width-90 { width: 90%; }
+        .full-height { height: 100%; }
+
+        header .l {
+            color: var(--header-primary-color);
+            z-index: calc(var(--header-z-index) + 2);
+        }
+
+        header .l.hover:hover { color: var(--header-secondary-color); }
+        header .l.hover::after { background: var(--header-secondary-color); }
+
+        header .header-bg {
+            --header-height: 70px;
+            --header-bg-color: rgba(250, 250, 250, 0.20);
+            z-index: var(--header-z-index);
+
+            width: 75%;
+            height: var(--header-height);
+            top: 0px;
+            position: fixed;
+
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
+
+            background: var(--header-bg-color);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+            -webkit-transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+
+            border-radius: 0px 0px 5px 5px;
+            border: 1px solid var(--header-border-color);
+            border-top: 0px;
+            /* transition: border 0.25s ease-out; */
+            /* -webkit-transition: border 0.25s ease-out; */
+
+            backdrop-filter: blur(15px);
+        }
+
+        header .header-bg:hover { border: 1px solid var(--header-border-color-hover); border-top: 0px; }
+
+        .bg-spotlight {
+            --size: 160px;
+
+            z-index: calc(var(--header-z-index) + 1);
+            position: absolute;
+            overflow: hidden;
+            inset: 0;
+
+            opacity: 0;
+            transition: opacity 2s ease-out;
+            -webkit-transition: opacity 2s ease-out;
+            background: radial-gradient(
+                var(--size) circle at var(--spotlight-x) var(--spotlight-y),
+                rgba(43, 76, 46, 0.40) 0%,
+                transparent 100%
+            );
+        }
+
+        .bg-spotlight:hover { opacity: 1; }
+
+        .header-content-collapsed { justify-content: space-between; align-items: center; }
+        .header-content-collapsed div > span { margin-left: 2em; margin-right: 2em; }
+
+        .sticky-bg-wrapper {
+            width: fit-content;
+            height: var(--section-content-height);
+            /* max-height: 2500px; */
+            /* margin-bottom: -390vh; */
+            position: relative;
+            z-index: 2;
+        }
+
+        .sticky-bg-stick {
+            /* width: 100vw; */
+            /* height: 100vh; */
+            top: 10em;
+            position: sticky;
+            position: -webkit-sticky;
+        }
+
+        .sticky-bg-container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+        }
+
+        header .btn { margin-top: 0px; }
+        header .btn:hover span { font-weight: 400; }
+
+        #header_menuLogo {
+            z-index: calc(var(--header-z-index) + 2);
+            margin: 8px;
+            margin-left: 24px;
+            cursor: pointer;
+            padding: 8px;
+
+            display: block;
+
+            border-radius: 5px;
+            border: 1px solid transparent;
+
+            transform: scale(1, 1);
+            -webkit-transform: scale(1, 1);
+            transition: 0.15s ease-out;
+            -webkit-transition: 0.15s ease-out;
+        }
+
+        #header_menuLogo path { fill: var(--header-secondary-color); }
+
+        #header_menuLogo:hover {
+            border: 1px solid var(--header-border-color-hover);
+            transform: scale(0.99, 0.99);
+            -webkit-transform: scale(0.99, 0.99);
+        }
+        
+        #header_menuButton {
+            z-index: calc(var(--header-z-index) + 2);
+            display: inline-flex;
+            width: 38px;
+            height: 38px;
+            position: relative;
+            top: -2px;
+            margin-left: 48px;
+            margin-right: 24px;
+            cursor: pointer;
+            transform: scale(1, 1);
+            -webkit-transform: scale(1, 1);
+            transition: transform 0.15s ease-out;
+            -webkit-transition: transform 0.15s ease-out;
+        }
+
+        #header_menuButton::selection { background-color: transparent; }
+
+        #header_menuButton:hover {
+            transform: scale(0.95, 0.95);
+            -webkit-transform: scale(0.95, 0.95);
+        }
+
+        #header_menuButton svg * { fill: var(--header-primary-color); }
+
+        #section1 {
+            margin-top: 30vh;
+        }
+
+        #section1 > div:first-child > span:first-child {
+            width: 32vw;
+            text-align: center;
+        }
+
+        #section1 > div:first-child > svg {
+            width: 65vw;
+        }
+
+        #section2 {
+            margin-top: 20vh;
+            margin-left: 5em;
+            margin-right: 5em;
+            margin-bottom: 50vh;
+            height: auto;
+        }
+
+        #section2_sticky {
+            position: sticky;
+            min-width: 25vw;
+            height: fit-content;
+        }
+
+        #section2_sticky > div:first-child {
+            padding-bottom: 1em;
+            border-bottom: 1px solid var(--header-border-color-hover);
+        }
+
+        #section2_sticky > div:last-child {
+            width: 100%;
+            height: fit-content;
+            min-height: fit-content;
+            margin-top: 1em;
+            background: var(--secondary-color);
+            border-radius: 5px;
+        }
+
+        #section2_sticky > div:last-child > span {
+            font-size: 2em;
+            width: fit-content;
+            color: #FAFAFA;
+            margin: 1em;
+        }
+
+        #section2_currentSectionNumber {
+            width: fit-content;
+            height: fit-content;
+            background: #FAFAFA;
+            padding-right: 1em;
+            left: 0px;
+            z-index: 1;
+        }
+
+        #section2_content {
+            position: relative;
+            height: fit-content;
+            top: 2.78em;
+            margin-left: 4em;
+            margin-right: 5em;
+        }
+
+        #section2_content > div > span:first-child {
+            padding-top: 1em;
+            padding-bottom: 1em;
+            border-top: 1px solid var(--header-border-color-hover);
+            margin-right: 2em;
+            margin-top: 2em;
+        }
+
+        #section2_content > div:first-child > span:first-child { margin-top: 0px; }
+
+        #section2_content p {
+            margin-right: 5em;
+        }
+
+        #section5 { background: var(--primary-color); }
+        #section5 > div:first-child { background: var(--secondary-color); padding: 2em; }
+
+        ul li {
+            display: list-item !important;
+            float: left;
+            clear: left;
+            padding: 0.2em;
+        }
+
+    </style>
+</head>
+<body>
+    <header class="flex row start-center full-width">
+        <div class="header-bg">
+            <div class="bg-spotlight"></div>
+            <div class="flex column width-90">
+                <div class="header-content-collapsed flex">
+                    <div class="flex align-center">
+                        <svg id="header_menuLogo" xmlns="http://www.w3.org/2000/svg" width="164" height="39" viewBox="0 0 164 39" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M20.2831 0.0746751C20.338 0.0265298 20.4083 0 20.4812 0H36.3692C36.4449 0 36.5178 0.0286392 36.5734 0.0802179L77.4604 37.9887C77.5516 38.0732 77.5819 38.2052 77.5367 38.3213C77.4916 38.4374 77.3802 38.5138 77.2562 38.5138H61.5188C61.4432 38.5138 61.3704 38.4852 61.3148 38.4338L28.307 7.89748L16.538 18.2363C16.4831 18.2845 16.4127 18.3111 16.3398 18.3111H0.301208C0.175669 18.3111 0.0632963 18.2328 0.0192033 18.1147C-0.0248897 17.9966 0.00854542 17.8634 0.10311 17.7804L20.2831 0.0746751ZM20.5942 0.605325L1.10411 17.7057H16.2267L28.114 7.26303C28.2297 7.16135 28.4031 7.16359 28.5162 7.26823L61.6364 37.9085H76.4856L36.2514 0.605325H20.5942ZM0.0190913 20.475C0.0631005 20.3568 0.175552 20.2784 0.301208 20.2784H16.3398C16.4125 20.2784 16.4828 20.3048 16.5376 20.3528L26.392 28.9799H44.4261C44.5026 28.9799 44.5762 29.0092 44.632 29.0617L54.1196 37.9902C54.2098 38.0751 54.2392 38.2068 54.1938 38.3224C54.1484 38.4379 54.0373 38.5138 53.9137 38.5138H20.4812C20.4086 38.5138 20.3384 38.4874 20.2836 38.4395L0.103592 20.8095C0.00876398 20.7266 -0.024918 20.5933 0.0190913 20.475ZM1.10671 20.8837L20.5938 37.9085H53.1514L44.3071 29.5853H26.2792C26.2064 29.5853 26.1362 29.5588 26.0813 29.5108L16.227 20.8837H1.10671Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M71.0817 2.1943C71.0817 1.48389 71.6548 0.907987 72.3618 0.907987H82.6777C83.3847 0.907987 83.9578 1.48389 83.9578 2.1943V6.50724C83.9578 6.84921 83.8223 7.1771 83.5812 7.41846C83.3401 7.65983 83.0133 7.7948 82.673 7.79355L73.6419 7.76043V9.4582H83.9578V12.0308H72.3618C71.6548 12.0308 71.0817 11.4549 71.0817 10.7445V2.1943ZM73.6419 5.18778L81.3976 5.21622V3.48062H73.6419V5.18778ZM66.4885 3.48062H57.8292V0.907988H67.7686C68.4756 0.907988 69.0487 1.48389 69.0487 2.1943V10.7445C69.0487 11.4549 68.4756 12.0308 67.7686 12.0308H57.4527C56.7457 12.0308 56.1726 11.4549 56.1726 10.7445V6.43158C56.1726 6.08961 56.3081 5.76172 56.5492 5.52036C56.7903 5.27899 57.1171 5.14402 57.4574 5.14527L66.4885 5.17839V3.48062ZM66.4885 7.75104L58.7328 7.7226V9.4582H66.4885V7.75104ZM86.7438 2.1943C86.7438 1.48389 87.3169 0.907988 88.0239 0.907988H96.0055V3.48062H89.304V12.0308H86.7438V2.1943ZM97.888 2.1943C97.888 1.48389 98.4611 0.907989 99.1681 0.907989H109.409C110.116 0.907989 110.689 1.48389 110.689 2.1943V10.8202C110.689 11.5306 110.116 12.1065 109.409 12.1065H99.1681C98.4611 12.1065 97.888 11.5306 97.888 10.8202V2.1943ZM100.448 3.48062V9.53387H108.129V3.48062H100.448ZM122.736 26.256V12.0308H125.297V24.9696H133.805V19.2947H127.179V16.7221H135.085C135.792 16.7221 136.365 17.298 136.365 18.0084V26.256C136.365 26.9664 135.792 27.5423 135.085 27.5423H124.017C123.31 27.5423 122.736 26.9664 122.736 26.256ZM155.717 16.6464V13.2415H158.277V16.6464H164V19.2191H158.277V24.9696H164V27.5423H156.997C156.29 27.5423 155.717 26.9664 155.717 26.256V19.2191H152.705V16.6464H155.717ZM72.7383 17.6301C72.7383 16.9197 73.3114 16.3438 74.0184 16.3438H85.6143V18.9164H75.2984V24.894H85.6143V27.4666H74.0184C73.3114 27.4666 72.7383 26.8907 72.7383 26.1803V17.6301ZM87.6474 17.6301C87.6474 16.9197 88.2205 16.3438 88.9275 16.3438H99.1681C99.875 16.3438 100.448 16.9197 100.448 17.6301V26.256C100.448 26.9664 99.875 27.5423 99.1681 27.5423H88.9275C88.2205 27.5423 87.6474 26.9664 87.6474 26.256V17.6301ZM90.2075 18.9164V24.9696H97.888V18.9164H90.2075ZM102.707 17.6301C102.707 16.9197 103.28 16.3438 103.987 16.3438H118.896C119.603 16.3438 120.176 16.9197 120.176 17.6301V27.5423H117.616V18.9164H112.722V27.5423H110.162V18.9164H105.267V27.5423H102.707V17.6301ZM148.865 19.0677H140.206V16.4951H150.145C150.852 16.4951 151.425 17.071 151.425 17.7814V26.3316C151.425 27.042 150.852 27.6179 150.145 27.6179H139.829C139.122 27.6179 138.549 27.042 138.549 26.3316V22.0187C138.549 21.6767 138.685 21.3488 138.926 21.1075C139.167 20.8661 139.494 20.7311 139.834 20.7324L148.865 20.7655V19.0677ZM148.865 23.3382L141.109 23.3097V25.0453H148.865V23.3382Z" fill="white"/><path d="M1.10411 17.7057L20.5942 0.605325H36.2514L76.4856 37.9085H61.6364L28.5162 7.26823C28.4031 7.16359 28.2297 7.16135 28.114 7.26303L16.2267 17.7057H1.10411Z" fill="white"/><path d="M20.5938 37.9085L1.10671 20.8837H16.227L26.0813 29.5108C26.1362 29.5588 26.2064 29.5853 26.2792 29.5853H44.3071L53.1514 37.9085H20.5938Z" fill="white"/></svg>
+                    </div>
+                    <div class="btn btn-primary btn-color-secondary flex align-center" data-target="home" data-msg="true">
+                        <svg class="btn-pointer" width="32" height="14" viewBox="0 0 32 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7L31 6.99998M31 6.99998L22 13.0622M31 6.99998L22 0.937805" stroke="black" stroke-width="2" stroke-linecap="round" /></svg>
+                        <span class="btn-l l jura">На головну</span>
+                        <div class="btn-hover-bg"></div>
+                        <svg class="cursor" width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25.5 31.25L25.5 50" stroke="#FAFAFA" /><path d="M25.5 0L25.5 18.75" stroke="#FAFAFA" /><path d="M31.25 25.5L50 25.5" stroke="#FAFAFA" /><path d="M0 25.5L18.75 25.5" stroke="#FAFAFA" /><path class="cursor-scope" fill-rule="evenodd" clip-rule="evenodd" d="M25.5 28.5C27.1569 28.5 28.5 27.1569 28.5 25.5C28.5 23.8431 27.1569 22.5 25.5 22.5C23.8431 22.5 22.5 23.8431 22.5 25.5C22.5 27.1569 23.8431 28.5 25.5 28.5Z" fill="#FAFAFA" /></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section id="section1" class="full-width">
+        <div class="flex column align-center">
+            <span class="l jura h3">Ознайомтеся з нашою політикою конфіденційності для розуміння, яку інформацію ми збираємо та з якою метою.</span>
+            <svg class="p-space-top" width="2441" height="363" viewBox="0 0 2441 363" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M616.352 130V0.625H745.727V130H719.852V26.5H642.227V130H616.352ZM873.889 104.125V26.5H796.264V104.125H873.889ZM796.264 130C788.986 130 782.854 127.507 777.868 122.521C772.882 117.534 770.389 111.402 770.389 104.125V26.5C770.389 19.3574 772.882 13.293 777.868 8.30664C782.854 3.18555 788.986 0.625 796.264 0.625H873.889C881.031 0.625 887.096 3.18555 892.082 8.30664C897.203 13.293 899.764 19.3574 899.764 26.5V104.125C899.764 111.402 897.203 117.534 892.082 122.521C887.096 127.507 881.031 130 873.889 130H796.264ZM950.301 130C943.023 130 936.892 127.507 931.905 122.521C926.919 117.534 924.426 111.402 924.426 104.125H950.301V0.625H1053.8V130H1027.93V26.5H976.176V104.125C976.176 111.402 973.615 117.534 968.494 122.521C963.508 127.507 957.443 130 950.301 130ZM1078.46 130V104.125H1130.21V26.5H1078.46V0.625H1207.84V26.5H1156.09V104.125H1207.84V130H1078.46ZM1284.25 130V26.5H1232.5V0.625H1361.88V26.5H1310.12V130H1284.25ZM1386.54 130V0.625H1412.41V78.25L1490.04 0.625H1515.91V130H1490.04V26.5L1412.41 104.125V130H1386.54ZM1540.57 130V0.625H1566.45V52.375H1592.32L1644.07 0.625H1669.95L1618.2 52.375H1644.07C1651.22 52.375 1657.28 54.9355 1662.27 60.0566C1667.39 65.043 1669.95 71.1074 1669.95 78.25V130H1644.07V78.25H1566.45V130H1540.57ZM1798.11 52.375V26.5H1720.49V52.375H1798.11ZM1694.61 130V26.5C1694.61 19.3574 1697.1 13.293 1702.09 8.30664C1707.08 3.18555 1713.21 0.625 1720.49 0.625H1798.11C1805.25 0.625 1811.32 3.18555 1816.3 8.30664C1821.43 13.293 1823.99 19.3574 1823.99 26.5V130H1798.11V78.25H1720.49V130H1694.61ZM0.203125 337V207.625H26.0781V259.375H51.9531L103.703 207.625H129.578L77.8281 259.375H103.703C110.846 259.375 116.91 261.936 121.896 267.057C127.018 272.043 129.578 278.107 129.578 285.25V337H103.703V285.25H26.0781V337H0.203125ZM257.74 311.125V233.5H180.115V311.125H257.74ZM180.115 337C172.838 337 166.706 334.507 161.72 329.521C156.733 324.534 154.24 318.402 154.24 311.125V233.5C154.24 226.357 156.733 220.293 161.72 215.307C166.706 210.186 172.838 207.625 180.115 207.625H257.74C264.883 207.625 270.947 210.186 275.934 215.307C281.055 220.293 283.615 226.357 283.615 233.5V311.125C283.615 318.402 281.055 324.534 275.934 329.521C270.947 334.507 264.883 337 257.74 337H180.115ZM308.277 337V207.625H334.152V259.375H411.777V207.625H437.652V337H411.777V285.25H334.152V337H308.277ZM514.064 311.125V233.5H488.189V311.125H514.064ZM565.814 311.125V233.5H539.939V311.125H565.814ZM488.189 337C480.912 337 474.78 334.507 469.794 329.521C464.808 324.534 462.314 318.402 462.314 311.125V233.5C462.314 226.357 464.808 220.293 469.794 215.307C474.78 210.186 480.912 207.625 488.189 207.625H565.814C572.957 207.625 579.021 210.186 584.008 215.307C589.129 220.293 591.689 226.357 591.689 233.5V311.125C591.689 318.402 589.129 324.534 584.008 329.521C579.021 334.507 572.957 337 565.814 337H488.189ZM616.352 337V311.125H668.102V233.5H616.352V207.625H745.727V233.5H693.977V311.125H745.727V337H616.352ZM770.389 362.875V311.125H848.014V233.5H822.139V285.25C822.139 292.527 819.578 298.659 814.457 303.646C809.471 308.632 803.406 311.125 796.264 311.125V207.625H873.889V311.125H899.764V362.875H873.889V337H796.264V362.875H770.389ZM924.426 337V207.625H1053.8V233.5H950.301V259.375H1027.93V285.25H950.301V311.125H1053.8V337H924.426ZM1078.46 337V207.625H1104.34V259.375H1181.96V207.625H1207.84V337H1181.96V285.25H1104.34V337H1078.46ZM1336 362.875V337H1232.5V207.625H1258.38V311.125H1336V207.625H1361.88V362.875H1336ZM1386.54 337V311.125H1438.29V233.5H1386.54V207.625H1515.91V233.5H1464.16V311.125H1515.91V337H1386.54ZM1540.57 337V207.625H1566.45V285.25L1644.07 207.625H1669.95V337H1644.07V233.5L1566.45 311.125V337H1540.57ZM1592.32 181.75C1585.05 181.75 1578.92 179.257 1573.93 174.271C1568.94 169.284 1566.45 163.152 1566.45 155.875H1592.32L1605.26 168.812L1618.2 155.875H1644.07C1644.07 163.152 1641.51 169.284 1636.39 174.271C1631.41 179.257 1625.34 181.75 1618.2 181.75H1592.32ZM1694.61 337V207.625H1720.49V259.375H1798.11V207.625H1823.99V337H1798.11V285.25H1720.49V337H1694.61ZM1952.15 311.125V233.5H1874.52V311.125H1952.15ZM1874.52 337C1867.25 337 1861.11 334.507 1856.13 329.521C1851.14 324.534 1848.65 318.402 1848.65 311.125V233.5C1848.65 226.357 1851.14 220.293 1856.13 215.307C1861.11 210.186 1867.25 207.625 1874.52 207.625H1952.15C1959.29 207.625 1965.36 210.186 1970.34 215.307C1975.46 220.293 1978.02 226.357 1978.02 233.5V311.125C1978.02 318.402 1975.46 324.534 1970.34 329.521C1965.36 334.507 1959.29 337 1952.15 337H1874.52ZM2028.56 337C2021.28 337 2015.15 334.507 2010.17 329.521C2005.18 324.534 2002.69 318.402 2002.69 311.125V233.5C2002.69 226.357 2005.18 220.293 2010.17 215.307C2015.15 210.186 2021.28 207.625 2028.56 207.625H2106.19C2113.33 207.625 2119.39 210.186 2124.38 215.307C2129.5 220.293 2132.06 226.357 2132.06 233.5V246.438H2106.19V233.5H2028.56V311.125H2106.19V298.188H2132.06V311.125C2132.06 318.402 2129.5 324.534 2124.38 329.521C2119.39 334.507 2113.33 337 2106.19 337H2028.56ZM2208.47 337V233.5H2156.72V207.625H2286.1V233.5H2234.35V337H2208.47ZM2310.76 337V311.125H2362.51V233.5H2310.76V207.625H2440.13V233.5H2388.38V311.125H2440.13V337H2310.76Z" fill="black"/></svg>
+        </div>
+    </section>    
+    <section id="section2" class="full-width">
+        <div class="flex row">
+            <div class="sticky-bg-wrapper">
+                <div class="sticky-bg-stick">
+                    <div id="section2_sticky" class="sticky-bg-container flex column">
+                        <div class="flex row align-center">
+                            <span id="section2_currentSectionNumber" class="l jura h3 abs-position">( 1/10 )</span>
+                            <span class="l jura h3">Секція</span>
+                        </div>
+                        <div class="flex column center-start">
+                            <span id="section2_currentSection" class="l jura">Вступ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="section2_content" class="flex column full-width">
+                <div data-section-id="1" class="flex column">
+                    <span class="l jura h1-5 bold">Вступ</span>
+                    <p class="l jura h4">Компанія <span class="l jura h5 bold">Aero Combat</span> drone academy (надалі - <span class="l jura h5 bold">Aero Combat</span>) управляє веб-сайтом https://www.aero-combat.com (Сайт). Ця сторінка інформує вас про політику <span class="l jura h5 bold">Aero Combat</span> щодо збору, використання і розкриття персональних даних при використанні вами Сайту. <span class="l jura h5 bold">Aero Combat</span> використовує Ваші дані для надання та поліпшення послуг <span class="l jura h5 bold">Aero Combat</span>. Використовуючи Сайт, ви погоджуєтеся на збір і використання даних відповідно до цієї політики.</p>
+                    <p class="l jura h4">Політика застосовується до всіх Ваших персональних даних, які може отримати <span class="l jura h5 bold">Aero Combat</span> в процесі використання Сайту. Політика поширюється на персональні дані, отримані як до, так і після набуття чинності цією Політикою.</p>
+                    <p class="l jura h4">При використанні сайту Ви, повідомивши <span class="l jura h5 bold">Aero Combat</span> свої персональні дані, у тому числі за допомогою третіх осіб, визнаєте свою згоду на обробку своїх персональних даних відповідно до політики.</p>
+                    <p class="l jura h4"><span class="l jura h5 bold">Aero Combat</span> не перевіряє достовірність персональних даних, наданих користувачем, немає можливості оцінювати його дієздатність. Проте <span class="l jura h5 bold">Aero Combat</span> виходить з того, що користувач діє сумлінно, обачно, надає достовірні та достатні персональні дані та докладає всіх необхідних зусиль до підтримки таких даних у актуальному стані, та не порушує права третіх осіб.</p>
+                    <p class="l jura h4">Погоджуючись з умовами Політики, Ви підтверджуєте, що в момент збору персональних даних Ви повідомлені про осіб, яким передаються персональні дані, зміст та цілі збору персональних даних. Ви підтверджуєте (гарантуєте), що персональні дані, що передані нам на обробку, передані за згодою власників персональних даних та в рамках чинного законодавства України.</p>
+                    <p class="l jura h4">Політика діє стосовно всієї інформації, яку <span class="l jura h5 bold">Aero Combat</span> може отримати про користувача під час використання ним Сайту, а також під час виконання будь-яких угод та договорів з Користувачем.</p>
+                    <p class="l jura h4">Визначення «Персональні дані» означає відомості чи сукупність відомостей про фізичну особу, яка ідентифікована або може бути конкретно ідентифікована.</p>
+                    <ul>
+                        <li class="l jura h4">«Дані про використання» означають дані, зібрані автоматично або за допомогою використання Сайту, або послуг, що надає <span class="l jura h5 bold">Aero Combat</span>.</li>
+                        <li class="l jura h4">«Файли cookie» - означають невеликі фрагменти даних, що зберігаються на вашому пристрої (комп'ютері або мобільному пристрої).</li>
+                        <li class="l jura h4">«Суб'єкт даних» - це будь-яка особа, яка користується послугами <span class="l jura h5 bold">Aero Combat</span> або відвідує Сайт і є суб'єктом Персональних даних.</li>
+                    </ul>
+                    <p class="l jura h4"><span class="l jura h5 bold">Aero Combat</span> виступає в ролі володільця Ваших персональних даних.</p>
+                    <p class="l jura h4">Ми цінуємо Ваше право на особисте життя та нерозголошення Ваших персональних даних. Цей документ описує, яку особисту інформацію ми отримуємо та збираємо, коли Ви користуєтесь Сайтом. Ми сподіваємося, що ці відомості допоможуть вам приймати усвідомлені рішення щодо особистої інформації, що надається нам.</p>
+                    <p class="l jura h4">Політика діє щодо обробки персональних даних, отриманих <span class="l jura h5 bold">Aero Combat</span> від фізичних осіб (суб'єктів персональних даних) на підставі Конституції України, Закону України „Про захист персональних даних, інших законів та підзаконних нормативно-правових актів, які регулюють відносини у сфері захисту персональних даних (далі – Законодавство).</p>
+                    <p class="l jura h4"><span class="l jura h5 bold">Aero Combat</span> може обробляти ваші персональні дані, тому що:</p>
+                    <ul>
+                        <li class="l jura h4">Ви хочете стати клієнтом <span class="l jura h5 bold">Aero Combat</span>;</li>
+                        <li class="l jura h4">Ви надали <span class="l jura h5 bold">Aero Combat</span> згоду;</li>
+                        <li class="l jura h4">Для задоволення вимог діючого законодавства.</li>
+                    </ul>
+                </div>
+                <div data-section-id="2" class="flex column">
+                    <span class="l jura h1-5 bold">Обсяг персональних даних</span>
+                    <p class="l jura h4">Під час використання сайту, а саме при здійсненні придбання послуг компанії <span class="l jura h5 bold">Aero Combat</span> та заповненні реєстраційної форми (замовлення), <span class="l jura h5 bold">Aero Combat</span> може попросити вас надати нам певні персональні дані, які можуть бути використані для ідентифікації вашої особистості. Особиста інформація може включати, але не обмежується: прізвище, ім'я, по батькові, адреси, номер телефону, e-mail, банківських даних, країна проживання, місце роботи, посада, дата народження тощо.</p>
+                    <p class="l jura h4">Такі дані <span class="l jura h5 bold">Aero Combat</span> отримуємо лише від осіб, які надають їх свідомо та з власного бажання. <span class="l jura h5 bold">Aero Combat</span> не збирає будь-які персональні дані про Вас, окрім інформації, яка свідомо надана Вами.</p>
+                    <p class="l jura h4"><span class="l jura h5 bold">Aero Combat</span> не збирає інформацію, до обробки та зберігання якої законодавством встановлені обмеження, а саме: персональні дані про расове або етнічне походження, політичні, релігійні або світоглядні переконання, членство в політичних партіях та професійних спілках, засудження до кримінального покарання, а також дані, що стосуються здоров’я, статевого життя, біометричні або генетичні дані.</p>
+                    <p class="l jura h4">Для того щоб придбати послуги <span class="l jura h5 bold">Aero Combat</span> чи іншим чином взаємодіяти з нами, Ви повинні уважно ознайомитися з Вашими правами та обов’язками щодо обробки персональних даних, які зазначені в ст. 8 Закону України «Про захист персональних даних», уважно ознайомитися з даною Політикою конфіденційності, а також висловити свою повну згоду з їх умовами.</p>
+                </div>
+                <div data-section-id="3" class="flex column">
+                    <span class="l jura h1-5 bold">Мета збору персональних даних</span>
+                    <p class="l jura h4">Ми збираємо кілька різних типів даних для різних цілей, щоб покращувати послуги <span class="l jura h5 bold">Aero Combat</span> для вас.</p>
+                    <p class="l jura h4">Ми можемо обробляти Ваші персональні дані для наступних цілей. При цьому одночасно можуть застосовуватися одна або кілька цілей:</p>
+                    <p class="l jura h4">Отримання замовлення. Ми можемо використовувати Ваші персональні дані для отримання замовлення, яке Ви зробили, для обробки Ваших запитів, або для інших цілей, які можуть існувати для досягнення кінцевої мети – задовольнити інтереси споживача, а також для запобігання та розслідування випадків шахрайства та інших зловживань.</p>
+                    <p class="l jura h4">Спілкування з Вами. Ми можемо використовувати Ваші персональні дані для зв’язку з Вами, наприклад повідомити Вас про зміну у наших продуктах,або відправлення інформаційних бюлетенів, маркетингових або рекламних матеріалів, пропозицій від <span class="l jura h5 bold">Aero Combat</span> та іншої інформації, яка може бути вам цікава, або надіслати Вам важливі повідомлення та інші подібні повідомлення, що стосуються замовлення, що було Вами зроблено та зв’язатися з Вами в цілях, пов’язаних з обслуговуванням (в тому числі технічною підтримкою) споживача/клієнта. Ви погоджуєтесь на отримання повідомлень рекламного, інформаційного та іншого характеру, включаючи надіслані з метою реклами наших послуг, у формі смс-повідомлень, листів на електронну пошту, телефонних дзвінків, повідомлень в системах обміну миттєвими повідомленнями (в тому числі, але не виключно Viber, WhatsApp, Telegram) тощо. Для відмови від отримання зазначених повідомлень, Вам необхідно повідомити нас про таку відмову на електронну адресу: bureaumeta.m@gmail.com або зв'язавшись з нами.</p>
+                    <p class="l jura h4">Дані про використання також можуть містити інформацію, яку ваш браузер відправляє щоразу, коли ви відвідуєте Сайт або коли ви отримуєте доступ до послуг <span class="l jura h5 bold">Aero Combat</span>. Ці Дані про використання можуть включати таку інформацію, як IP-адреса вашого комп'ютера, тип браузера, версія браузера, сторінки, які ви відвідуєте на сайту, час і дата вашого відвідування, час, проведений на цих сторінках, ідентифікатори пристрою та інші діагностичні дані. Коли ви отримуєте доступ до Сайту через мобільний пристрій, Дані про використання можуть включати таку інформацію, як тип використовуваного вами мобільного пристрою, унікальний ідентифікатор мобільного пристрою, IP-адреса вашого мобільного пристрою, ваша мобільна операційна система, тип мобільного інтернет-браузера, унікальні ідентифікатори пристроїв і інші діагностичні дані.</p>
+                    <p class="l jura h4">Ми діємо відповідно до цієї Політики конфіденційності та на підставі чинного законодавства.</p>
+                    <p class="l jura h4">Ми маємо право зберігати Персональні дані стільки, скільки необхідно для реалізації мети, що зазначена у даній Політиці або у строки, встановлені чинним законодавством або до моменту видалення Вами цих даних.</p>
+                    <p class="l jura h4"><span class="l jura h5 bold">Aero Combat</span> буде зберігати та використовувати ваші особисті дані в обсязі, необхідному для дотримання наших юридичних обов'язків (наприклад, якщо вони обов'язково маємо зберігати ваші дані у відповідності з діючим законодавством), вирішувати спори та забезпечують дотримання наших юридичних обов'язків і політик. <span class="l jura h5 bold">Aero Combat</span> також зберігає дані щодо використання для внутрішнього аналізу. Дані використовуються, як правило більш короткий періоду часу за винятком випадків, коли ці дані використовуються для посилення безпеки або поліпшення функціональних можливостей нашого сайту, або ж ми має юридичний обов’язок зберігати ці дані довший період часу.</p>
+                </div>
+                <div data-section-id="4" class="flex column">
+                    <span class="l jura h1-5 bold">Відстеження даних Cookies</span>
+                    <p class="l jura h4"><span class="l jura h5 bold">Aero Combat</span> використовує файли cookie і аналогічні технології для відстеження активності на Сайті і зберігання певної інформації для створення статистичної звітності.</p>
+                    <p class="l jura h4">«Кукі» являє собою невеликий обсяг даних, що відсилається веб-сайтом, який браузер Вашого пристрою зберігає на Вашому ж пристрою. У «cookies» міститься інформація, яка може бути необхідною для Сайту, - для збереження Ваших налаштувань варіантів перегляду та збору статистичної інформації на Сайті, тобто які сторінки Ви відвідали, що було завантажено, ім'я домену інтернет- провайдера і країна відвідувача, а також адреси сторонніх веб-сайтів, з яких здійснено перехід на Сайт і далі. Проте вся ця інформація ніяк не пов'язана з Вами, як з персональною особою. «Cookies» не записують Вашу адресу електронної пошти і будь-які особисті відомості щодо Вас.</p>
+                    <p class="l jura h4">Крім того, ми використовуємо стандартні журнали обліку веб-сервера для підрахунку кількості відвідувачів і оцінки технічних можливостей нашого Сайту. Ми використовуємо цю інформацію для того, щоб визначити статистичну інформацію щодо відвідування Сайту з метою організації сторінок найбільш зручним способом та забезпечення відповідності Сайту використовуваним браузерам. Ми фіксуємо відомості про переміщення на Сайті, але не про окремих відвідувачів Сайту, так що ніяка конкретна інформація щодо Вас особисто не буде зберігатися або використовуватися Компанією <span class="l jura h5 bold">Aero Combat</span> без Вашої згоди.</p>
+                    <p class="l jura h4">Щоб переглядати матеріал без «cookies», Ви можете налаштувати свій браузер таким чином, щоб він не приймав «cookies» або повідомляв Вас про їх. Однак, якщо ви не приймаєте файли cookie, ви не зможете використовувати деякі частини Веб-сайту.</p>
+                </div>
+                <div data-section-id="5" class="flex column">
+                    <span class="l jura h1-5 bold">Передача персональних даних третім особам</span>
+                    <p class="l jura h4">Ми не продаємо, не передаємо та не розголошуємо персональні дані, які отримуємо на нашому сайті, третім сторонам без Вашої попередньої згоди.</p>
+                    <p class="l jura h4">Ми розкриваємо персональні дані лише у випадках визначених чинним законодавством, а також:</p>
+                    <ul>
+                        <li class="l jura h4">Ми розкриємо інформацію в випадку запобігання злочину або завдання шкоди нам або третім особам;</li>
+                        <li class="l jura h4">Ми розкриємо інформацію третім особам, що надають нам технічну підтримку та послуги за допомогою яких Ви отримуєте Ваше замовлення.</li>
+                    </ul>
+                    <p class="l jura h4">Ми маємо право доручити обробку персональних даних третій особі за згодою суб'єкта персональних даних, якщо інше не передбачено законодавством.</p>
+                    <p class="l jura h4">Представники органів державної влади (у тому числі контролюючих, правоохоронних та інших органів) отримують доступ до персональних даних, що обробляються нами в обсязі та порядку, визначеному законодавством.</p>
+                    <p class="l jura h4">Якщо <span class="l jura h5 bold">Aero Combat</span> бере участь у злитті, придбанні або продажу активів, Ваші персональні дані можуть бути передані. Ми повідомимо про це до того, як Ваші персональні дані будуть передані і стануть предметом іншої Політики конфіденційності.</p>
+                </div>
+                <div data-section-id="6" class="flex column">
+                    <span class="l jura h1-5 bold">Спільне використання інформації</span>
+                    <p class="l jura h4"><span class="l jura h5 bold">Aero Combat</span> ні за яких обставин не продає і не віддає у користування Вашу персональні дані третім сторонам чи особам. Ми також не розкриваємо надану Вами особисту інформацію за винятком випадків передбачених законодавством.</p>
+                </div>
+                <div data-section-id="7" class="flex column">
+                    <span class="l jura h1-5 bold">Безпека</span>
+                    <p class="l jura h4">Ми вживаємо розумних заходів для захисту інформації від втрати, крадіжки, неправильного використання та несанкціонованого доступу, розкриття, зміни та знищення (виняток становить інформація, яку Ви публічно опублікували в соціальних мережах). Безпека ваших даних важлива для <span class="l jura h5 bold">Aero Combat</span>, але пам'ятайте, що жоден метод передачі через Інтернет або метод електронного зберігання не є на 100% безпечним. Хоча <span class="l jura h5 bold">Aero Combat</span> прагне використовувати прийнятні засоби для захисту ваших персональних даних, ми не можемо гарантувати їх абсолютну безпеку.</p>
+                    <p class="l jura h4">Ваша інформація, включаючи персональні дані, може передаватися і зберігатись на комп'ютерах, розташованих поза межами вашої юрисдикцій, де закони про зберігання даних можуть бути відмінні від законів вашої юрисдикції. <span class="l jura h5 bold">Aero Combat</span> дотримується необхідних кроків, щоб забезпечити безпечне використання ваших даних у відповідності з цією Політикою конфіденційності та передача ваших персональних даних не буде проводитись, якщо не будуть дотримані належні заходи контролю, включаючи безпеку ваших даних.</p>
+                    <p class="l jura h4">Сайт не призначений для неповнолітніх користувачів. <span class="l jura h5 bold">Aero Combat</span> серйозно ставиться до питань безпеки, особливо щодо осіб, які не досягли повноліття, в зв'язку з чим, зі свого боку, <span class="l jura h5 bold">Aero Combat</span> звертається до батьків із закликом пояснити своїм дітям про проблеми безпеки в Інтернеті, про їх конкретну мету і потребу у використання тих чи інших сервісів.</p>
+                    <p class="l jura h4">Ви маєте право застосовувати засоби правового захисту в разі порушення законодавства про захист персональних даних, відкликати згоду на обробку персональних даних.</p>
+                    <p class="l jura h4">Будь-які повідомлення або запити, пов’язані з персональними даними, можна надсилати до <span class="l jura h5 bold">Aero Combat</span> зручним для Вас способом за допомогою відкритих контактних даних.</p>
+                    <p class="l jura h4">Користувач в будь-який час може змінити/видалити особисту інформацію у спосіб направлення відповідного повідомлення на електронну адресу bureaumeta.m@gmail.com</p>
+                    <p class="l jura h4">Після отримання такого повідомлення обробка даних користувача припиняється, а його данні будуть видалені, крім випадків, коли таке оброблення може бути необхідним у відповідності до чинного законодавства.</p>
+                </div>
+                <div data-section-id="8" class="flex column">
+                    <span class="l jura h1-5 bold">Відмова від відповідальності</span>
+                    <p class="l jura h4">Пам'ятайте, передача інформації особистого характеру при відвідуванні сторонніх сайтів, включаючи сайти партнерів <span class="l jura h5 bold">Aero Combat</span>, навіть якщо веб-сайт містить посилання на Сайт <span class="l jura h5 bold">Aero Combat</span> або на Сайті <span class="l jura h5 bold">Aero Combat</span> є посилання на ці веб-сайти, не підпадає під дії даного документа. <span class="l jura h5 bold">Aero Combat</span> не несе відповідальності за дії інших веб-сайтів. Процес збору та передачі інформації особистого характеру при відвідуванні цих сайтів регламентується законодавством про захист інформації особистого характеру. <span class="l jura h5 bold">Aero Combat</span> рекомендує вам ознайомитися з політикою конфіденційності кожного сайту, який ви відвідуєте. <span class="l jura h5 bold">Aero Combat</span> не контролює і не несе ніякої відповідальності за зміст, політику конфіденційності або дії будь-яких сторонніх сайтів або служб.</p>
+                </div>
+                <div data-section-id="9" class="flex column">
+                    <span class="l jura h1-5 bold">Зміни в цій політиці конфіденційності</span>
+                    <p class="l jura h4">Компанія <span class="l jura h5 bold">Aero Combat</span> має право у будь-який час в односторонньому порядку без попереднього повідомлення користувачів, у тому числі якщо цього вимагає законодавство, змінювати Політику конфіденційності. Політика конфіденційності з внесеними змінами вступає в силу з моменту її оприлюднення, якщо інші умови не передбачені новою редакцією Політики конфіденційності. Рекомендується періодично переглядати діючу Політику конфіденційності на предмет будь-яких змін. При непогодженні Користувача з внесеними змінами він зобов’язаний відмовитись від доступу до Сайту, припинити використання матеріалів і сервісів Сайту.</p>
+                </div>
+                <div data-section-id="10" class="flex column">
+                    <span class="l jura h1-5 bold">Місцезнаходження персональних даних</span>
+                    <p class="l jura h4">Власником персональних даних є <span class="l jura h5 bold">ТОВ «МЕТА БЮРО»</span>.</p>
+                    <p class="l jura h4">Персональні дані зберігаються в автоматизованих системах <span class="l jura h5 bold">ТОВ «МЕТА БЮРО»</span> за адресою: 03150, Україна, м. Київ, вул. Фізкультури, 28 (літера Д).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="section5" class="full-width">
+        <div class="flex column align-center">
+            <span data-target="copyright" class="l jura h6 p-space-top">Ви переглядаєте політику конфіденційності</span>
+            <span class="l jura h6 p-space-bottom">Усі права захищені</span>
+        </div>
+    </section>
+    <script>
+        const URL = "https://kirilstrezikozin.wixsite.com/aero-combat-dev";
+
+        const buttons = document.querySelectorAll(".btn");
+
+        const header = document.querySelector("header");
+        const header_bg = document.querySelector("header .header-bg");
+        const header_bgSpotlight = document.querySelector("header .bg-spotlight");
+        const header_menuLogo = document.querySelector("#header_menuLogo");
+
+        const section2_currentSection = document.querySelector("#section2_currentSection");
+        const section2_currentSectionNumber = document.querySelector("#section2_currentSectionNumber");
+        const section2_content = document.querySelector("#section2_content");
+        const sections = document.querySelectorAll("*[data-section-id]");
+
+        function postMessage(message, useLog=false) {
+            window.parent.postMessage(message, URL);
+            if (useLog) console.log(messageData);
+        }
+
+        /**
+         * Throttling wrapper around addEventListener.
+         * 
+         * @param {Element} element element to add event listener for.
+         * @param {string} eventType event type.
+         * @param {function} funcThrottle function to call with throttling.
+         * @param {function} func function to call without throttling alongside funcThrottle.
+         */
+        function addEventListenerThrottle(element, eventType, funcThrottle, func, useCapture=false, throttleDelay=100) {
+            let throttle = false;
+            element.addEventListener(eventType, (event) => {
+                if (func) func(event);
+
+                if (throttle) return;
+                throttle = true;
+
+                if (funcThrottle) funcThrottle(event);
+
+                setTimeout(() => throttle = false, throttleDelay);
+            }, useCapture);
+        }
+
+        function mouseCursorListener(element, cursorHandlerThrottled, cursorHandler, useCapture=false, throttleDelay=100) {
+            addEventListenerThrottle(element, "mousemove",
+            (event) => {
+                const { clientX, clientY } = event;
+                const targetRect = element.getBoundingClientRect();
+                if (cursorHandlerThrottled) cursorHandlerThrottled(clientX, clientY, targetRect, element);
+            },
+            (event) => {
+                const { clientX, clientY } = event;
+                const targetRect = element.getBoundingClientRect();
+                if (cursorHandler) cursorHandler(clientX, clientY, targetRect, element);
+            },
+            useCapture, throttleDelay);
+        }
+
+        class ScrollYListener {
+            scrollY;
+            scrollDirection;
+
+            throttleDelay;
+            handlers;
+
+            constructor(throttleDelay=100) {
+                this.throttleDelay = throttleDelay;
+                this.scrollY = window.scrollY;
+                this.scrollDirection = "STILL";
+                this.handlers = new Map();
+            }
+
+            /**
+             * Add scroll event listener to the document element.
+             * Updates scrollY and scrollDirection variables.
+             */
+            listen() {
+                addEventListenerThrottle(document, "scroll", (event) => {
+                    if (this.scrollY < window.scrollY) this.scrollDirection = "DOWN";
+                    else this.scrollDirection = "UP";
+                    this.scrollY = window.scrollY;
+
+                    this.handlers.forEach((callback, _key) => {
+                        if (callback.params) callback.func(this, callback.params);
+                        else callback.func(this);
+                    });
+                });
+            }
+
+            /**
+             * Attach custom function to execute on scroll event.
+             * Provide { element: Element, func: Function } as a callback argument.
+             * At most one func is expected to be attached to one element.
+             * Accepts custom params parameters to be sent to the callback func.
+             * 
+             * @param {Object} callback callback object.
+             */
+            attach(callbackObj) {
+                this.handlers.set(callbackObj.element, { func: callbackObj.func, params: callbackObj.params });
+            }
+
+            /**
+             * Detach custom function executing on scroll event.
+             * Provide element as an argument. The function attached alongside it will be cleared.
+             * 
+             * @param {Element} element Element the callback function of which to detach.
+             */
+            detach(element) {
+                this.handlers.delete(element);
+            }
+        }
+
+        class Observer {
+            /**
+             * Observe elements' intersection state with the viewport.
+             * Provide a map where keys are elements and values are functions to call when the element's intersection state changes.
+             * Note that the class should be instanced when DOM Content has been loaded.
+             * 
+             * @param {Map} args Map of entries to observe.
+             */
+            constructor(args) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        args.get(entry.target)(entry.isIntersecting);
+                    });
+                });
+
+                args.forEach((_value, key) => observer.observe(key));
+            } 
+        }
+
+        function onDOMLoad(event) {
+            section2_currentSection.innerHTML = "";
+
+            const scrollYListener = new ScrollYListener();
+            scrollYListener.listen();
+
+            scrollYListener.attach({
+                element: document,
+                func: (scrollInfo) => {
+                    let sectionContentHeight = section2_content.getBoundingClientRect().height + "px";
+                    document.documentElement.style.setProperty("--section-content-height", sectionContentHeight);
+                }
+            })
+
+            let observerItems = [];
+
+            sections.forEach((element) => {
+                let sectionName = element.children[0].innerHTML;
+                let sectionId = element.getAttribute("data-section-id");
+
+                observerItems.push([
+                    element,
+                    function(isIntersecting) {
+                        if (!isIntersecting) return;
+                        section2_currentSectionNumber.innerHTML = `( ${sectionId}/${sections.length} )`;        
+                        section2_currentSection.innerHTML = sectionName;
+                    }
+                ]);
+            });
+
+            const observer = new Observer(new Map(observerItems));
+
+            scrollTo({ left: 0 });
+        }
+
+        document.addEventListener("DOMContentLoaded", onDOMLoad);
+
+        function buttonPrimary_attachMouseMove(button, button_l) {
+            let cursor = button.querySelector(".cursor");
+            let scope = button.querySelector(".cursor-scope");
+            let hoverBg = button.querySelector(".btn-hover-bg");
+
+            mouseCursorListener(button, function(clientX, clientY, targetRect, button) {
+                let { width, height, left, top } = targetRect;
+                let cursorX = clientX - width / 2 - left, cursorY = clientY - height / 2 - top;
+                let scopeX = cursorX / -10, scopeY = cursorY / -10;
+
+                cursor.style.setProperty('--cursor-x', `${cursorX}px`);
+                cursor.style.setProperty('--cursor-y', `${cursorY}px`);
+
+                if (cursor.clientWidth / 2 > scopeX * 1.1 && scopeX * 1.1 > cursor.clientWidth / -2) {
+                    scope.style.setProperty('--scope-x',  `${scopeX}px`);
+                }
+                if (cursor.clientHeight / 2 > scopeY * 1.1 && scopeY * 1.1 > cursor.clientHeight / -2) {
+                    scope.style.setProperty('--scope-y',  `${scopeY}px`);
+                }
+
+                if (!button_l) return;
+                if (Math.abs(scopeX + scopeY) <= 1.5) {
+                    button_l.style.setProperty('--label-sx', "1.1");
+                    button_l.style.setProperty('--label-sy', "1.1");
+                } else {
+                    button_l.style.setProperty('--label-sx', "1.0");
+                    button_l.style.setProperty('--label-sy', "1.0");
+                }
+
+            }, function(clientX, clientY, targetRect, button) {
+                hoverBg.style.setProperty('--bg-x',  `${clientX - targetRect.left}px`)
+                hoverBg.style.setProperty('--bg-y',  `${clientY - targetRect.top}px`)
+            }, true);
+        }
+
+        buttons.forEach((button) => {
+            let button_l = button.querySelector(".btn-l");
+            let button_pointer = button.querySelector(".btn-pointer");
+            let button_l_innerInit = button_l.innerHTML;
+
+            button.onmouseenter = (event) => {
+                if (button_pointer) button_pointer.style.display = "none";
+            };
+
+            button.onmouseleave = (event) => {
+                if (button_pointer) button_pointer.style.display = "block";
+                if (button.getAttribute("data-target")) button_l.innerHTML = button_l_innerInit;
+                button_l.style.setProperty('--label-sx', "1.0");
+                button_l.style.setProperty('--label-sy', "1.0");
+            };
+
+            if (button.classList.contains("btn-primary")) {
+                buttonPrimary_attachMouseMove(button, button_l);
+            }
+
+            if (button.getAttribute("data-msg") === "true") {
+                button.onclick = (event) => postMessage(button, {
+                    "messageType": "openPage",
+                    "page": "home"
+                });
+            }
+        });
+
+        header_menuLogo.onclick = (event) => {
+            postMessage({ "messageType": "reloadPage" });
+        };
+    </script>
+</body>
+</html>
