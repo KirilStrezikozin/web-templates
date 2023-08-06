@@ -579,19 +579,37 @@
                 -webkit-animation-duration: 5s;
             }
 
-            #section2 {
-                z-index: 3;
-                position: relative;
-                background: #FAFAFA;
+            #section2, #section3, #section4 {
                 height: 100vh;
+                min-height: fit-content;
+                position: relative;
+                z-index: 3;
+                background: #FAFAFA;
             }
 
-            #section2 div:not(.btn) > svg:not(.hour-label, .hour-label-under, .drone-icon) path { fill: var(--secondary-color); }
+            #section2 div:not(.btn) > svg:not(.hour-label, .hour-label-under, .drone-icon, .angel-icon) path { fill: var(--secondary-color); }
             #section2 div:not(.btn) > svg.hour-label path { fill: var(--primary-color); }
             #section2 div:not(.btn) > svg.hour-label,
             #section2 div:not(.btn) > svg.drone-icon {  height: 3.4vmax; }
             #section2 span { color: var(--primary-color); }
             #section2 span.hour-label-under { font-size: 1vw; transform: rotate(90deg); }
+
+            .angel-icon { 
+                height: 6vmax;
+                margin-right: 1.6rem;
+                margin-bottom: -1.6rem;
+                transition: all cubic-bezier(0.16, 1, 0.3, 1);
+                -webkit-transition: all cubic-bezier(0.16, 1, 0.3, 1);
+                transition-duration: 3s;
+                -webkit-transition-duration: 3s;
+                transform: rotateX(0) rotateY(-360deg);
+            }
+
+            .flashcard:hover .angel-icon {
+                transform: rotateX(var(--angel-icon-ry)) rotateY(var(--angel-icon-rx));
+                transition-duration: 1.5s;
+                -webkit-transition-duration: 1.5s;
+            }
 
             #section2 .btn-wrapper { height: 100%; }
             #section2 .btn { border: 1px solid rgba(0, 0, 0, .1); }
@@ -626,12 +644,7 @@
             #section2 .flashcard > .flex > span { margin-right: 1.5rem; }
             #section2 .flashcard .h1-5 { font-size: 2.8vw; }
 
-            #section3 {
-                position: relative;
-                height: 100vh;
-                z-index: 3;
-            }
-
+            #section3 { height: auto; margin-bottom: -30vh; }
             #section3 > div:first-child > div:first-child svg path { fill: var(--secondary-color); }
             #section3 > div:first-child > div:first-child { margin-left: 25vw; }
 
@@ -701,6 +714,104 @@
             #section3 .btn { border: 1px solid rgba(0, 0, 0, .1); }
             #section3 .btn:hover { border: none; }
             #section3 .btn:hover span { font-weight: normal; color: #FAFAFA; }
+
+            #section3 > div:first-child > div:last-child {
+                position: relative;
+                top: -29vh;
+                transform: scale(-1, 1);
+            }
+
+            #section4 { background: black; height: auto; }
+
+            #section4 > div:first-child {
+                position: relative;
+                margin-left: 5em;
+                margin-right: 5em;
+                justify-content: space-between;
+            }
+
+            #section4_heading { width: 50vw; margin-bottom: 10vh; }
+            #section4 *:not(.overlay, #section4_heading, #section4_bg, #section4_bg *) { z-index: 3; }
+            #section4 span:not(.l.l-emboss-wrapper, .btn-copy > span) { color: #FAFAFA; }
+
+            #section4 .contacts-content {
+                width: 65vw;
+                margin-top: 10vh;
+                margin-bottom: 8em;
+                justify-content: space-between;
+                align-items: end;
+            }
+
+            #section4 .contacts-content > div:first-child > svg:first-child { width: 15vw; margin-bottom: 2vh; }
+
+            #section4 .socials-content { margin-right: 5em; }
+            #section4 .socials-content > div { margin-bottom: 1em; margin-top: 1em; }
+            #section4 .socials-content > div > span { margin-left: 1em; }
+            #section4 .socials-content > div:hover { cursor: pointer; }
+            #section4 .socials-content > div:hover > svg path { fill: rgb(87, 122, 90); }
+            #section4 .socials-content > div:hover > .l.hover { color: rgb(87, 122, 90); }
+
+            #section4 .socials-content > div:hover > .l.hover::after {
+                transform: scaleX(1);
+                -webkit-transform: scaleX(1);
+                transform-origin: bottom left;
+                -webkit-transform-origin: bottom left;
+            }
+
+            #section4_bg { position: absolute; }
+            #section4_bg > div { width: 27vw; overflow: hidden; }
+            #section4_bg > div > video { position: relative; height: 115%; }
+            #section4_bgOverlay { background: linear-gradient(black 0%, transparent 100%); z-index: 1; }
+
+            #section4 .overlay {
+                left: 0px;
+                opacity: 0.4;
+                z-index: 2;
+            }
+
+            #section5 { background: var(--primary-color); }
+            #section5 > div:first-child { background: var(--secondary-color); padding: 2em; }
+            #section5 .l.hover { margin-bottom: 0.3em; }
+            #section5 .l.hover:hover { color: rgba(250, 250, 250, 0.60); }
+            #section5 .l.hover::after { background: rgba(250, 250, 250, 0.60); }
+
+            .l.l-emboss-wrapper {
+                margin-top: 0.5em;
+                padding-top: 0.5em;
+                padding-bottom: 0.5em;
+                padding-left: 0.5em;
+                padding-right: 0.5em;
+                border: 1px solid rgba(250, 250, 250, 0.25);
+                border-radius: 5px;
+                color: #FAFAFA;
+                backdrop-filter: blur(15px);
+                transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+                -webkit-transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            .l.l-emboss-wrapper:hover {
+                background: rgba(43, 76, 46, 0.40);
+                border: 1px solid var(--secondary-color);
+                color: #FAFAFA;
+                cursor: pointer; 
+            }
+
+            .btn-copy {
+                position: absolute;
+                left: 13em;
+                pointer-events: none;
+                background: rgba(43, 76, 46, 0.40);
+                padding: 0.2em;
+                border-radius: 5px;
+                opacity: 0; 
+                transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+                -webkit-transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            .btn-copy.btn-copy-visible { opacity: 1; left: 15em; }
+
+            .btn-copy > svg { position: absolute; left: -0.6em; }
+            .btn-copy > span { font-weight: 400; color:rgba(250, 250, 250, 0.80) }
 
             .hidden { visibility: hidden; }
             .collapsed { width: 0px; height: 0px; display: none; }
@@ -870,7 +981,7 @@
                             <span class="l jura p0 l-end">Опануйте FPV на індивідуальних практичних заняттях.</span>
                         </div>
                     </div>
-                    <div class="flashcard">
+                    <!-- <div class="flashcard">
                         <div class="bg-spotlight"></div>
                         <div class="flex column end-end full-width full-height">
                             <div class="flex row align-center">
@@ -878,6 +989,16 @@
                             </div>
                             <span class="l jura h1-5 bold p-space-top-smaller">Додатково</span>
                             <span class="l jura p0 l-end">Польоти на спеціальних<br>та цивільних дронах.</span>
+                        </div>
+                    </div> -->
+                    <div class="flashcard">
+                        <div class="bg-spotlight"></div>
+                        <div class="flex column end-end full-width full-height">
+                            <div class="flex row align-center">
+                                <img class="angel-icon" src="https://static.wixstatic.com/media/68e506_a460e2f6f2e244ca8435733e1e9d36de~mv2.png" alt="A certificate brochure example a pilot receives after completing the course">
+                            </div>
+                            <span class="l jura h1-5 bold p-space-top-smaller">Сертифікат</span>
+                            <span class="l jura p0 l-end">Отримайте сертифікат за успішне проходження курсу.</span>
                         </div>
                     </div>
                 </div>
@@ -903,6 +1024,74 @@
                     <div class="btn-hover-bg"></div>
                     <svg class="cursor" width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25.5 31.25L25.5 50" stroke="#FAFAFA" /><path d="M25.5 0L25.5 18.75" stroke="#FAFAFA" /><path d="M31.25 25.5L50 25.5" stroke="#FAFAFA" /><path d="M0 25.5L18.75 25.5" stroke="#FAFAFA" /><path class="cursor-scope" fill-rule="evenodd" clip-rule="evenodd" d="M25.5 28.5C27.1569 28.5 28.5 27.1569 28.5 25.5C28.5 23.8431 27.1569 22.5 25.5 22.5C23.8431 22.5 22.5 23.8431 22.5 25.5C22.5 27.1569 23.8431 28.5 25.5 28.5Z" fill="#FAFAFA" /></svg>
                 </div>
+                <div class="flex column start-center">
+                    <div id="section0_bg" class="flex column align-center stretch full-width">
+                        <img class="ribs" alt="" src="https://static.wixstatic.com/media/68e506_177fcd29565d48d589934f0a4899bb20~mv2.png">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="section4" class="full-width">
+            <div class="flex row">
+                <div class="flex column">
+                    <svg id="section4_heading" width="3538" height="100" viewBox="0 0 3538 358" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 358V0.5H71.5V143.5H143L286 0.5H357.5L214.5 143.5H286C305.737 143.5 322.495 150.576 336.273 164.727C350.424 178.505 357.5 195.263 357.5 215V358H286V215H71.5V358H0ZM740.248 286.5V72H525.748V286.5H740.248ZM525.748 358C505.639 358 488.695 351.111 474.916 337.332C461.138 323.553 454.248 306.609 454.248 286.5V72C454.248 52.263 461.138 35.5052 474.916 21.7266C488.695 7.57552 505.639 0.5 525.748 0.5H740.248C759.985 0.5 776.743 7.57552 790.522 21.7266C804.673 35.5052 811.748 52.263 811.748 72V286.5C811.748 306.609 804.673 323.553 790.522 337.332C776.743 351.111 759.985 358 740.248 358H525.748ZM908.497 358V0.5H979.997V143.5H1194.5V0.5H1266V358H1194.5V215H979.997V358H908.497ZM1505.75 358V72H1362.75V0.5H1720.25V72H1577.25V358H1505.75ZM2102.99 143.5V72H1888.49V143.5H2102.99ZM1816.99 358V72C1816.99 52.263 1823.88 35.5052 1837.66 21.7266C1851.44 7.57552 1868.38 0.5 1888.49 0.5H2102.99C2122.73 0.5 2139.49 7.57552 2153.27 21.7266C2167.42 35.5052 2174.49 52.263 2174.49 72V358H2102.99V215H1888.49V358H1816.99ZM2271.24 358V0.5H2342.74V143.5H2414.24L2557.24 0.5H2628.74L2485.74 143.5H2557.24C2576.98 143.5 2593.74 150.576 2607.52 164.727C2621.67 178.505 2628.74 195.263 2628.74 215V358H2557.24V215H2342.74V358H2271.24ZM2868.49 358V72H2725.49V0.5H3082.99V72H2939.99V358H2868.49ZM3179.74 358V0.5H3251.24V215L3465.74 0.5H3537.24V358H3465.74V72L3251.24 286.5V358H3179.74Z" fill="white"/></svg>
+                    <span class="l jura h1-5">Будьмо на зв'язку!</span>
+                    <span class="l jura h4 p-space-top">
+                        Напишіть на електронну пошту за адресою, якщо виникли питання
+                        <br>
+                        або зателефонуйте за номером телефону.
+                    </span>
+                    <div class="flex row contacts-content">
+                        <div class="flex column">
+                            <svg width="320" height="100" viewBox="0 0 965 200" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 200V114.375H34.25C36.569 114.375 38.5758 115.222 40.2705 116.917C41.9652 118.612 42.8125 120.618 42.8125 122.938C42.8125 120.618 43.6152 118.612 45.2207 116.917C46.9154 115.222 48.9668 114.375 51.375 114.375H68.5C73.2272 114.375 77.2409 116.07 80.541 119.459C83.9303 122.759 85.625 126.773 85.625 131.5V200H68.5V131.5H51.375V200H34.25V131.5H17.125V200H0ZM108.797 200V165.75H143.047V200H108.797ZM253.42 200V0.625H293.295V80.375H333.17L412.92 0.625H452.795L373.045 80.375H412.92C423.927 80.375 433.272 84.321 440.957 92.2129C448.849 99.8971 452.795 109.243 452.795 120.25V200H412.92V120.25H293.295V200H253.42ZM506.75 200V70.625H532.625V148.25L610.25 70.625H636.125V200H610.25V96.5L532.625 174.125V200H506.75ZM671.138 200V174.125H722.888V96.5H671.138V70.625H800.513V96.5H748.763V174.125H800.513V200H671.138ZM697.013 44.75V18.875H722.888V44.75H697.013ZM748.763 44.75V18.875H774.638V44.75H748.763ZM939.025 174.125V148.25H861.4V174.125H939.025ZM939.025 122.375V96.5H861.4V122.375H939.025ZM835.525 200V70.625H939.025C946.167 70.625 952.232 73.1855 957.218 78.3066C962.339 83.293 964.9 89.3574 964.9 96.5V122.375C964.9 126.014 963.619 129.113 961.059 131.674C958.498 134.1 955.466 135.312 951.962 135.312C955.466 135.312 958.498 136.593 961.059 139.153C963.619 141.714 964.9 144.746 964.9 148.25V174.125C964.9 181.402 962.339 187.534 957.218 192.521C952.232 197.507 946.167 200 939.025 200H835.525Z" fill="white"/></svg>
+                            <div class="flex column">
+                                <span class="l jura h2 bold l-emboss-wrapper">
+                                    <div class="btn-copy btn-copy-unvisible flex row">
+                                        <svg width="10" height="14" viewBox="0 0 10 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.41303 13.3494L1.1167 8.05961C0.565994 7.66035 0.565994 6.83965 1.1167 6.44039L8.41303 1.15055C9.07416 0.671231 10 1.14356 10 1.96016V12.5398C10 13.3564 9.07416 13.8288 8.41303 13.3494Z" fill="#2B4C2E" fill-opacity="0.4"/></svg>
+                                        <span class="l jura h8">скопійовано</span>
+                                    </div>
+                                    + 38 (068) 011 2264
+                                </span>
+                                <span id="section4_email" class="l jura h2 bold l-emboss-wrapper">
+                                    <div class="btn-copy btn-copy-unvisible flex row">
+                                        <svg width="10" height="14" viewBox="0 0 10 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.41303 13.3494L1.1167 8.05961C0.565994 7.66035 0.565994 6.83965 1.1167 6.44039L8.41303 1.15055C9.07416 0.671231 10 1.14356 10 1.96016V12.5398C10 13.3564 9.07416 13.8288 8.41303 13.3494Z" fill="#2B4C2E" fill-opacity="0.4"/></svg>
+                                        <span class="l jura h8">скопійовано</span>
+                                    </div>
+                                    dkingacademy@gmail.com
+                                </span>
+                            </div>
+                        </div>
+                        <div class="flex column socials-content">
+                            <div id="socials-instagram" class="flex row center-start">
+                                <svg width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M38.9493 1H12C5.92487 1 1 5.92488 1 12V38.9493C1 45.0244 5.92488 49.9493 12 49.9493H38.9493C45.0244 49.9493 49.9493 45.0244 49.9493 38.9493V12C49.9493 5.92487 45.0244 1 38.9493 1ZM12 0C5.37258 0 0 5.3726 0 12V38.9493C0 45.5767 5.3726 50.9493 12 50.9493H38.9493C45.5767 50.9493 50.9493 45.5767 50.9493 38.9493V12C50.9493 5.37258 45.5767 0 38.9493 0H12Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M14.5942 25.4746C14.5942 31.4837 19.4655 36.3551 25.4746 36.3551C31.4837 36.3551 36.3551 31.4837 36.3551 25.4746C36.3551 19.4655 31.4837 14.5942 25.4746 14.5942C19.4655 14.5942 14.5942 19.4655 14.5942 25.4746ZM25.4746 12.5942C18.361 12.5942 12.5942 18.361 12.5942 25.4746C12.5942 32.5883 18.361 38.3551 25.4746 38.3551C32.5883 38.3551 38.3551 32.5883 38.3551 25.4746C38.3551 18.361 32.5883 12.5942 25.4746 12.5942Z" fill="white"/><path d="M42.9344 10.5906C42.9344 12.0133 41.781 13.1667 40.3583 13.1667C38.9356 13.1667 37.7822 12.0133 37.7822 10.5906C37.7822 9.16788 38.9356 8.01453 40.3583 8.01453C41.781 8.01453 42.9344 9.16788 42.9344 10.5906Z" fill="white"/></svg>
+                                <span class="l hover jura h3">Instagram</span>
+                            </div>
+                            <div id="socials-facebook" class="flex row center-start">
+                                <svg width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M38.9493 1H12C5.92487 1 1 5.92488 1 12V38.9493C1 45.0244 5.92488 49.9493 12 49.9493H38.9493C45.0244 49.9493 49.9493 45.0244 49.9493 38.9493V12C49.9493 5.92487 45.0244 1 38.9493 1ZM12 0C5.37258 0 0 5.3726 0 12V38.9493C0 45.5767 5.3726 50.9493 12 50.9493H38.9493C45.5767 50.9493 50.9493 45.5767 50.9493 38.9493V12C50.9493 5.37258 45.5767 0 38.9493 0H12Z" fill="white"/><path d="M26.8232 41H20.876V22.9941V18.8105V16.8418C20.876 15.1602 21.2041 13.7451 21.8604 12.5967C22.5303 11.4346 23.4668 10.5596 24.6699 9.97168C25.8867 9.37012 27.3291 9.06934 28.9971 9.06934C29.5439 9.06934 30.0703 9.11035 30.5762 9.19238C31.082 9.26074 31.5742 9.34961 32.0527 9.45898L31.9912 13.9092C31.7314 13.8408 31.458 13.793 31.1709 13.7656C30.8838 13.7383 30.5488 13.7246 30.166 13.7246C29.4551 13.7246 28.8467 13.8477 28.3408 14.0938C27.8486 14.3262 27.4727 14.6748 27.2129 15.1396C26.9531 15.6045 26.8232 16.1719 26.8232 16.8418V18.8105V22.9941V41Z" fill="white"/><path d="M20.876 18.8105H17.5V22.9941H20.876V18.8105Z" fill="white"/><path d="M31.2529 22.9941V18.8105H26.8232V22.9941H31.2529Z" fill="white"/></svg>
+                                <span class="l hover jura h3">Facebook</span>
+                            </div>
+                            <div id="socials-telegram" class="flex row center-start">
+                                <svg width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M38.9493 1H12C5.92487 1 1 5.92488 1 12V38.9493C1 45.0244 5.92488 49.9493 12 49.9493H38.9493C45.0244 49.9493 49.9493 45.0244 49.9493 38.9493V12C49.9493 5.92487 45.0244 1 38.9493 1ZM12 0C5.37258 0 0 5.3726 0 12V38.9493C0 45.5767 5.3726 50.9493 12 50.9493H38.9493C45.5767 50.9493 50.9493 45.5767 50.9493 38.9493V12C50.9493 5.37258 45.5767 0 38.9493 0H12Z" fill="#FAFAFA"/><path fill-rule="evenodd" clip-rule="evenodd" d="M39.228 13L11.634 23.8567C10.7285 24.2129 10.8136 25.5214 11.7576 25.7574L18.6216 27.4734L39.228 13L22.228 29.1538L25.9989 32.0545L32.48 37.04C33.0607 37.4867 33.9089 37.1778 34.0663 36.4622L39.228 13Z" fill="#FAFAFA"/><path d="M21.728 35.5C22.228 35.5 22.7698 36.1091 25.9989 32.0545L22.228 29.1538L21.728 35.5Z" fill="#FAFAFA" fill-opacity="0.2"/><path d="M18.6216 27.4734L20.5259 27.9495C20.6592 27.9828 20.7842 28.0432 20.8931 28.127L22.228 29.1538L39.228 13L18.6216 27.4734Z" fill="#FAFAFA" fill-opacity="0.5"/><path d="M20.8931 28.127C20.7842 28.0432 20.6592 27.9828 20.5259 27.9495L18.6216 27.4734L20.7032 34.4172C20.7197 34.4723 20.7405 34.5259 20.7679 34.5764C20.9566 34.9255 21.3567 35.5 21.728 35.5L22.228 29.1538L20.8931 28.127Z" fill="#FAFAFA" fill-opacity="0.5"/></svg>
+                                <span class="l hover jura h3">Telegram</span>
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+                <div id="section4_bg" class="abs-position full-height full-width flex row align-end">
+                    <div class="flex row full-width align-end">
+                        <div id="section4_bgOverlay" class="abs-position full-height full-width"></div>
+                        <video class="img-fill" autoplay muted playsinline loop poster="https://static.wixstatic.com/media/68e506_cf324201193b46bca8889e474e451058f000.jpg">
+                            <source type="video/mp4" src="https://video.wixstatic.com/video/68e506_cf324201193b46bca8889e474e451058/720p/mp4/file.mp4">
+                        </video>
+                    </div>
+                </div>
+            <div class="overlay bg-dark gradient"></div>
+        </section>
+        <section id="section5" class="full-width">
+            <div class="flex column align-center">
+                <span class="l hover jura h6 p-space-top">Політика конфіденційності</span>
+                <span class="l jura h6 p-space-bottom">Усі права захищені</span>
             </div>
         </section>
         <script type="text/javascript">
@@ -946,8 +1135,55 @@
 
             const section2 = document.querySelector("#section2");
 
+            const section3 = document.querySelector("#section3");
             const section3_closestDate = document.querySelector("#section3_closestDate");
             const section3_flashcards =  document.querySelector("#section3_flashcards");
+
+            const section4 = document.querySelector("#section4");
+            const section4_email = document.querySelector("#section4_email");
+            const section4_embossedLs = document.querySelectorAll("#section4 .l.l-emboss-wrapper");
+            const section4_socials = document.querySelectorAll("#section4 .socials-content > div");
+
+            const socials_links = new Map([
+                ["socials-instagram", "https://www.instagram.com/aero_combat_drone_academy/"],
+                ["socials-facebook", "https://www.facebook.com/AerocombatEurope/"],
+                ["socials-telegram", "https://t.me/+WYqOXEO3o4Q4Y2Yy"],
+            ]);
+
+            function postMessage(message, useLog=false) {
+                window.parent.postMessage(message, URL);
+                if (useLog) console.log(messageData);
+            }
+
+            function openLink(link, asMessage=false) {
+                if (!link) {
+                    console.log(`In openLink(link, asMessage), invalid link was passed: ${link}`);
+                    return;
+                }
+
+                if (!asMessage) {
+                    window.open(link, "_blank");
+                    return;
+                }
+
+                postMessage({ "messageType": "openLink", "link": link });
+            }
+
+            function copyToClipboard(text) {
+                textElement = document.createElement("textarea");
+                textElement.textContent = text;
+                textElement.style.position = "fixed";
+                document.body.appendChild(textElement);
+                textElement.select();
+
+                try {
+                    return document.execCommand("cut");
+                } catch (error) {
+                    console.log(`In copyToClipboard(textElement, text), failed to copy to clipboard due to error: ${error}`)
+                } finally {
+                    document.body.removeChild(textElement);
+                }
+            }
 
             async function callsheetsapi(sheetId, apiKey, sheetName, cellRange) {
                 const requestUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}!${cellRange}?key=${apiKey}`;
@@ -971,13 +1207,13 @@
 
                         let closestDate = `${dates[0][0]} ${dates[0][1]}`;
                         if (dates[0][2] == month && dates[0][3] == year) {
-                            if (dates[0][0] === day) closestDate = "сьогодні";
-                            else if (dates[0][0] - 1 === day) closestDate = "завтра";
-                            else if (dates[0][0] - 2 === day) closestDate = "післязавтра";
+                            if (dates[0][0] == day) closestDate = "сьогодні";
+                            else if (dates[0][0] - 1 == day) closestDate = "завтра";
+                            else if (dates[0][0] - 2 == day) closestDate = "післязавтра";
                         }
 
                         section3_closestDate.innerHTML = closestDate;
-                        section3_closestDate.onclick = (event) => window.open(dates[0][5], "_blank");
+                        section3_closestDate.onclick = (event) => openLink(dates[0][5]);
                     }
                     
                     dates.forEach((date) => {
@@ -996,7 +1232,7 @@
                             </div>
                         `;
 
-                        dateFlashcard.onclick = (event) => window.open(date[5], "_blank");
+                        dateFlashcard.onclick = (event) => openLink(date[5]);
                         dateFlashcard.onmousemove = (event) => {
                             let { clientX, clientY, currentTarget } = event;
                             let { left, top } = currentTarget.getBoundingClientRect();
@@ -1285,6 +1521,12 @@
                 }
             }
 
+            function headerThemeHandler(scrollInfo, switchHeaderMenuThemeAtY) {
+                if (isMenuExpanded) toggleHeaderMenu("collapsed");
+                if (scrollInfo.scrollY >= switchHeaderMenuThemeAtY) setHeaderMenuTheme("black");
+                else setHeaderMenuTheme("white");
+            }
+
             function onDOMLoad(event) {
                 section0_bg_video.poster = poster1_url;
                 section0_bg_video.currentTime = 0;
@@ -1353,6 +1595,26 @@
                             }
                         }
                     ],
+                    [
+                        section4_email,
+                        function (isIntersecting) {
+                            if (isIntersecting) {
+                                scrollYListener.detach(document);
+                                setHeaderMenuTheme("white");
+                            } else {
+                                setHeaderMenuTheme("black");
+
+                                const switchHeaderMenuThemeAtY = 
+                                    document.querySelector("section").getBoundingClientRect().height -
+                                    document.querySelector(".ribs").getBoundingClientRect().height;
+
+                                scrollYListener.attach({
+                                    element: document,
+                                    func: (scrollInfo) => headerThemeHandler(scrollInfo, switchHeaderMenuThemeAtY)
+                                });
+                            }
+                        }
+                    ]
                 ]));
 
                 section1_bg_sticky_TransitionHandler(scrollYListener, section1_bg_sticky_getParams(scrollYListener));
@@ -1369,15 +1631,7 @@
 
                 scrollYListener.attach({
                     element: document,
-                    func: function (scrollInfo) {
-                        if (isMenuExpanded) toggleHeaderMenu("collapsed");
-
-                        if (scrollInfo.scrollY >= switchHeaderMenuThemeAtY) {
-                            setHeaderMenuTheme("black");
-                        } else {
-                            setHeaderMenuTheme("white");
-                        }
-                    }
+                    func: (scrollInfo) => headerThemeHandler(scrollInfo, switchHeaderMenuThemeAtY)
                 });
 
                 populateDates();
@@ -1467,10 +1721,43 @@
             flashcards.forEach((flashcard) => {
                 flashcard.onmousemove = (event) => {
                     let { clientX, clientY, currentTarget } = event;
-                    let { left, top } = currentTarget.getBoundingClientRect();
-                    flashcard.style.setProperty('--spotlight-x',  `${clientX - left}px`)
-                    flashcard.style.setProperty('--spotlight-y',  `${clientY - top}px`)
+                    let { left, top, width, height } = currentTarget.getBoundingClientRect();
+
+                    let spotlightX = clientX - left, spotlightY = clientY - top;
+
+                    let angle = 90;
+
+                    let halfWidth = width / 2, halfHeight = height / 2;
+                    let dx = Math.abs(spotlightX - halfWidth);
+                    let dy = Math.abs(spotlightY - halfHeight);
+                    dx *= spotlightX < halfWidth ? -1 : spotlightX > halfWidth ? 1 : 0;
+                    dy *= spotlightY < halfHeight ? 1 : spotlightY > halfHeight ? -1 : 0;
+
+                    let rx = (dx * angle / width) + "deg";
+                    let ry = (dy * angle / height) + "deg";
+
+                    flashcard.style.setProperty('--spotlight-x',  `${spotlightX}px`)
+                    flashcard.style.setProperty('--spotlight-y',  `${spotlightY}px`)
+                    flashcard.style.setProperty('--angel-icon-rx', rx);
+                    flashcard.style.setProperty('--angel-icon-ry', ry);
                 };
+            });
+
+            section4_embossedLs.forEach((element) => {
+                element.onclick = (event) => {
+                    let copyText = element.innerText.replace(/(.+\n)|( )/g, "");
+                    if (copyToClipboard(copyText)) {
+                        element.children[0].classList.add("btn-copy-visible");
+                        setTimeout(() => element.children[0].classList.remove("btn-copy-visible"), 3000);
+                    } else {
+                        console.log(`On ${element} click event, failed to copy ${copyText} to clipboard`);
+                    }
+                }
+            });
+
+            section4_socials.forEach((element) => {
+                let link = socials_links.get(element.id);
+                if (link) element.onclick = (event) => openLink(link);
             });
 
             header_menuButton.onmouseenter = (event) => {
