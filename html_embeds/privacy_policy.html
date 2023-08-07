@@ -327,8 +327,8 @@
             position: relative;
         }
 
-        header .btn { margin-top: 0px; }
-        header .btn:hover span { font-weight: 400; }
+        #header_button { margin-top: 0px; }
+        #header_button:hover span { font-weight: 400; }
 
         #header_menuLogo {
             z-index: calc(var(--header-z-index) + 2);
@@ -481,7 +481,7 @@
                     <div class="flex align-center">
                         <svg id="header_menuLogo" xmlns="http://www.w3.org/2000/svg" width="164" height="39" viewBox="0 0 164 39" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M20.2831 0.0746751C20.338 0.0265298 20.4083 0 20.4812 0H36.3692C36.4449 0 36.5178 0.0286392 36.5734 0.0802179L77.4604 37.9887C77.5516 38.0732 77.5819 38.2052 77.5367 38.3213C77.4916 38.4374 77.3802 38.5138 77.2562 38.5138H61.5188C61.4432 38.5138 61.3704 38.4852 61.3148 38.4338L28.307 7.89748L16.538 18.2363C16.4831 18.2845 16.4127 18.3111 16.3398 18.3111H0.301208C0.175669 18.3111 0.0632963 18.2328 0.0192033 18.1147C-0.0248897 17.9966 0.00854542 17.8634 0.10311 17.7804L20.2831 0.0746751ZM20.5942 0.605325L1.10411 17.7057H16.2267L28.114 7.26303C28.2297 7.16135 28.4031 7.16359 28.5162 7.26823L61.6364 37.9085H76.4856L36.2514 0.605325H20.5942ZM0.0190913 20.475C0.0631005 20.3568 0.175552 20.2784 0.301208 20.2784H16.3398C16.4125 20.2784 16.4828 20.3048 16.5376 20.3528L26.392 28.9799H44.4261C44.5026 28.9799 44.5762 29.0092 44.632 29.0617L54.1196 37.9902C54.2098 38.0751 54.2392 38.2068 54.1938 38.3224C54.1484 38.4379 54.0373 38.5138 53.9137 38.5138H20.4812C20.4086 38.5138 20.3384 38.4874 20.2836 38.4395L0.103592 20.8095C0.00876398 20.7266 -0.024918 20.5933 0.0190913 20.475ZM1.10671 20.8837L20.5938 37.9085H53.1514L44.3071 29.5853H26.2792C26.2064 29.5853 26.1362 29.5588 26.0813 29.5108L16.227 20.8837H1.10671Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M71.0817 2.1943C71.0817 1.48389 71.6548 0.907987 72.3618 0.907987H82.6777C83.3847 0.907987 83.9578 1.48389 83.9578 2.1943V6.50724C83.9578 6.84921 83.8223 7.1771 83.5812 7.41846C83.3401 7.65983 83.0133 7.7948 82.673 7.79355L73.6419 7.76043V9.4582H83.9578V12.0308H72.3618C71.6548 12.0308 71.0817 11.4549 71.0817 10.7445V2.1943ZM73.6419 5.18778L81.3976 5.21622V3.48062H73.6419V5.18778ZM66.4885 3.48062H57.8292V0.907988H67.7686C68.4756 0.907988 69.0487 1.48389 69.0487 2.1943V10.7445C69.0487 11.4549 68.4756 12.0308 67.7686 12.0308H57.4527C56.7457 12.0308 56.1726 11.4549 56.1726 10.7445V6.43158C56.1726 6.08961 56.3081 5.76172 56.5492 5.52036C56.7903 5.27899 57.1171 5.14402 57.4574 5.14527L66.4885 5.17839V3.48062ZM66.4885 7.75104L58.7328 7.7226V9.4582H66.4885V7.75104ZM86.7438 2.1943C86.7438 1.48389 87.3169 0.907988 88.0239 0.907988H96.0055V3.48062H89.304V12.0308H86.7438V2.1943ZM97.888 2.1943C97.888 1.48389 98.4611 0.907989 99.1681 0.907989H109.409C110.116 0.907989 110.689 1.48389 110.689 2.1943V10.8202C110.689 11.5306 110.116 12.1065 109.409 12.1065H99.1681C98.4611 12.1065 97.888 11.5306 97.888 10.8202V2.1943ZM100.448 3.48062V9.53387H108.129V3.48062H100.448ZM122.736 26.256V12.0308H125.297V24.9696H133.805V19.2947H127.179V16.7221H135.085C135.792 16.7221 136.365 17.298 136.365 18.0084V26.256C136.365 26.9664 135.792 27.5423 135.085 27.5423H124.017C123.31 27.5423 122.736 26.9664 122.736 26.256ZM155.717 16.6464V13.2415H158.277V16.6464H164V19.2191H158.277V24.9696H164V27.5423H156.997C156.29 27.5423 155.717 26.9664 155.717 26.256V19.2191H152.705V16.6464H155.717ZM72.7383 17.6301C72.7383 16.9197 73.3114 16.3438 74.0184 16.3438H85.6143V18.9164H75.2984V24.894H85.6143V27.4666H74.0184C73.3114 27.4666 72.7383 26.8907 72.7383 26.1803V17.6301ZM87.6474 17.6301C87.6474 16.9197 88.2205 16.3438 88.9275 16.3438H99.1681C99.875 16.3438 100.448 16.9197 100.448 17.6301V26.256C100.448 26.9664 99.875 27.5423 99.1681 27.5423H88.9275C88.2205 27.5423 87.6474 26.9664 87.6474 26.256V17.6301ZM90.2075 18.9164V24.9696H97.888V18.9164H90.2075ZM102.707 17.6301C102.707 16.9197 103.28 16.3438 103.987 16.3438H118.896C119.603 16.3438 120.176 16.9197 120.176 17.6301V27.5423H117.616V18.9164H112.722V27.5423H110.162V18.9164H105.267V27.5423H102.707V17.6301ZM148.865 19.0677H140.206V16.4951H150.145C150.852 16.4951 151.425 17.071 151.425 17.7814V26.3316C151.425 27.042 150.852 27.6179 150.145 27.6179H139.829C139.122 27.6179 138.549 27.042 138.549 26.3316V22.0187C138.549 21.6767 138.685 21.3488 138.926 21.1075C139.167 20.8661 139.494 20.7311 139.834 20.7324L148.865 20.7655V19.0677ZM148.865 23.3382L141.109 23.3097V25.0453H148.865V23.3382Z" fill="white"/><path d="M1.10411 17.7057L20.5942 0.605325H36.2514L76.4856 37.9085H61.6364L28.5162 7.26823C28.4031 7.16359 28.2297 7.16135 28.114 7.26303L16.2267 17.7057H1.10411Z" fill="white"/><path d="M20.5938 37.9085L1.10671 20.8837H16.227L26.0813 29.5108C26.1362 29.5588 26.2064 29.5853 26.2792 29.5853H44.3071L53.1514 37.9085H20.5938Z" fill="white"/></svg>
                     </div>
-                    <div class="btn btn-primary btn-color-secondary flex align-center" data-target="home" data-msg="true">
+                    <div id="header_button" class="btn btn-primary btn-color-secondary flex align-center" data-target="home" data-msg="true">
                         <svg class="btn-pointer" width="32" height="14" viewBox="0 0 32 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7L31 6.99998M31 6.99998L22 13.0622M31 6.99998L22 0.937805" stroke="black" stroke-width="2" stroke-linecap="round" /></svg>
                         <span class="btn-l l jura">На головну</span>
                         <div class="btn-hover-bg"></div>
@@ -619,6 +619,7 @@
         const header_bg = document.querySelector("header .header-bg");
         const header_bgSpotlight = document.querySelector("header .bg-spotlight");
         const header_menuLogo = document.querySelector("#header_menuLogo");
+        const header_button = document.querySelector("#header_button");
 
         const section2_currentSection = document.querySelector("#section2_currentSection");
         const section2_currentSectionNumber = document.querySelector("#section2_currentSectionNumber");
@@ -751,6 +752,14 @@
                 func: (scrollInfo) => {
                     let sectionContentHeight = section2_content.getBoundingClientRect().height + "px";
                     document.documentElement.style.setProperty("--section-content-height", sectionContentHeight);
+
+                    if (scrollInfo.scrollY > window.innerHeight / 2) {
+                        header_button.children[1].innerHTML = "На початок";
+                        header_button.setAttribute("data-target", "scrolltotop");
+                    } else {
+                        header_button.children[1].innerHTML = "На головну";
+                        header_button.setAttribute("data-target", "home");
+                    }
                 }
             })
 
@@ -833,10 +842,13 @@
             }
 
             if (button.getAttribute("data-msg") === "true") {
-                button.onclick = (event) => postMessage(button, {
-                    "messageType": "openPage",
-                    "page": "home"
-                });
+                button.onclick = (event) => {
+                    if (button.getAttribute("data-target") === "home") {
+                        postMessage(button, { "messageType": "openPage", "page": "home" });
+                    } else if (button.getAttribute("data-target") === "scrolltotop") {
+                        scrollTo(0, 0);
+                    }
+                }
             }
         });
 
