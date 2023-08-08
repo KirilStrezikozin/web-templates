@@ -1985,15 +1985,10 @@
         window.onmessage = ({ data }) => {
             if (!data) return;
             
+            console.log("iframe", data);
             if (data.messageType === "scroll") {
                 scrollTo(Number(data.scrollX), Number(data.scrollY));
-                console.log("resized to", data.scrollY);
-            }
-
-            else if (data.messageType === "resize") {
-                document.documentElement.style.setProperty("--frame-width", data.width);
-                document.documentElement.style.setProperty("--frame-height", data.height);
-                console.log("resized to", data.width, data.height);
+                console.log("scrolled to in iframe", data.scrollY);
             }
         }
     </script>
