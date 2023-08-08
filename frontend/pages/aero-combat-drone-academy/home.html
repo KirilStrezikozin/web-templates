@@ -871,6 +871,7 @@
     </style>
 </head>
 <body>
+    <a id="linkOpener" href="" target="_blank" class="abs-position collapsed"></a>
     <header class="flex row start-center full-width">
         <div class="header-bg">
             <div class="bg-spotlight"></div>
@@ -1197,6 +1198,8 @@
         const buttons = document.querySelectorAll(".btn");
         const flashcards =  document.querySelectorAll(".flashcard");
 
+        const linkOpener = document.querySelector("#linkOpener");
+
         const header = document.querySelector("header");
         const header_bg = document.querySelector("header .header-bg");
         const header_bgSpotlight = document.querySelector("header .bg-spotlight");
@@ -1282,7 +1285,9 @@
             }
 
             if (!asMessage) {
-                window.open(link, "_blank");
+                linkOpener.href = link;
+                linkOpener.click();
+                // window.open(link, "_blank");
                 return;
             }
 
