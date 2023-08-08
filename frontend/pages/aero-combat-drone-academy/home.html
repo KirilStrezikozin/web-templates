@@ -1275,7 +1275,7 @@
 
         function postMessage(message, useLog=false) {
             // window.parent.postMessage(message, URL);
-            window.parent.postMessage(message);
+            window.parent.postMessage(message, "*");
             if (useLog) console.log(message);
         }
 
