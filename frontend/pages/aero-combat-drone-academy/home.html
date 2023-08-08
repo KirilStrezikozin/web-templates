@@ -1354,22 +1354,19 @@
                 `;
 
                 dateFlashcard.onclick = (event) => openLink(date[5]);
-                dateFlashcard.onmousemove = (event) => {
-                    let { clientX, clientY, currentTarget } = event;
-                    let { left, top } = currentTarget.getBoundingClientRect();
+                mouseCursorListener(dateFlashcard, function(clientX, clientY, targetRect, _element) {
+                    let { left, top } = targetRect;
                     dateFlashcard.style.setProperty('--spotlight-x',  `${clientX - left}px`)
                     dateFlashcard.style.setProperty('--spotlight-y',  `${clientY - top}px`)
-                };
+                }, null, false, 50);
 
                 section3_flashcards.appendChild(dateFlashcard);
             });
         }
 
-        function switchSource(event) {
+        function switchSource() {
             section0_bg_video_src.src = video1_url;
-
             section0_bg_video.loop = true;
-            section0_bg_video.load();
             section0_bg_video.currentTime = 0;
         }
 
@@ -1663,7 +1660,7 @@
         function onDOMLoad(event) {
             section0_bg_video.poster = poster1_url;
             section0_bg_video.currentTime = 0;
-            setTimeout(switchSource, section0_bg_video.duration * 1000);
+            setTimeout(() => switchSource(), section0_bg_video.duration * 1000);
 
             const scrollYListener = new ScrollYListener(blockScrollX=true);
             scrollYListener.listen();
@@ -1889,17 +1886,14 @@
             section1_cursor.style.setProperty('--cursor-y',  `${clientY + section1_cursor.clientHeight / 2}px`);
         });
 
-        header.onmousemove = (event) => {
-            let { clientX, clientY, currentTarget } = event;
-            let { left, top, width } = currentTarget.getBoundingClientRect();
-            header_bgSpotlight.style.setProperty('--spotlight-x',  `${clientX - left - width / 8}px`)
-            header_bgSpotlight.style.setProperty('--spotlight-y',  `${clientY - top - window.pageYOffset}px`)
-        };
+        mouseCursorListener(header, function(clientX, clientY, targetRect, _element) {
+            header_bgSpotlight.style.setProperty('--spotlight-x',  `${clientX - targetRect.left - targetRect.width / 8}px`)
+            header_bgSpotlight.style.setProperty('--spotlight-y',  `${clientY - targetRect.top - window.pageYOffset}px`)
+        }, null, false, throttleDelay=50);
 
         flashcards.forEach((flashcard) => {
-            flashcard.onmousemove = (event) => {
-                let { clientX, clientY, currentTarget } = event;
-                let { left, top, width, height } = currentTarget.getBoundingClientRect();
+            mouseCursorListener(flashcard, function(clientX, clientY, targetRect, _element) {
+                let { left, top, width, height } = targetRect;
 
                 let spotlightX = clientX - left, spotlightY = clientY - top;
 
@@ -1918,7 +1912,7 @@
                 flashcard.style.setProperty('--spotlight-y',  `${spotlightY}px`)
                 flashcard.style.setProperty('--angel-icon-rx', rx);
                 flashcard.style.setProperty('--angel-icon-ry', ry);
-            };
+            });
         });
 
         section4_embossedLs.forEach((element) => {
@@ -1990,7 +1984,7 @@
                 console.log("resized to", data.scrollY);
             }
 
-            else if (data.messageType = "resize") {
+            else if (data.messageType === "resize") {
                 document.documentElement.style.setProperty("--frame-width", data.width);
                 document.documentElement.style.setProperty("--frame-height", data.height);
                 console.log("resized to", data.width, data.height);
