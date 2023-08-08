@@ -871,7 +871,7 @@
     </style>
 </head>
 <body>
-    <a id="linkOpener" href="" target="_blank" class="abs-position collapsed"></a>
+    <a id="linkOpener" href="" target="_blank" rel="noopener noreferrer" class="abs-position collapsed"></a>
     <header class="flex row start-center full-width">
         <div class="header-bg">
             <div class="bg-spotlight"></div>
@@ -1275,7 +1275,7 @@
 
         function postMessage(message, useLog=false) {
             window.parent.postMessage(message, URL);
-            if (useLog) console.log(messageData);
+            if (useLog) console.log(message);
         }
 
         function openLink(link, asMessage=false) {
@@ -1286,8 +1286,8 @@
 
             if (!asMessage) {
                 linkOpener.href = link;
-                // linkOpener.click();
-                window.open(link, "_blank");
+                linkOpener.click();
+                // window.open(link, "_blank");
                 return;
             }
 
