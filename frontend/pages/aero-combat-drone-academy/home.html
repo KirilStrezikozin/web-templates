@@ -685,7 +685,7 @@
         #section2 .btn:hover span { font-weight: normal; color: #FAFAFA; }
 
         #section2 > div:first-child {
-            margin-top: 100vh;
+            margin-top: 50%;
             margin-left: 5em;
             margin-right: 5em;
             justify-content: space-between;
@@ -933,6 +933,30 @@
 
         .btn { min-width: 300px; }
 
+        @media only screen and (max-width: 1750px) {
+            #section2 > div:first-child {
+                margin-top: 40%;
+            }
+        }
+
+        @media only screen and (max-width: 1600px) {
+            #section2 > div:first-child {
+                margin-top: 35%;
+            }
+        }
+
+        @media only screen and (max-width: 1500px) {
+            #section2 > div:first-child {
+                margin-top: 30%;
+            }
+        }
+
+        @media only screen and (max-width: 1400px) {
+            #section2 > div:first-child {
+                margin-top: 25%;
+            }
+        }
+
         @media only screen and (max-width: 1300px) {
             .cursor,
             /* .bg-spotlight, */
@@ -951,7 +975,7 @@
             #section1_content1 > .sticky-bg-stick { display: none; }
             #section1_cursor { display: none; }
 
-            #section2 > div:first-child { margin-top: 20vh; padding-top: 40vh; }
+            #section2 > div:first-child { margin-top: 0px; padding-top: 40vh; }
             #section2 > div:first-child > div:first-child > div:not(.btn-wrapper) > svg { width: 60vw; }
             #section2 > div:first-child > div:first-child > div:nth-child(2) > svg { margin-top: 8vh; margin-bottom: 8vh; }
 
@@ -1609,15 +1633,24 @@
         }
 
         async function populateDates() {
-            const dates = await fetchDates();
+            const rawDates = await fetchDates();
+            let dates = [];
+
+            const currentDate = new Date();
+            let month = currentDate.getMonth() + 1, day = currentDate.getDate(), year = currentDate.getFullYear();
+
             let center_text_style = "";
             let heading_text_style = "h1 bold";
             let month_text_style = "h3 bold";
 
-            if (dates.length) {
-                const currentDate = new Date();
-                let month = currentDate.getMonth() + 1, day = currentDate.getDate(), year = currentDate.getFullYear();
+            rawDates.forEach((date) => {
+                if (Number(date[3]) < year) return;
+                else if (Number(date[2]) < month && Number(date[3]) <= year) return;
+                else if (Number(date[0]) < day && Number(date[2]) <= month && Number(date[3]) < year) return;
+                dates.push(date);
+            });
 
+            if (dates.length) {
                 let closestDate = `${dates[0][0]} ${dates[0][1]}`;
                 if (dates[0][2] == month && dates[0][3] == year) {
                     if (dates[0][0] == day) closestDate = "сьогодні";
