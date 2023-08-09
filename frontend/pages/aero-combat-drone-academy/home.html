@@ -1006,6 +1006,8 @@
             #header_menuLogo { width: 27vw; margin-left: 0px; }
             #header_menuButton { margin-left: 24px; }
 
+            header .width-90 { max-width: 520px; }
+
             .ribs,
             #section0_bg,
             #section0_bg_video { width: unset; }
@@ -1026,6 +1028,10 @@
 
             #section1_content1 > .flex > svg { width: 80vw; }
             #section1_content1 > .sticky-bg-stick { display: none; }
+
+            #section1_scrollTipWrapper { display: none !important; }
+
+            #section1_scrollTip { display: none !important; }
 
             #section2 div:not(.btn) > svg.hour-label,
             #section2 div:not(.btn) > img.drone-icon { width: 30vw; height: 20vw; }
@@ -1087,6 +1093,56 @@
 
             #section4 .l.l-emboss-wrapper {
                 font-size: 1.4em;
+                max-width: 76vw;
+            }
+        }
+
+        @media only screen and (max-width: 400px) {
+            .btn { min-width: 200px; }
+            .btn-primary .btn-l { font-size: 1em; }
+
+            .l.h1 { font-size: 5em; }
+            .l.h1-5 { font-size: 3.3em; }
+            .l.h2 { font-size: 2em; }
+            .l.h3 { font-size: 1.2em; }
+            .l.h4 { font-size: 1em; }
+            .l.h6 { font-size: 1em; }
+            .l.h7 { font-size: 0.8em; }
+            .l.h8 { font-size: 0.5em; }
+            .l.p1 { font-size: 1em; }
+            .l.p2 { font-size: 0.8em; }
+
+            .flashcard { width: 84vw; min-height: 340px; }
+
+            header .width-90 { max-width: 280px; }
+
+            #section1_aboutHeading { margin-bottom: 10em; }
+
+            #section2 span.hour-label-under { font-size: 1em; }
+            #section2 .flashcard > .flex > span { margin-right: 1.5rem; }
+            #section2 .flashcard .h1-5 { font-size: 2.5em; }
+            #section2 .flashcard > .flex > span:last-child { font-size: 1em; margin-left: 1em; }
+
+            #section3 > div:first-child > div:first-child > svg:first-child { max-width: 84vw; }
+
+            #section3_flashcards {
+                width: 90vw !important;
+                align-items: center;
+                justify-content: center;
+                margin-left: 1em !important;
+                margin-top: -15em;
+            }
+
+            #section3 > div:first-child > .btn { margin-left: auto; margin-right: auto; }
+
+            #section4 .contacts-content { margin-top: 15vh; }
+            #section4 .socials-content { margin-top: 15vh; }
+            #section4_heading { width: 84vw; }
+            #section4 .h1-5 { font-size: 2em; }
+
+            #section4 .l.l-emboss-wrapper {
+                font-size: 1.2em;
+                font-weight: 400;
                 max-width: 76vw;
             }
         }
