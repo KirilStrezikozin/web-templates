@@ -2036,6 +2036,9 @@
                         if (isIntersecting) {
                             document.documentElement.style.setProperty('--header-z-index', 2);
                             section1_content1_sticky.style.opacity = 1.0;
+                        } else {
+                            document.documentElement.style.setProperty('--header-z-index', 4);
+                            section1_content1_sticky.style.opacity = 0;
                         }
                     }
                 ],
