@@ -1646,7 +1646,7 @@
             rawDates.forEach((date) => {
                 if (Number(date[3]) < year) return;
                 else if (Number(date[2]) < month && Number(date[3]) <= year) return;
-                else if (Number(date[0]) < day && Number(date[2]) <= month && Number(date[3]) < year) return;
+                else if (Number(date[0]) < day && Number(date[2]) <= month && Number(date[3]) <= year) return;
                 dates.push(date);
             });
 
