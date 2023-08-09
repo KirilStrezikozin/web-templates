@@ -2219,7 +2219,7 @@
 
         window.scroll({ left: 0 });
 
-        window.onmessage = ({ data }) => {
+        function handleMessageData(data) {
             if (!data) return;
             
             console.log("iframe", data);
@@ -2227,6 +2227,16 @@
                 window.scroll(Number(data.scrollX), Number(data.scrollY));
                 console.log("scrolled to in iframe", data.scrollY);
             }
+        }
+
+        if (window.addEventListener) {
+            window.addEventListener("message", ({ data }) => {
+                handleMessageData(data);
+            });
+        } else {
+            window.attachEvent("onmessage", ({ data }) => {
+                handleMessageData(data);
+            });
         }
     </script>
 </body>
