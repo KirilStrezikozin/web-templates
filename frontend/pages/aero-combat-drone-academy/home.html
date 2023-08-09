@@ -25,8 +25,14 @@
         ::-webkit-scrollbar { width: 0px; display: none !important; }
 
         @keyframes rotate-neg360deg {
-            0% { transform: rotate(0); }
-            100% { transform: rotate(-360deg); }
+            0% {
+                transform: rotate(0);
+                -webkit-transform: rotate(0);
+            }
+            100% {
+                transform: rotate(-360deg);
+                -webkit-transform: rotate(-360deg);
+            }
         }
 
         @keyframes anim-fill-flow {
@@ -38,15 +44,22 @@
         @keyframes hover-flow {
             0% {
                 transform: scaleX(0);
+                -webkit-transform: scaleX(0);
                 transform-origin: left;
+                -webkit-transform-origin: left;
             } 49% {
                 transform-origin: left;
+                -webkit-transform-origin: left;
             } 50% {
                 transform: scaleX(1);
+                -webkit-transform: scaleX(1);
                 transform-origin: right;
+                -webkit-transform-origin: right;
             } 100% {
                 transform: scaleX(0);
+                -webkit-transform: scaleX(0);
                 transform-origin: right;
+                -webkit-transform-origin: right;
             }
         }
 
@@ -209,6 +222,7 @@
             width: 1.5em;
             margin-right: 1em;
             transform: scale(1, var(--scroll-icon-scale-y));
+            -webkit-transform: scale(1, var(--scroll-icon-scale-y));
         }
 
         .sticky-bg-stick {
@@ -257,8 +271,13 @@
         }
 
         .bg-dark { background: #1d331f; }
-        .bg-dark.gradient { background: linear-gradient(rgba(29, 51, 31, 0), rgba(29, 51, 31, 0.95) 45%); }
-        .bg-black.gradient { background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(11, 14, 12, 0.75) 45%); }
+        .bg-dark.gradient {
+            background: linear-gradient(rgba(29, 51, 31, 0), rgba(29, 51, 31, 0.95) 45%);
+            background: -webkit-linear-gradient(rgba(29, 51, 31, 0), rgba(29, 51, 31, 0.95) 45%);
+        }
+        .bg-black.gradient {
+            background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(11, 14, 12, 0.75) 45%);
+        }
 
         .cursor {
             --cursor-x: 0px;
@@ -287,7 +306,9 @@
 
         .rotate-infinite {
             animation: rotate-neg360deg calc(var(--animation-duration, 5s)) linear 0s infinite running;
+            -webkit-animation: rotate-neg360deg calc(var(--animation-duration, 5s)) linear 0s infinite running;
             transition: animation 0.5s ease-out;
+            -webkit-transition: animation 0.5s ease-out;
         }
 
         .btn-primary, .l-focus {
@@ -332,6 +353,14 @@
                 rgba(0, 0, 0, 0.3) 0%,
                 transparent 100%
             );
+
+            background: -webkit-radial-gradient(
+                var(--size) circle at var(--bg-x) var(--bg-y),
+                /* rgba(250, 250, 250, 0.2) 0%, */
+                rgba(0, 0, 0, 0.3) 0%,
+                transparent 100%
+            );
+
             transition: background 1s cubic-bezier(0.16, 1, 0.3, 1);
             -webkit-transition: background 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -412,6 +441,7 @@
             /* -webkit-transition: border 0.25s ease-out; */
 
             backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
         }
 
         header .header-bg:hover { border: 1px solid var(--header-border-color-hover); border-top: 0px; }
@@ -428,6 +458,11 @@
             transition: opacity 2s ease-out;
             -webkit-transition: opacity 2s ease-out;
             background: radial-gradient(
+                var(--size) circle at var(--spotlight-x) var(--spotlight-y),
+                rgba(43, 76, 46, 0.40) 0%,
+                transparent 100%
+            );
+            background: -webkit-radial-gradient(
                 var(--size) circle at var(--spotlight-x) var(--spotlight-y),
                 rgba(43, 76, 46, 0.40) 0%,
                 transparent 100%
@@ -458,6 +493,7 @@
             border-radius: 5px;
             border: 1px solid var(--header-border-color);
             backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
             -webkit-transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -468,7 +504,9 @@
         .flashcard > .bg-spotlight:hover { opacity: 0.4; }
         .flashcard > .flex {
             transform: translate(calc(var(--spotlight-x) / -50), calc(var(--spotlight-y) / -50));
+            -webkit-transform: translate(calc(var(--spotlight-x) / -50), calc(var(--spotlight-y) / -50));
             transition: transform 0.5s ease-out;
+            -webkit-transition: transform 0.5s ease-out;
         }
 
         .link-icon {
@@ -617,7 +655,7 @@
         #section2 div:not(.btn) > svg.hour-label,
         #section2 div:not(.btn) > svg.drone-icon {  height: 3.4vmax; }
         #section2 span { color: var(--primary-color); }
-        #section2 span.hour-label-under { font-size: 1vw; transform: rotate(90deg); }
+        #section2 span.hour-label-under { font-size: 1vw; transform: rotate(90deg); -webkit-transform: rotate(90deg); }
 
         .angel-icon { 
             height: 6vmax;
@@ -628,10 +666,12 @@
             transition-duration: 3s;
             -webkit-transition-duration: 3s;
             transform: rotateX(0) rotateY(-360deg);
+            -webkit-transform: rotateX(0) rotateY(-360deg);
         }
 
         .flashcard:hover .angel-icon {
             transform: rotateX(var(--angel-icon-ry)) rotateY(var(--angel-icon-rx));
+            -webkit-transform: rotateX(var(--angel-icon-ry)) rotateY(var(--angel-icon-rx));
             transition-duration: 1.5s;
             -webkit-transition-duration: 1.5s;
         }
@@ -716,9 +756,10 @@
             height: 1px;
             background: var(--header-border-color-hover);
             animation: hover-flow 2.5s infinite linear running;
+            -webkit-animation: hover-flow 2.5s infinite linear running;
         }
 
-        #section3 > div:first-child > div.rel-position { pointer-events: none; top: -40vh; }
+        #section3 > div:first-child > div.rel-position { pointer-events: none; top: -40vh; z-index: -1; }
 
         #section3_flashcards .flashcard {
             width: 360px;
@@ -727,11 +768,12 @@
             border-radius: 5px;
             border: 1px solid var(--header-border-color);
             backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
             -webkit-transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        #section3 > div:first-child > div:first-child > div.flex.row > span:hover { cursor: pointer; }
+        #section3_flashcards > span:hover { cursor: pointer; }
 
         #section3_flashcards .flashcard:hover { border: 1px solid rgba(29, 51, 31, 0.02); }
         #section3_flashcards .flashcard:hover { cursor: pointer; }
@@ -748,7 +790,7 @@
             -webkit-transition-delay: 0s;
         }
 
-        #section3 > div:first-child > div.flex.flex-wrap {
+        #section3_flashcards {
             position: relative;
             width: 70vw;
             top: -60vh;
@@ -770,6 +812,7 @@
             position: relative;
             top: -29vh;
             transform: scale(-1, 1);
+            -webkit-transform: scale(-1, 1);
         }
 
         #section4 { background: black; height: auto; }
@@ -781,7 +824,7 @@
             justify-content: space-between;
         }
 
-        #section4_heading { width: 50vw; margin-bottom: 10vh; }
+        #section4_heading { width: 50vw; min-width: 400px; margin-bottom: 10vh; }
         #section4 *:not(.overlay, #section4_heading, #section4_bg, #section4_bg *) { z-index: 3; }
         #section4 span:not(.l.l-emboss-wrapper, .btn-copy > span) { color: #FAFAFA; }
 
@@ -793,9 +836,15 @@
             align-items: end;
         }
 
-        #section4 .contacts-content > div:first-child > svg:first-child { width: 15vw; margin-bottom: 2vh; }
+        #section4 .contacts-content > div:first-child > svg:first-child {
+            width: 15vw;
+            min-width: 200px;
+            margin-bottom: 2vh;
+        }
 
-        #section4 .socials-content { margin-right: 5em; }
+        #section4 .contacts-content > div:first-child > div { margin-right: 10em; }
+
+        #section4 .socials-content { margin-top: 5em; margin-right: 5em; }
         #section4 .socials-content > div { margin-bottom: 1em; margin-top: 1em; }
         #section4 .socials-content > div > span { margin-left: 1em; }
         #section4 .socials-content > div:hover { cursor: pointer; }
@@ -812,7 +861,11 @@
         #section4_bg { position: absolute; }
         #section4_bg > div { width: 27vw; overflow: hidden; }
         #section4_bg > div > video { position: relative; height: 115%; }
-        #section4_bgOverlay { background: linear-gradient(black 0%, transparent 100%); z-index: 1; }
+        #section4_bgOverlay {
+            z-index: 1;
+            background: linear-gradient(black 0%, transparent 100%);
+            background: -webkit-linear-gradient(black 0%, transparent 100%);
+        }
 
         #section4 .overlay {
             left: 0px;
@@ -836,6 +889,7 @@
             border-radius: 5px;
             color: #FAFAFA;
             backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
             -webkit-transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -868,6 +922,149 @@
         .collapsed { width: 0px; height: 0px; display: none; }
 
         .overflow-hidden { overflow: hidden; }
+
+        .btn { min-width: 300px; }
+
+        @media only screen and (max-width: 1300px) {
+            .cursor,
+            /* .bg-spotlight, */
+            .btn-copy { display: none; }
+
+            .btn-primary .btn-hover-bg { background: none };
+
+            .btn-primary.btn-color-primary:hover,
+            .btn-primary.btn-color-secondary:hover,
+            .btn-primary:hover { transform: none !important; -webkit-transform: none !important; }
+
+            .flashcard { width: 35vw; min-height: 340px; }
+
+            .angel-icon { height: 9vw; padding-bottom: 1em; }
+
+            #section1_content1 > .sticky-bg-stick { display: none; }
+
+            #section2 > div:first-child { margin-top: 20vh; padding-top: 40vh; }
+            #section2 > div:first-child > div:first-child > div:not(.btn-wrapper) > svg { width: 60vw; }
+            #section2 > div:first-child > div:first-child > div:nth-child(2) > svg { margin-top: 8vh; margin-bottom: 8vh; }
+
+            #section2 div:not(.btn) > svg.hour-label,
+            #section2 div:not(.btn) > img.drone-icon { width: 12vw; height: 7vw; }
+            #section2 span.hour-label-under { font-size: 1.3em; }
+
+            #section2 .flashcard > .flex > span { margin-right: 1.5rem; }
+            #section2 .flashcard .h1-5 { font-size: 2em; margin-top: 1em; }
+            #section2 .flashcard > .flex > span:last-child {
+                margin-top: 2em;
+                margin-bottom: 1.5em;
+                font-size: 1.1em;
+            }
+
+            #section2 .grid {
+                grid-template-areas: unset;
+                grid-template-columns: repeat(2, 1fr);
+                margin-top: 8vh;
+                margin-right: 0px;
+                /* margin-left: 5em; */
+                width: unset;
+            }
+
+            #section2_bg { margin-top: 20vh; }
+
+            #section3 { margin-top: 70rem; }
+            #section3 > div:first-child > div:first-child { margin-right: 5em; }
+        }
+
+        @media only screen and (max-width: 900px) {
+            .cursor,
+            /* .bg-spotlight, */
+            .btn-copy { display: none; }
+
+            .btn-primary .btn-hover-bg { background: none };
+
+            .btn-primary.btn-color-primary:hover,
+            .btn-primary.btn-color-secondary:hover,
+            .btn-primary:hover { transform: none !important; -webkit-transform: none !important; }
+
+            .flashcard { width: 90vw; min-height: 340px; }
+            .flashcard .bg-spotlight { opacity: 0.1; }
+
+            .angel-icon { height: 25vw; }
+
+            header .header-bg { width: 100%; }
+            .header-content-collapsed div > span { display: none; }
+            .header-content-expanded { margin-top: 3rem; }
+            .header-content-expanded .h3.bold { margin-bottom: 0.5em; }
+            .header-content-expanded .h2 { font-size: 2.4em; }
+            #header_menuLogo { width: 27vw; margin-left: 0px; }
+            #header_menuButton { margin-left: 24px; }
+
+            .ribs,
+            #section0_bg,
+            #section0_bg_video { width: unset; }
+
+            #section0_content { min-width: 96vw; }
+            #section0_content > svg { margin-bottom: 15vh; }
+
+            #section1_aboutHeading { margin-top: 2em; }
+            #section1_aboutHeading > svg { margin-bottom: -0.5em; width: 80vw; }
+            #section1_content1 { align-items: center; }
+
+            #section1_content1 > .flex {
+                width: 80vw;
+                margin-right: 0.2em;
+                margin-left: 0.2em;
+            }
+
+            #section1_content1 > .flex > svg { width: 80vw; }
+            #section1_content1 > .sticky-bg-stick { display: none; }
+
+            #section2 div:not(.btn) > svg.hour-label,
+            #section2 div:not(.btn) > img.drone-icon { width: 30vw; height: 20vw; }
+            #section2 span.hour-label-under { font-size: 1.5em; }
+
+            #section2 .flashcard > .flex > span { margin-right: 1.5rem; }
+            #section2 .flashcard .h1-5 { font-size: 3em; margin-top: 0.5em; }
+            #section2 .flashcard > .flex > span:last-child {
+                margin-top: 1.5em;
+                margin-bottom: 1.5em;
+                font-size: 1.2em;
+            }
+
+            #section2 > div:first-child { margin-top: 20vh; padding-top: 40vh; }
+            #section2 > div:first-child > div:first-child > div:not(.btn-wrapper) > svg { width: 80vw; }
+            #section2 > div:first-child > div:first-child > div:nth-child(2) > svg { margin-top: 8vh; margin-bottom: 8vh; }
+            #section2 > div:first-child > div:first-child > div:nth-child(3) { display: none; }
+            #section2_bg { display: none; }
+
+            #section2 .grid {
+                grid-template-areas: unset;
+                grid-template-columns: repeat(1, 1fr);
+                margin-top: 8vh;
+                margin-right: 0px;
+                width: unset;
+            }
+
+            #section3 { margin-top: 100rem; }
+            #section3 > div:first-child > div:first-child > svg:first-child { max-width: 90vw; }
+            #section3 > div:first-child > div:first-child > div > svg { max-width: 20vw; }
+            #section3_closestDate { font-size: 2.5em; margin-left: 0.2em; }
+            #section3 > div:first-child > div.rel-position { opacity: 0.2; }
+
+            #section3_flashcards {
+                width: 100vw !important;
+                align-items: center;
+                justify-content: center;
+                margin-left: 0px !important;
+            }
+
+            #section3 > div:first-child > .btn { margin-left: auto; margin-right: auto; }
+
+            #section4 .contacts-content { margin-top: 15vh; }
+            #section4 .socials-content { margin-top: 15vh; }
+
+            #section2 > div:first-child,
+            #section3 > div:first-child > div:first-child,
+            #section4 > div:first-child { margin-left: 2em; margin-right: 2em; }
+        }
     </style>
 </head>
 <body>
@@ -933,7 +1130,7 @@
         <div id="section1_content0" class="flex column align-center">
             <span class="l jura h4">Ласкаво просимо до</span>
             <span class="l jura h3 bold p-space-bottom">Aero Combat Drone Academy</span>
-            <div id="section1_aboutHeading" class="flex row align-center">
+            <div id="section1_aboutHeading" class="flex row flex-wrap align-center">
                 <svg width="487" height="138" viewBox="0 0 487 138" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M27.5 138V130H22.5V138H27.5Z" fill="white" /><path d="M27.5 91.5H14V115H0V138H22.5V130H27.5V91.5Z" fill="white" /><path d="M1 33H0V53H5.5V61.5H9.5V70H0V115H14V91.5H27.5V80H13.5V68H27.5V42H20V33H7.5H1Z" fill="white" /><path d="M27.5 68H13.5V80H27.5V68Z" fill="white" /><path d="M5.5 53H0V70H9.5V61.5H5.5V53Z" fill="white" /><path d="M26.5 33H22.5H20V42H27.5V29.5H26.5V33Z" fill="white" /><path d="M7.5 29.5V33H20H22.5V29.5H7.5Z" fill="white" /><path d="M22.5 29.5V33H26.5V29.5V27H24.5H22.5V29.5Z" fill="white" /><path d="M24.5 27H26.5V21H24.5V27Z" fill="white" /><path d="M11.5 14.5H20V5.5H11.5V14.5Z" fill="white" /><path d="M20 3.5H11.5V5.5H20V3.5Z" fill="white" /><path d="M0 0.5V3.5H11.5V0.5H0Z" fill="white" /><path d="M1 14.5H0V33H1V14.5Z" fill="white" /><path d="M37.5 14.5V20.5H44V14.5H37.5Z" fill="white" /><path d="M35.5 27V21H26.5V27H35.5Z" fill="white" /><path d="M35.5 27H26.5V29.5H27.5V28H39.5V27H35.5Z" fill="white" /><path d="M44 20.5V28H52.5V20.5H44Z" fill="white" /><path d="M65 0.5V7.5H71.5V0.5H65Z" fill="white" /><path d="M56.5 0.5V1.5H63V7.5H65V0.5H56.5Z" fill="white" /><path d="M63 21V28H74V23V21H63Z" fill="white" /><path d="M78.5 14.5V20.5H91V14.5H78.5Z" fill="white" /><path d="M74 23V28H89V23H74Z" fill="white" /><path d="M93 0.5V10H100V0.5H93Z" fill="white" /><path d="M89 28H110V33.5H118.5V23H132V8H123V14.5H100V23H89V28Z" fill="white" /><path fill-rule="evenodd" clip-rule="evenodd" d="M11.5 3.5H0V14.5H1V33H7.5V29.5H22.5V27H24.5V21H26.5H35.5V27H39.5V28H44V20.5H37.5V14.5H44V20.5H52.5V28H63V21H74V23H89H100V14.5H123V8H132V0.5H100V10H93V0.5H71.5V7.5H65H63V1.5H56.5V0.5H11.5V3.5H20V5.5V14.5H11.5V5.5V3.5ZM78.5 20.5V14.5H91V20.5H78.5Z" fill="white" /><path d="M132 8V23H118.5V33.5V42V53H110V57.5H121V61.5H125.5V53H134V61.5H137.5V44H130V33.5H137.5V8H132Z" fill="white" /><path d="M137.5 0.5H132V8H137.5V0.5Z" fill="white" /><path d="M118.5 42H110V53H118.5V42Z" fill="white" /><path d="M118.5 33.5H110V42H118.5V33.5Z" fill="white" /><path d="M137.5 33.5H130V44H137.5V33.5Z" fill="white" /><path fill-rule="evenodd" clip-rule="evenodd" d="M121 57.5H110V91.5H117V102.5H137.5V78.5H132V70H137.5V61.5H134V53H125.5V61.5H121V57.5ZM114.5 78.5V70H127.5V78.5H114.5Z" fill="white" /><path d="M114.5 70V78.5H127.5V70H114.5Z" fill="white" /><path d="M137.5 70H132V78.5H137.5V70Z" fill="white" /><path d="M110 91.5V138H114.5V106.5H121V117H125.5V126H119.5V138H128V128.5H133V138H137.5V102.5H117V91.5H110Z" fill="white" /><path d="M114.5 106.5V138H119.5V126H125.5V117H121V106.5H114.5Z" fill="white" /><path d="M128 128.5V138H133V128.5H128Z" fill="white" /><path d="M174.711 138H202.211V89.5H200H174.711V138Z" fill="white" /><path d="M284.711 28V55.5H269.5V59.5H261V70H248V57.5H260.5V55.5H233.5V59.5H226.5V70H209.5V55.5H202.211V33H174.711V89.5H200V80.5H213.5V83H241V75.0508H250V83H284.711C292.302 83 298.747 80.3503 304.047 75.0508C305.049 74.0751 305.959 73.0582 306.776 72H303.5V57.5H309.5V44H312.211V28C312.211 20.4089 309.49 13.9635 304.047 8.66406C298.747 3.22135 292.302 0.5 284.711 0.5H232.5V8H238.5V18.5H211.5V28H284.711Z" fill="white" /><path d="M202.211 89.5V83H213.5V80.5H200V89.5H202.211Z" fill="white" /><path d="M209.5 55.5V70H226.5V59.5H233.5V55.5H209.5Z" fill="white" /><path d="M241 75.0508V83H250V75.0508H241Z" fill="white" /><path d="M248 57.5V70H261V59.5H269.5V55.5H260.5V57.5H248Z" fill="white" /><path d="M312.211 55.5V44H309.5V57.5H303.5V72H306.776C310.399 67.3104 312.211 61.8104 312.211 55.5Z" fill="white" /><path d="M174.711 0.5V33H202.211V28H211.5V18.5H238.5V8H232.5V0.5H174.711Z" fill="white" /><path d="M376.922 0.5C369.509 0.5 363.214 3 358.038 8H374.5V1.5H384V12H398V0.5H376.922Z" fill="white" /><path d="M404.5 0.5V12H419V0.5H404.5Z" fill="white" /><path d="M376.922 28H459.422V54.5H462.5V61H459.422V110.5H434.5V114H417.5V119.5H443.5V132H456V138H459.422C460.47 138 461.496 137.95 462.5 137.849V130.051H456V119.5H460.5V111.5H468.5V106.5H473V94H468.5V80H486.922V35.5H481.5V23.5H473V35.5H460.5V25H466.5V19H485.467C484.14 15.172 481.903 11.7267 478.758 8.66406C473.458 3.22135 467.013 0.5 459.422 0.5H419V12H404.5V0.5H398V12H384V1.5H374.5V8H358.038C357.813 8.21666 357.591 8.43801 357.371 8.66406C352.072 13.9635 349.422 20.4089 349.422 28V37.5H370V28H376.922Z" fill="white" /><path d="M349.422 46H351V51H356V44.5H367.5V40.5H372V36.5H376.922V28H370V37.5H349.422V46Z" fill="white" /><path d="M349.422 71H357.371V57H349.422V71Z" fill="white" /><path d="M349.422 104.5H361.5V89.5H370V81H376.922V36.5H372V40.5H367.5V44.5H356V51H351V46H349.422V57H357.371V71H349.422V104.5Z" fill="white" /><path d="M370 81V89.5H376.922V81H370Z" fill="white" /><path d="M349.422 110.5C349.422 118.234 352.072 124.751 357.371 130.051C361.007 133.687 365.217 136.076 370 137.217V132H385V138H456V132H443.5V119.5H417.5V114V110.5H400V119.5H391.5V110.5H376.922V104.5H370V89.5H361.5V104.5H349.422V110.5Z" fill="white" /><path d="M376.922 89.5H370V104.5H376.922V89.5Z" fill="white" /><path d="M391.5 110.5V119.5H400V110.5H391.5Z" fill="white" /><path d="M370 137.217C372.187 137.739 374.495 138 376.922 138H385V132H370V137.217Z" fill="white" /><path d="M434.5 110.5H417.5V114H434.5V110.5Z" fill="white" /><path d="M462.5 137.849C468.771 137.218 474.19 134.619 478.758 130.051C481.942 126.951 484.195 123.434 485.516 119.5H481V113H486.824C486.889 112.181 486.922 111.348 486.922 110.5V80H468.5V94H473V106.5H468.5V111.5H460.5V119.5H456V130.051H462.5V137.849Z" fill="white" /><path d="M486.824 113H481V119.5H485.516C486.206 117.447 486.642 115.28 486.824 113Z" fill="white" /><path d="M462.5 54.5H459.422V61H462.5V54.5Z" fill="white" /><path d="M486.922 28C486.922 24.7959 486.437 21.7959 485.467 19H466.5V25H460.5V35.5H473V23.5H481.5V35.5H486.922V28Z" fill="white" /></svg>
                 <svg width="487" height="138" viewBox="0 0 487 138" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M486.922 41.75V28C486.922 26.2741 486.781 24.6074 486.5 23H481V34.875H476V23H467.5V34.875H459.422V41.75H486.922Z" fill="white"/><path d="M376.922 28H459.422V34.875H467.5V23H476V34.875H481V23H486.5C485.544 17.5373 482.963 12.7587 478.758 8.66406C478.027 7.9135 477.274 7.21468 476.5 6.56762V8.66406H468V1.81237C465.325 0.937458 462.465 0.5 459.422 0.5H457V8.66406H446.5V15H438V25.5H427.5V13H435.5V8.66406H427.5V0.5H406V7.5H401V15H388.5V25.5H380V15H369V25.5H360.5H349.521C349.455 26.319 349.422 27.1524 349.422 28V57.5H353.5V51.5H376.922V28Z" fill="white"/><path d="M457 8.66406V0.5H427.5V8.66406H435.5V13H427.5V25.5H438V15H446.5V8.66406H457Z" fill="white"/><path d="M468 1.81237V8.66406H476.5V6.56762C473.91 4.40379 471.077 2.81871 468 1.81237Z" fill="white"/><path d="M376.922 0.5C369.188 0.5 362.671 3.22135 357.371 8.66406C355.415 10.62 353.82 12.7319 352.586 15H360.5V25.5H369V15H380V25.5H388.5V15H401V7.5H406V0.5H376.922Z" fill="white"/><path d="M349.521 25.5H360.5V15H352.586C350.85 18.191 349.828 21.691 349.521 25.5Z" fill="white"/><path d="M376.922 51.5H353.5V57.5H349.422V110.5C349.422 113.142 349.731 115.642 350.349 118H358.5V109.5H369.5V90.5H376.922V51.5Z" fill="white"/><path d="M357.371 130.051C362.671 135.35 369.188 138 376.922 138H393V128.5H399.5V138H429.461L429.5 128.5H421V120H404V110.5H394.5V120H386.5V133H378.5V110.5H376.922V90.5H369.5V109.5H358.5V118H350.349C351.541 122.545 353.882 126.562 357.371 130.051Z" fill="white"/><path d="M378.5 110.5V133H386.5V120H394.5V110.5H378.5Z" fill="white"/><path d="M393 128.5V138H399.5V128.5H393Z" fill="white"/><path d="M442.5 118V127.5H455.5V118H442.5Z" fill="white"/><path d="M486.922 110.5V109.5H472V126.5H481.864C485.236 121.921 486.922 116.588 486.922 110.5Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M459.422 96.75V110.5H404V120H421V128.5H429.5L429.461 138H459.422C467.013 138 473.458 135.35 478.758 130.051C479.917 128.922 480.952 127.739 481.864 126.5H472V109.5H486.922V96.75H459.422ZM442.5 127.5V118H455.5V127.5H442.5Z" fill="white"/><path d="M284.711 28V55.5H269V68.5H251V55.5H215.5V58H206V79.5H212.5V83H280V70.5H288.5V62.5H308.5V71H312.211V28C312.211 27.3243 312.189 26.6576 312.146 26H305.339V10C304.927 9.54688 304.496 9.10157 304.047 8.66406C298.747 3.22135 292.302 0.5 284.711 0.5H202.211C196.797 0.5 191.98 1.83333 187.759 4.5H195.5V13H179.084C176.169 17.3697 174.711 22.3697 174.711 28V31H194.5V39H199.5V31H202.211V28H274.5V21H282V28H284.711Z" fill="white"/><path d="M251 55.5V68.5H269V55.5H251Z" fill="white"/><path d="M274.5 21V28H282V21H274.5Z" fill="white"/><path d="M182.66 8.66406C181.291 10.0329 180.099 11.4782 179.084 13H195.5V4.5H187.759C185.95 5.64304 184.25 7.03106 182.66 8.66406Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M194.5 31H174.711V97H178.5V79.5H189.5V70.5H198V79.5H193V92H202.211V83H212.5V79.5H206V58H215.5V55.5H202.211V31H199.5V39H194.5V31ZM186.5 58.5V53.5H194V58.5H186.5Z" fill="white"/><path d="M186.5 53.5V58.5H194V53.5H186.5Z" fill="white"/><path d="M178.5 97H174.711V109.5H184.5V105H190.5V98.5H202.211V92H193V79.5H198V70.5H189.5V79.5H178.5V97Z" fill="white"/><path d="M174.711 138H202.211V109.5H184.5H174.711V138Z" fill="white"/><path d="M312.211 96.5H296.5V120.5H304.5V109.5H312.211V96.5Z" fill="white"/><path d="M284.711 138H312.211V109.5H304.5V120.5H296.5V96.5H312.211V71H308.5V62.5H288.5V70.5H280V83H284.711V138Z" fill="white"/><path d="M305.339 10V26H312.146C311.745 19.8803 309.476 14.547 305.339 10Z" fill="white"/><path d="M110 0.5V12.5H118V21.5H128.5V9H120V4.5H128.5V0.5H110Z" fill="white"/><path d="M110 138H137.5V133H124V126.5H131V116H137.5V96.5H120.5V90H113.5V75H120.5V66.5H137.5V0.5H128.5V4.5H120V9H128.5V21.5H118V12.5H110V55.5H85V68.5H79V75H66.5V62H60V75H47.5V83H110V107.5H121V118H110V138Z" fill="white"/><path d="M137.5 66.5H120.5V75H113.5V90H120.5V96.5H137.5V88.5H133V77H137.5V66.5Z" fill="white"/><path d="M137.5 77H133V88.5H137.5V77Z" fill="white"/><path d="M121 107.5H110V118H121V107.5Z" fill="white"/><path d="M137.5 116H131V126.5H124V133H137.5V116Z" fill="white"/><path d="M27.5 55.5V49H13V60H4.5V81.5H19V73H41V62.5H56V55.5H27.5Z" fill="white"/><path d="M27.5 0.5H0V44.5H6V39H13V49H27.5V34H13V17H27.5V0.5Z" fill="white"/><path d="M27.5 17H13V34H27.5V17Z" fill="white"/><path d="M2.5 85.5H0V111.5H2.5V99H8.5V93H2.5V85.5Z" fill="white"/><path d="M6 44.5H0V85.5H2.5V93H8.5V99H2.5V111.5H0V124.75H2.5V117.5H12V124.75H27.5V83H47.5V75H60V62H66.5V75H79V68.5H85V55.5H56V62.5H41V73H19V81.5H4.5V60H13V49V39H6V44.5Z" fill="white"/><path d="M0 138H27.5V124.75H12V117.5H2.5V124.75H0V138Z" fill="white"/><path d="M202.211 98.5H190.5V105H184.5V109.5H202.211V98.5Z" fill="white"/></svg>
             </div>
@@ -986,7 +1183,7 @@
         </div>
     </section>
     <section id="section2" class="full-width">
-        <div class="flex row">
+        <div class="flex row flex-wrap">
             <div class="flex column center-start">
                 <div class="flex column center-start">
                     <svg width="550" height="130" viewBox="0 0 623 130" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M550.5 104.125V118.5H544V123.5H564V130H581V127.5H574.5V116H561V104.125H550.5Z" fill="white"/><path d="M561 104.125V116H574.5V127.5H581V130H588.831V128.5H602V118V117.5H600H591V113.5H578.5V107H589V104.125H561Z" fill="white"/><path d="M596.661 130C603.804 130 609.868 127.507 614.855 122.521C619.164 118.325 621.66 113.318 622.343 107.5H614.5V118H608.5H602V128.5H588.831V130H596.661Z" fill="white"/><path d="M600 107.5V117.5H602V118H608.5V107.5H600Z" fill="white"/><path d="M596.661 91.1875V104.125H589V107H578.5V113.5H591V117.5H600V107.5H608.5V118H614.5V107.5H622.343C622.472 106.404 622.536 105.279 622.536 104.125V91.1875H596.661Z" fill="white"/><path d="M500.641 122.521C505.627 127.507 511.759 130 519.036 130H564V123.5H544V118.5H550.5V104.125H519.036V96.5H504.5V83.5H493.161V104.125C493.161 111.402 495.654 117.534 500.641 122.521Z" fill="white"/><path d="M500.641 68.5H493.161V83.5H504.5V96.5H519.036V68.5H509.5V78.5H500.641V68.5Z" fill="white"/><path d="M500.641 42H493.161V68.5H500.641V78.5H509.5V68.5H519.036V60.5H509.5V51H500.641V42Z" fill="white"/><path d="M520.5 19.5V14.5V12.5H506V21.5H493.6C493.308 23.1034 493.161 24.7701 493.161 26.5V30H506V40.5H519.036V26.5H529V19.5H520.5Z" fill="white"/><path d="M506 30H493.161V42H500.641V51H509.5V60.5H519.036V40.5H506V30Z" fill="white"/><path d="M519.036 0.625C511.759 0.625 505.627 3.18555 500.641 8.30664C496.862 12.0853 494.515 16.4831 493.6 21.5H506V12.5H520.5V14.5H527V4.5H538.5V15.5H576V8.30664H558L557.849 0.625H519.036Z" fill="white"/><path d="M578.5 26.5V15.5H576H538.5V4.5H527V14.5H520.5V19.5H529V26.5H578.5Z" fill="white"/><path d="M614.855 8.30664C609.868 3.18555 603.804 0.625 596.661 0.625H557.849L558 8.30664H576V15.5H578.5V26.5H596.661V39.4375H606V30H611V21.5H615.5V31.5H622.536V26.5C622.536 19.3574 619.976 13.293 614.855 8.30664Z" fill="white"/><path d="M606 39.4375H622.536V31.5H615.5V21.5H611V30H606V39.4375Z" fill="white"/><path d="M354.649 52.375V26.5H364.5V13H358.5V3.5H347V8.5H340.5V13H332.5V24H328.774V58.5H349V71H370.5V78.25H398.5V73H404.5V64.5H417.5V78.25H425.5V73H437V77.8597C442.131 76.9809 446.62 74.6179 450.468 70.7705C455.589 65.7842 458.149 59.6523 458.149 52.375V49H449V58H436.5V62H425.5V58H419.5V52.375H354.649Z" fill="white"/><path d="M328.774 87H342V94.5H354.649V78.25H370.5V71H349V58.5H328.774V87Z" fill="white"/><path d="M328.774 108H346.5V130H354.649V94.5H342V87H328.774V108Z" fill="white"/><path d="M328.774 108V130H346.5V108H328.774Z" fill="white"/><path d="M398.5 73V78.25H417.5V64.5H404.5V73H398.5Z" fill="white"/><path d="M425.5 78.25H432.274C433.906 78.25 435.481 78.1199 437 77.8597V73H425.5V78.25Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M432.274 26.5V52.375H419.5V58H425.5H436.5H449V49H458.149V26.5C458.149 21.2511 456.766 16.5844 454.001 12.5H449.651V7.5C444.824 2.91667 439.031 0.625 432.274 0.625H328.774V24H332.5V13H340.5V8.5H347V3.5H358.5V13H364.5V26.5H417V21H424.5V15H447V21H424.5V26.5H432.274ZM372.5 13V5H389V13H372.5Z" fill="white"/><path d="M424.5 15V21H447V15H424.5Z" fill="white"/><path d="M417 21V26.5H424.5V21H417Z" fill="white"/><path d="M372.5 5V13H389V5H372.5Z" fill="white"/><path d="M450.468 8.30664C450.199 8.0303 449.926 7.76142 449.651 7.5V12.5H454.001C453.003 11.0264 451.825 9.62864 450.468 8.30664Z" fill="white"/><path d="M425.5 58V62H436.5V58H425.5Z" fill="white"/><path d="M222 128.5V130H265V126.5H252V116H239H222V120H228.5V128.5H222Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M164.387 104.125V130H173V128H166V118H174.5V126.5H181V130H222V128.5H228.5V120H222V116H239V104.125H164.387ZM207 118V107.5H212V118H207Z" fill="white"/><path d="M207 107.5V118H212V107.5H207Z" fill="white"/><path d="M166 118V128H173V130H181V126.5H174.5V118H166Z" fill="white"/><path d="M252 116V126.5H265V130H267.887C271.54 130 274.911 129.348 278 128.044V124.5H265V118H278V107H284V118H288.5V107H293.623C293.716 106.062 293.762 105.104 293.762 104.125V94.5H267.887V104.125H239V116H252Z" fill="white"/><path d="M286.08 122.521C290.513 118.205 293.027 113.032 293.623 107H288.5V118H284V107H278V118H265V124.5H278V128.044C280.951 126.798 283.644 124.957 286.08 122.521Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M199 52.375V54H237V65H243.5V75H250V78.25H267.887V94.5H293.762V77H290.5V64.5H278V58H258.944V52.375H250V62H243.5V52.375H199ZM251.5 73V66H264.5V73H251.5Z" fill="white"/><path d="M251.5 66V73H264.5V66H251.5Z" fill="white"/><path d="M243.5 52.375V62H250V52.375H243.5Z" fill="white"/><path d="M171.867 70.7705C176.853 75.7568 182.985 78.25 190.262 78.25H250V75H243.5V65H237V54H199V52.375H190.262V49.5H187.5H180V56H172.5V49.5H166V55.5H164.548C165.171 61.4246 167.611 66.5148 171.867 70.7705Z" fill="white"/><path d="M172.5 49.5V56H180V49.5H179H172.5Z" fill="white"/><path d="M179 40H172.5V49.5H179V40Z" fill="white"/><path d="M179 49.5H180H187.5V38.5H179V40V49.5Z" fill="white"/><path d="M190.262 36.5H188V26H179V38.5H187.5V49.5H190.262V36.5Z" fill="white"/><path d="M188 36.5H190.262V17H179V26H188V36.5Z" fill="white"/><path d="M164.387 0.625V52.375C164.387 53.4413 164.441 54.4829 164.548 55.5H166V49.5H172.5V40H179V38.5V26V17H190.262V8.5H188V2.5H183.5V0.625H164.387Z" fill="white"/><path d="M190.262 0.625H183.5V2.5H188V8.5H190.262V0.625Z" fill="white"/><path d="M267.887 52.375H258.944V58H278H282V53.5H288.5V41.5H293.762V30H288.5V17H282.5V8.5H274V17H267.887V52.375Z" fill="white"/><path d="M282 53.5V58H278V64.5H290.5V77H293.762V41.5H288.5V53.5H282Z" fill="white"/><path d="M288.5 17V30H293.762V17H288.5Z" fill="white"/><path d="M288.5 8.5V17H293.762V8.5H288.5Z" fill="white"/><path d="M274 2V8.5H282.5V17H288.5V8.5H293.762V0.625H282V2H274Z" fill="white"/><path d="M274 8.5H267.887V17H274V8.5Z" fill="white"/><path d="M267.887 0.625V8.5H274V2H282V0.625H267.887Z" fill="white"/><path d="M125.5 126.5H129.375V83.5H123V90H103.5V130H125.5V126.5Z" fill="white"/><path d="M129.375 130V126.5H125.5V130H129.375Z" fill="white"/><path d="M103.5 78.25V81.5H117V73H103V78.25H103.5Z" fill="white"/><path d="M103 78.25V73H97.5V78.25H103Z" fill="white"/><path d="M103 73V62.5H95.5V73H97.5H103Z" fill="white"/><path d="M95.5 73H91V62.5H84.5V73H78V78.25H97.5V73H95.5Z" fill="white"/><path d="M51.75 52.375H25.875V34H13.5V42.5H5.5V47.5H1V41H0V56.5H3.24783V66.5H13.5V58H16V56H28.5V60H41.5V69H50V78.25H59V71H67V78.25H78V73H84.5V62.5H91V73H95.5V62.5H103V73H117V81.5H103.5V90H123V83.5H129.375V78.25C129.375 71.1074 126.814 65.043 121.693 60.0566C116.707 54.9355 110.643 52.375 103.5 52.375H77.625L78.5 51.5H65.5V43.5H60.625L51.75 52.375Z" fill="white"/><path d="M59 71V78.25H67V71H59Z" fill="white"/><path d="M25.875 86V78.25H50V69H41.5V60H28.5V56H16V58H13.5V66.5H3.24783V77.5H13.5V83.5H3.24783V95.5H22.5V86H25.875Z" fill="white"/><path d="M3.24783 83.5H13.5V77.5H3.24783V83.5Z" fill="white"/><path d="M0 83.5H3.24783V77.5H0V83.5Z" fill="white"/><path d="M3.24783 77.5V66.5H0V77.5H3.24783Z" fill="white"/><path d="M3.24783 66.5V56.5H0V66.5H3.24783Z" fill="white"/><path d="M25.875 130V86H22.5V95.5H3.24783V83.5H0V112H10.5V130H25.875Z" fill="white"/><path d="M0 112V130H10.5V112H0Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M12.9375 0.625H0V41H1V47.5H5.5V42.5H13.5V34H25.875V0.625H24V4H12.9375V0.625ZM5 24V10.5H11.5V24H5Z" fill="white"/><path d="M5 10.5V24H11.5V10.5H5Z" fill="white"/><path d="M12.9375 0.625V4H24V0.625H12.9375Z" fill="white"/><path d="M60.625 43.5H65.5V51.5H78.5L95.5 34.5H93H86.625H80.5V30H74.125L60.625 43.5Z" fill="white"/><path d="M86.625 25V34.5H93V25H86.625Z" fill="white"/><path d="M74.125 30H80.5V34.5H86.625V25H79.125L74.125 30Z" fill="white"/><path d="M86.625 17.5V25H93V34.5H95.5L97.5 32.5V23.686H98V15H89.125L86.625 17.5Z" fill="white"/><path d="M86.625 25V17.5L79.125 25H86.625Z" fill="white"/><path d="M97.5 32.5L106.314 23.686H98H97.5V32.5Z" fill="white"/><path d="M89.125 15H98V23.686H106.314L114.5 15.5V2H102.125L89.125 15Z" fill="white"/><path d="M129.375 0.625H103.5L102.125 2H114.5V15.5L123.5 6.5V2H128L129.375 0.625Z" fill="white"/><path d="M128 2H123.5V6.5L128 2Z" fill="white"/></svg>
@@ -1132,7 +1329,7 @@
                     <br>
                     або зателефонуйте за номером телефону.
                 </span>
-                <div class="flex row contacts-content">
+                <div class="flex row flex-wrap contacts-content">
                     <div class="flex column">
                         <svg width="320" height="100" viewBox="0 0 965 200" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 200V114.375H34.25C36.569 114.375 38.5758 115.222 40.2705 116.917C41.9652 118.612 42.8125 120.618 42.8125 122.938C42.8125 120.618 43.6152 118.612 45.2207 116.917C46.9154 115.222 48.9668 114.375 51.375 114.375H68.5C73.2272 114.375 77.2409 116.07 80.541 119.459C83.9303 122.759 85.625 126.773 85.625 131.5V200H68.5V131.5H51.375V200H34.25V131.5H17.125V200H0ZM108.797 200V165.75H143.047V200H108.797ZM253.42 200V0.625H293.295V80.375H333.17L412.92 0.625H452.795L373.045 80.375H412.92C423.927 80.375 433.272 84.321 440.957 92.2129C448.849 99.8971 452.795 109.243 452.795 120.25V200H412.92V120.25H293.295V200H253.42ZM506.75 200V70.625H532.625V148.25L610.25 70.625H636.125V200H610.25V96.5L532.625 174.125V200H506.75ZM671.138 200V174.125H722.888V96.5H671.138V70.625H800.513V96.5H748.763V174.125H800.513V200H671.138ZM697.013 44.75V18.875H722.888V44.75H697.013ZM748.763 44.75V18.875H774.638V44.75H748.763ZM939.025 174.125V148.25H861.4V174.125H939.025ZM939.025 122.375V96.5H861.4V122.375H939.025ZM835.525 200V70.625H939.025C946.167 70.625 952.232 73.1855 957.218 78.3066C962.339 83.293 964.9 89.3574 964.9 96.5V122.375C964.9 126.014 963.619 129.113 961.059 131.674C958.498 134.1 955.466 135.312 951.962 135.312C955.466 135.312 958.498 136.593 961.059 139.153C963.619 141.714 964.9 144.746 964.9 148.25V174.125C964.9 181.402 962.339 187.534 957.218 192.521C952.232 197.507 946.167 200 939.025 200H835.525Z" fill="white"/></svg>
                         <div class="flex column">
@@ -1321,12 +1518,20 @@
 
         async function fetchDates() {
             const cellRange = "A2:E";
-            const dates = await callsheetsapi(sheetId, sheetApiKey, "1", "A2:F");
+            let dates = [];
+            try {
+                dates = await callsheetsapi(sheetId, sheetApiKey, "1", "A2:F");
+            } catch (error) {
+                console.log("In fetchDates(), proper dates could not be fetched due to", error);
+            }
             return dates;
         }
 
         async function populateDates() {
             const dates = await fetchDates();
+            let center_text_style = "";
+            let heading_text_style = "h1 bold";
+            let month_text_style = "h3 bold";
 
             if (dates.length) {
                 const currentDate = new Date();
@@ -1341,6 +1546,13 @@
 
                 section3_closestDate.innerHTML = closestDate;
                 section3_closestDate.onclick = (event) => openLink(dates[0][5]);
+            } else {
+                dates.push([
+                    "Зареєструватися", "Поки що, конкретних дат немає - спробуйте перезавантажити сторінку.", "", "Натисніть, щоб перейти за посиланням", "", "https://forms.gle/VzXk1AMuHnajiDuXA"
+                ])
+                center_text_style = " l-center";
+                heading_text_style = "h2 bold p-space-both";
+                month_text_style = "h7";
             }
             
             dates.forEach((date) => {
@@ -1352,9 +1564,9 @@
                         <div class="link-icon flex row align-end full-width">
                             <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.12515 0H29.0002C30.1047 0 31.0002 0.89543 31.0002 2V23.875H27.0002V6.82843L2.91436 30.9142L0.0859375 28.0858L24.1717 4H7.12515V0Z" fill="black"/></svg>
                         </div>
-                        <span class="l jura h3 bold">${date[1]}</span>
-                        <span class="l jura h1 bold">${date[0]}</span>
-                        <span class="l jura h3">${date[3]}</span>
+                        <span class="l jura l-center ${month_text_style}">${date[1]}</span>
+                        <span class="l jura ${heading_text_style}">${date[0]}</span>
+                        <span class="l jura h3${center_text_style}">${date[3]}</span>
                         <span class="l jura h4 bold p-space-top">${date[4]}</span>
                     </div>
                 `;
@@ -1964,7 +2176,7 @@
 
         header_menuLogo.onclick = (event) => {
             toggleHeaderMenu("collapsed");
-            postMessage({ "messageType": "reloadPage" });
+            openLink(URL);
         };
 
         header_menuButton.onclick = (event) => {
