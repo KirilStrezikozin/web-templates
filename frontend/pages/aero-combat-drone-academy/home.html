@@ -662,6 +662,8 @@
             height: 6vmax;
             margin-right: 1.6rem;
             margin-bottom: -1.6rem;
+            position: relative;
+            z-index: 3;
             transition: all cubic-bezier(0.16, 1, 0.3, 1);
             -webkit-transition: all cubic-bezier(0.16, 1, 0.3, 1);
             transition-duration: 3s;
@@ -710,6 +712,10 @@
             height: 150%;
             position: relative;
             z-index: 2;
+        }
+
+        #section2 .bg-spotlight, #section3 .bg-spotlight {
+            z-index: 1;
         }
 
         #section2 .flashcard > .flex > span:last-child {
