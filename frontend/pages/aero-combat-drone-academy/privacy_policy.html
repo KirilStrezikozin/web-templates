@@ -277,6 +277,7 @@
             /* -webkit-transition: border 0.25s ease-out; */
 
             backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
         }
 
         header .header-bg:hover { border: 1px solid var(--header-border-color-hover); border-top: 0px; }
@@ -293,6 +294,11 @@
             transition: opacity 2s ease-out;
             -webkit-transition: opacity 2s ease-out;
             background: radial-gradient(
+                var(--size) circle at var(--spotlight-x) var(--spotlight-y),
+                rgba(43, 76, 46, 0.40) 0%,
+                transparent 100%
+            );
+            background: -webkit-radial-gradient(
                 var(--size) circle at var(--spotlight-x) var(--spotlight-y),
                 rgba(43, 76, 46, 0.40) 0%,
                 transparent 100%
