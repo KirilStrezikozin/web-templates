@@ -818,7 +818,7 @@
 
             const observer = new Observer(new Map(observerItems));
 
-            scrollTo({ left: 0 });
+            window.scroll({ left: 0 });
         }
 
         document.addEventListener("DOMContentLoaded", onDOMLoad);
@@ -883,7 +883,7 @@
                     if (button.getAttribute("data-target") === "home") {
                         openLink(URL);
                     } else if (button.getAttribute("data-target") === "scrolltotop") {
-                        scrollTo(0, 0);
+                        window.scroll(0, 0);
                     }
                 }
             }
