@@ -381,18 +381,9 @@
 
         #header_menuButton svg * { fill: var(--header-primary-color); }
 
-        #section1 {
-            margin-top: 30vh;
-        }
-
-        #section1 > div:first-child > span:first-child {
-            width: 32vw;
-            text-align: center;
-        }
-
-        #section1 > div:first-child > svg {
-            width: 65vw;
-        }
+        #section1 { margin-top: 30vh; }
+        #section1 > div:first-child > span:first-child { width: 32vw; text-align: center; }
+        #section1 > div:first-child > svg { width: 65vw; }
 
         #section2 {
             margin-top: 20vh;
@@ -443,7 +434,8 @@
             height: fit-content;
             top: 2.78em;
             margin-left: 4em;
-            margin-right: 5em;
+            margin-right: 10em;
+            text-align: justify;
         }
 
         #section2_content > div > span:first-child {
@@ -452,13 +444,11 @@
             border-top: 1px solid var(--header-border-color-hover);
             margin-right: 2em;
             margin-top: 2em;
+            text-align: left;
         }
 
         #section2_content > div:first-child > span:first-child { margin-top: 0px; }
-
-        #section2_content p {
-            margin-right: 5em;
-        }
+        #section2_content p { margin-right: 5em; }
 
         #section5 { background: var(--primary-color); }
         #section5 > div:first-child { background: var(--secondary-color); padding: 2em; }
@@ -468,6 +458,28 @@
             float: left;
             clear: left;
             padding: 0.2em;
+        }
+
+        @media only screen and (max-width: 900px) {
+            .cursor,
+            /* .bg-spotlight, */
+            .btn-copy { display: none; }
+
+            .btn-primary .btn-hover-bg { background: none };
+
+            .btn-primary.btn-color-primary:hover,
+            .btn-primary.btn-color-secondary:hover,
+            .btn-primary:hover { transform: none !important; -webkit-transform: none !important; }
+
+            .sticky-bg-wrapper { display: none; }
+
+            header .header-bg { width: 100%; }
+            #header_menuLogo { width: 27vw; margin-left: 0px; }
+
+            #section1 > div:first-child > span:first-child { font-size: 1em; width: 80vw; }
+            #section1 > div:first-child > svg { width: 90vw; height: 20vh; }
+            #section2 { margin-left: 1.2em; }
+            #section2_content { margin-left: 0px; margin-right: 2em; width: 90vw; font-size: 0.8em; }
         }
 
     </style>
@@ -502,7 +514,7 @@
             <div class="sticky-bg-wrapper">
                 <div class="sticky-bg-stick">
                     <div id="section2_sticky" class="sticky-bg-container flex column">
-                        <div class="flex row align-center">
+                        <div class="flex row align-end">
                             <span id="section2_currentSectionNumber" class="l jura h3 abs-position">( 1/10 )</span>
                             <span class="l jura h3">Секція</span>
                         </div>
@@ -627,8 +639,24 @@
         const sections = document.querySelectorAll("*[data-section-id]");
 
         function postMessage(message, useLog=false) {
-            window.parent.postMessage(message, URL);
+            window.parent.postMessage(message, "*");
             if (useLog) console.log(messageData);
+        }
+
+        function openLink(link, asMessage=true) {
+            if (!link) {
+                console.log(`In openLink(link, asMessage), invalid link was passed: ${link}`);
+                return;
+            }
+
+            if (!asMessage) {
+                linkOpener.href = link;
+                linkOpener.click();
+                // window.open(link, "_blank");
+                return;
+            }
+
+            postMessage({ "messageType": "openLink", "link": link });
         }
 
         /**
@@ -844,7 +872,7 @@
             if (button.getAttribute("data-msg") === "true") {
                 button.onclick = (event) => {
                     if (button.getAttribute("data-target") === "home") {
-                        postMessage(button, { "messageType": "openPage", "page": "home" });
+                        openLink(URL);
                     } else if (button.getAttribute("data-target") === "scrolltotop") {
                         scrollTo(0, 0);
                     }
@@ -853,7 +881,7 @@
         });
 
         header_menuLogo.onclick = (event) => {
-            postMessage({ "messageType": "reloadPage" });
+            openLink(URL);
         };
     </script>
 </body>
