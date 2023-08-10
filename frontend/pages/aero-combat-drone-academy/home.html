@@ -1709,7 +1709,7 @@
                 section0_bg_video.loop = true;
                 section0_bg_video.currentTime = 0;
 
-            }, section0_bg_video.duration * 0);
+            }, section0_bg_video.duration * 1000);
         }
 
         function toggleHeaderMenu(state) {
@@ -1999,11 +1999,53 @@
             else setHeaderMenuTheme("white");
         }
 
-        function onDOMLoad(event) {
+        function startLoadAfterReady() {
             section0_bg_video.poster = poster1_url;
             section0_bg_video.currentTime = 0;
             section0_bg_video.addEventListener("loadedmetadata", section0_bg_video_handlePlayback);
 
+            populateDates().then(() => {
+                let flashcard = section3_flashcards;
+                // for (let flashcard of section3_flashcards.children) {
+
+                // section2_bgVideo.poster = section2_bgVideo_srcs[0][0];
+                section2_bgVideo.setAttribute("data-src-id", 0);
+                let firstLoad = true;
+
+                section2_bgVideo.onended = (event) => {
+                    if (section2_bgVideo.getAttribute("data-src-id") == 0) {
+                        section2_bgVideo.src = section2_bgVideo_srcs[1][1];
+                        section2_bgVideo.currentTime = 0;
+                        section2_bgVideo.load();
+                        section2_bgVideo.play()
+                            .then(() => section2_bgVideo.poster = section2_bgVideo_srcs[0][0]);
+
+                        section2_bgVideo.setAttribute("data-src-id", 1);
+
+                    } else if (section2_bgVideo.getAttribute("data-src-id") == 1) {
+                        section2_bgVideo.src = section2_bgVideo_srcs[0][1];
+                        section2_bgVideo.currentTime = 0;
+                        section2_bgVideo.load();
+                        section2_bgVideo.play()
+                            .then(() => section2_bgVideo.poster = section2_bgVideo_srcs[1][0]);
+
+                        section2_bgVideo.setAttribute("data-src-id", 0);
+                    }
+                }
+
+                flashcard.onmouseleave = (event) => section2_bgVideo.pause();
+                flashcard.onmouseenter = (event) => {
+                    section2_bgVideo.play();
+
+                    if (firstLoad) {
+                        firstLoad = false;
+                        section2_bgVideo.poster = section2_bgVideo_srcs[1][0];
+                    }
+                };
+            });
+        }
+
+        function onDOMLoad(event) {
             const scrollYListener = new ScrollYListener(blockScrollX=true);
             scrollYListener.listen();
 
@@ -2108,46 +2150,6 @@
             scrollYListener.attach({
                 element: document,
                 func: (scrollInfo) => headerThemeHandler(scrollInfo, switchHeaderMenuThemeAtY)
-            });
-
-            populateDates().then(() => {
-                let flashcard = section3_flashcards;
-                // for (let flashcard of section3_flashcards.children) {
-
-                // section2_bgVideo.poster = section2_bgVideo_srcs[0][0];
-                section2_bgVideo.setAttribute("data-src-id", 0);
-                let firstLoad = true;
-
-                section2_bgVideo.onended = (event) => {
-                    if (section2_bgVideo.getAttribute("data-src-id") == 0) {
-                        section2_bgVideo.src = section2_bgVideo_srcs[1][1];
-                        section2_bgVideo.currentTime = 0;
-                        section2_bgVideo.load();
-                        section2_bgVideo.play()
-                            .then(() => section2_bgVideo.poster = section2_bgVideo_srcs[0][0]);
-
-                        section2_bgVideo.setAttribute("data-src-id", 1);
-
-                    } else if (section2_bgVideo.getAttribute("data-src-id") == 1) {
-                        section2_bgVideo.src = section2_bgVideo_srcs[0][1];
-                        section2_bgVideo.currentTime = 0;
-                        section2_bgVideo.load();
-                        section2_bgVideo.play()
-                            .then(() => section2_bgVideo.poster = section2_bgVideo_srcs[1][0]);
-
-                        section2_bgVideo.setAttribute("data-src-id", 0);
-                    }
-                }
-
-                flashcard.onmouseleave = (event) => section2_bgVideo.pause();
-                flashcard.onmouseenter = (event) => {
-                    section2_bgVideo.play();
-
-                    if (firstLoad) {
-                        firstLoad = false;
-                        section2_bgVideo.poster = section2_bgVideo_srcs[1][0];
-                    }
-                };
             });
 
             window.scroll({ left: 0 });
@@ -2319,8 +2321,6 @@
             };
         });
 
-        window.scroll({ left: 0 });
-
         function handleMessageData(data) {
             if (!data) return;
             
@@ -2328,6 +2328,11 @@
             if (data.messageType === "scroll") {
                 window.scroll(Number(data.scrollX), Number(data.scrollY));
                 console.log("scrolled to in iframe", data.scrollY);
+            }
+
+            else if (data.messageType === "startLoad") {
+                startLoadAfterReady();
+                console.log("starting load in iframe");
             }
         }
 
