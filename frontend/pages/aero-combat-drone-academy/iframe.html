@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>Aero Combat</title>
+</head>
+<body onload="onLoad(event)" style="margin: 0; overflow: hidden;">
+    <a id="linkOpener" href="" target="_blank" rel="external" style="position: absolute; display: none; width: 0px; height: 0px;"></a>
+    <iframe sandbox="allow-same-origin allow-forms allow-popups allow-modals allow-scripts allow-pointer-lock allow-popups-to-escape-sandbox" id="frame" src="https://kirilstrezikozin.github.io/web-templates/frontend/pages/aero-combat-drone-academy/home.html" width="100%" height="0" frameborder="0"></iframe>
+    <script type="text/javascript">
+        const URL = "https://www.aero-combat.com";
+        const frame = document.querySelector("#frame");
+        const linkOpener = document.querySelector("#linkOpener");
+
+        function postMessage(message, useLog=true) {
+            window.parent.postMessage(message, URL);
+            if (useLog) console.log(message);
+        }
+
+        function openLink(link, asMessage=true) {
+            if (!link) {
+                console.log(`In openLink(link, asMessage), invalid link was passed: ${link}`);
+                return;
+            }
+
+            if (!asMessage) {
+                linkOpener.href = link;
+                // linkOpener.click();
+                window.open(link, "_blank");
+                return;
+            }
+
+            postMessage({ "messageType": "openLink", "link": link });
+        }
+
+        function onLoad(event) { 
+            frame.width = window.innerWidth + "px";
+            frame.height = window.innerHeight + "px";
+            postMessage({ "messageType": "status", "status": "ready" });
+        }
+
+        function handleMessageData(data) {
+            if (!data) return;
+            console.log(data);
+            
+            if (data.messageType === "resize") {
+                frame.width = data.width + "px";
+                frame.height = data.height + "px";
+                console.log("resized to", data.width, data.height);
+            }
+            
+            else if (data.messageType === "scroll") {
+                frame.contentWindow.postMessage({ "messageType": "scroll", "scrollY": data.scrollY, "scrollX": data.scrollX }, "*");
+            }
+
+            else if (data.messageType === "openLink") {
+                openLink(data.link);
+            }
+
+            else if (data.messageType === "changeSrc") {
+                frame.src = data.src;
+                frame.contentWindow.location.reload();
+            }
+
+            else if (data.messageType === "startLoad") {
+                console.log("posted start load");
+                frame.contentWindow.postMessage({ "messageType": "startLoad" }, "*");
+            }
+        }
+
+        if (window.addEventListener) {
+            window.addEventListener("message", ({ data }) => {
+                handleMessageData(data);
+            });
+        } else {
+            window.attachEvent("onmessage", ({ data }) => {
+                handleMessageData(data);
+            });
+        }
+    </script>
+</body>
+</html>
