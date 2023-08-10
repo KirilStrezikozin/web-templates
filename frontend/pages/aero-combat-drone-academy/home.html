@@ -1700,16 +1700,13 @@
             });
         }
 
-        function section0_bg_video_handlePlayback(event) {
+        function section0_bg_video_handlePlayback() {
             setTimeout(() => {
-                section0_bg_video.removeEventListener("loadedmetadata", section0_bg_video_handlePlayback);
-
                 section0_bg_video_src.src = video1_url;
                 section0_bg_video.load();
                 section0_bg_video.loop = true;
                 section0_bg_video.currentTime = 0;
-
-            }, section0_bg_video.duration * 1000);
+            }, 18100);
         }
 
         function toggleHeaderMenu(state) {
@@ -2002,7 +1999,7 @@
         function startLoadAfterReady() {
             section0_bg_video.poster = poster1_url;
             section0_bg_video.currentTime = 0;
-            section0_bg_video.addEventListener("loadedmetadata", section0_bg_video_handlePlayback);
+            section0_bg_video_handlePlayback();
 
             populateDates().then(() => {
                 let flashcard = section3_flashcards;
