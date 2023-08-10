@@ -1700,10 +1700,16 @@
             });
         }
 
-        function switchSource() {
-            section0_bg_video_src.src = video1_url;
-            section0_bg_video.loop = true;
-            section0_bg_video.currentTime = 0;
+        function section0_bg_video_handlePlayback(event) {
+            setTimeout(() => {
+                section0_bg_video.removeEventListener("loadedmetadata", section0_bg_video_handlePlayback);
+
+                section0_bg_video_src.src = video1_url;
+                section0_bg_video.load();
+                section0_bg_video.loop = true;
+                section0_bg_video.currentTime = 0;
+
+            }, section0_bg_video.duration * 1000);
         }
 
         function toggleHeaderMenu(state) {
@@ -1996,7 +2002,7 @@
         function onDOMLoad(event) {
             section0_bg_video.poster = poster1_url;
             section0_bg_video.currentTime = 0;
-            setTimeout(() => switchSource(), section0_bg_video.duration * 1000);
+            section0_bg_video.addEventListener("loadedmetadata", section0_bg_video_handlePlayback);
 
             const scrollYListener = new ScrollYListener(blockScrollX=true);
             scrollYListener.listen();
